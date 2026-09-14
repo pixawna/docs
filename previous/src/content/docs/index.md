@@ -9,7 +9,7 @@ As AI accelerates engineering throughput, traditional manual approvals and fragi
 
 SuperPlane lets you model these high-velocity workflows as fully operational [apps](/concepts/superplane-apps). Apps execute your processes deterministically using graphs, providing the exact guardrails AI needs to safely interact with your tools—like Git, CI/CD, and observability.
 
-![Run chain view showing end-to-end workflow execution history](../../assets/superplane-canvas-example.png)
+![Run chain view showing end-to-end workflow execution history](https://assets.superplane.com/previous/src/assets/superplane-canvas-example.png)
 
 ## What you can build
 

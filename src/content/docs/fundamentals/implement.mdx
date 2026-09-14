@@ -3,14 +3,10 @@ title: Implement
 description: See how an approved task becomes a reviewable software change.
 ---
 
-import { Image } from "astro:assets";
-import implementBoard from "../../../assets/agent_config.png";
-import implementRun from "../../../assets/implementation_phase.png";
-
 Implement is where an approved task becomes a concrete change. The Factory owns the sequence and the guardrails. The coding agent works inside them: it inspects the repository, changes the code, runs the available checks and prepares the result for review.
 
 <figure class="sp-media-figure not-content">
-  <Image src={implementBoard} alt="A SuperPlane board with one task moving from Backlog into the Implement stage." />
+  <img src="https://assets.superplane.com/src/assets/agent_config.png" alt="A SuperPlane board with one task moving from Backlog into the Implement stage." />
   <figcaption>A task leaves Backlog only after the team authorizes execution.</figcaption>
 </figure>
 
@@ -45,7 +41,7 @@ Implementation is not complete when files have changed locally. The result needs
 Every component in the automation receives an input and emits an output. Those messages build a record of the run. You can inspect the path that executed, the step that failed and the artifact created for the task.
 
 <figure class="sp-media-figure not-content">
-  <Image src={implementRun} alt="The Implement automation with a running agent and a workflow graph for creating or updating a pull request." />
+  <img src="https://assets.superplane.com/src/assets/implementation_phase.png" alt="The Implement automation with a running agent and a workflow graph for creating or updating a pull request." />
   <figcaption>The implementation run and its workflow path remain visible together.</figcaption>
 </figure>
 

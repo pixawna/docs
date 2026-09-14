@@ -3,9 +3,6 @@ title: Canvas
 description: Learn about canvases and how to use the canvas page to design and manage workflows.
 ---
 
-import canvasOverview from "../../../assets/canvas-overview.png";
-import { Image } from "astro:assets";
-
 A **canvas** is the workspace where you design and run workflows in SuperPlane. It's a visual
 graph of nodes connected by subscriptions that define how events flow between steps.
 
@@ -21,8 +18,8 @@ multiple tools, wait for human input, and run over extended periods of time.
 
 <div class="big-image">
   <figure class="sp-canvas-figure">
-    <Image
-      src={canvasOverview}
+    <img
+      src="https://assets.superplane.com/previous/src/assets/canvas-overview.png"
       alt="Hello World canvas with start, if, and action nodes connected on the workflow graph"
     />
   </figure>
@@ -106,11 +103,11 @@ payload. For details on components, see [Component Nodes](/concepts/component-no
 Every node emits a **payload** — JSON data containing the results of its execution. Click any node
 and view the Payload tab to inspect it.
 
-![Inspecting a node payload](../../../assets/canvas-overview-payload.png)
+![Inspecting a node payload](https://assets.superplane.com/previous/src/assets/canvas-overview-payload.png)
 
 When configuring nodes, type `{{` in expression fields to access payload data from upstream nodes.
 
-![Selecting payload data in expressions](../../../assets/canvas-overview-selecting-payload.png)
+![Selecting payload data in expressions](https://assets.superplane.com/previous/src/assets/canvas-overview-selecting-payload.png)
 
 Use `{{` … `}}` to insert payload data into text fields, or write bare expressions in condition fields (If / Filter). See [Expressions](/concepts/expressions).
 

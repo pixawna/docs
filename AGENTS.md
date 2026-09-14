@@ -17,8 +17,9 @@ factory for tracked agent work. The documentation site is built with
 - `src/content/docs/` - All documentation content (`.md` and `.mdx` files)
   - Each file becomes a route based on its file name
   - Organized by topic (for example, `get-started/` and `reference/`)
-- `src/assets/` - Images and other assets referenced in documentation
-- `public/` - Static assets like favicons
+- `src/assets/` - Text-based assets such as SVG logos
+- `public/` - Text-based static assets
+- `docs-assets` R2 bucket - Raster images, videos and other binary assets
 - `astro.config.mjs` - Starlight configuration (sidebar, title, etc.)
 
 ### File Organization
@@ -119,8 +120,10 @@ Use consistently: **factory**, **workspace**, **task**, **work order**, **line**
 
 ### Images
 
-- Place images in `src/assets/`
-- Reference them with relative paths in Markdown
+- Upload raster images and videos to the `docs-assets` Cloudflare R2 bucket
+- Use repository-style object keys such as `src/assets/image-name.png`
+- Reference assets with absolute `https://assets.superplane.com/` URLs
+- Never commit binary assets to this repository
 - Use descriptive filenames
 - Include alt text for accessibility
 
@@ -158,9 +161,9 @@ Use consistently: **factory**, **workspace**, **task**, **work order**, **line**
 
 ### Adding Images
 
-1. Save the image to `src/assets/`
-2. Reference it in Markdown: `![Alt text](../assets/image-name.png)`
-3. Adjust the relative path based on the documentation file's location
+1. Upload the image to the `docs-assets` R2 bucket with a key such as `src/assets/image-name.png`
+2. Reference it in Markdown: `![Alt text](https://assets.superplane.com/src/assets/image-name.png)`
+3. Run `npm run check:text-only` before committing
 
 ## Technical Details
 
@@ -204,6 +207,7 @@ When making content or navigation changes, run `npm run build` to catch:
 - Preserve frontmatter structure when editing files
 - Run `npm run build` after content or navigation changes
 - Treat `public/llms.txt` and `public/llms-full.txt` as generated artifacts (do not edit manually)
+- Keep the Git repository text-only. Store raster images, videos and other binaries in the `docs-assets` R2 bucket.
 - Keep `public/robots.txt` limited to crawler policy, sitemap discovery, and comments that point to agent-readable indexes. Do not use non-standard directives to advertise `llms.txt`.
 - Keep the `<link rel="describedby" href="/llms.txt">` discovery hint in the shared document head when changing head metadata.
 

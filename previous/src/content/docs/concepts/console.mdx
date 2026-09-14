@@ -3,9 +3,6 @@ title: Console
 description: Per-app operational view for status, runbooks, and live workflow data.
 ---
 
-import consoleOverview from "../../../assets/console-overview.png";
-import { Image } from "astro:assets";
-
 The **console** is the per-app operational surface. It turns workflow state into an
 at-a-glance view: notes and runbooks, pinned nodes, tables of live data, KPIs, and
 charts. Every app has one console, configured from the UI or from `console.yaml` in
@@ -13,8 +10,8 @@ the app's git repository.
 
 <div class="big-image">
   <figure class="sp-canvas-figure">
-    <Image
-      src={consoleOverview}
+    <img
+      src="https://assets.superplane.com/previous/src/assets/console-overview.png"
       alt="Openclaw Manager console with KPI panels, agent table, charts, and quick start controls"
     />
   </figure>

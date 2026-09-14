@@ -59,7 +59,7 @@ faster to model workflows.
 
 Each component node on the canvas displays key information and provides interactive elements:
 
-![Component node on canvas](../../../assets/component-nodes-node.png)
+![Component node on canvas](https://assets.superplane.com/previous/src/assets/component-nodes-node.png)
 
 1. **Input channel** — Drag to subscribe to events from other nodes (action nodes only).
 2. **Configuration overview** — Quick summary of key settings for this node.
@@ -70,7 +70,7 @@ Each component node on the canvas displays key information and provides interact
 
 Click on a component node to select it and open the inspector panel at the bottom of the canvas.
 
-![Component node inspector](../../../assets/component-nodes-sidebar.png)
+![Component node inspector](https://assets.superplane.com/previous/src/assets/component-nodes-sidebar.png)
 
 1. **Selected node** — The node is highlighted on the canvas. The bottom panel shows its details.
 2. **Runs** — Recent executions with run ID, PR reference, and timestamp. Click a run item to inspect it. Running or waiting items can be cancelled or pushed through from the action menu.
@@ -81,7 +81,7 @@ Click on a component node to select it and open the inspector panel at the botto
 
 Select a run from the **Runs** tab or from the [Runs sidebar](/concepts/runs) to inspect it. The canvas highlights the path the run took, dimming nodes that were not part of the execution.
 
-![Single run chain view](../../../assets/component-nodes-single-run.png)
+![Single run chain view](https://assets.superplane.com/previous/src/assets/component-nodes-single-run.png)
 
 1. **Selected run** — The sidebar shows the full execution chain with every node and its status.
 2. **Node selection** — Click a node in the sidebar or directly on the canvas to inspect its execution.
