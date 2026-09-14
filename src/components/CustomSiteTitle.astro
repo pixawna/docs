@@ -28,7 +28,7 @@ const { siteTitleHref } = Astro.locals.starlightRoute;
 		)
 	}
 	<span class="site-title-text" translate="no">Docs</span>
-	<span class="sr-only" translate="no">SuperPlane Docs</span>
+	<span class="sr-only" translate="no">SuperPlane Factory Docs</span>
 </a>
 
 <style>
@@ -58,8 +58,32 @@ const { siteTitleHref } = Astro.locals.starlightRoute;
 			object-fit: contain;
 			object-position: 0 50%;
 		}
-		:global([data-theme='dark']) .site-title .site-logo {
-			filter: invert(1) brightness(1.1);
+		.site-title .site-logo {
+			filter: invert(1) brightness(1.1) sepia(0.08);
+		}
+
+		@media (max-width: 49.999rem) {
+			.site-title {
+				gap: 8px;
+				max-width: 100%;
+				overflow: hidden;
+			}
+
+			img {
+				max-width: min(135px, 40vw);
+			}
+
+			.site-title-text {
+				flex: 0 1 auto;
+				font-size: 1rem;
+				text-overflow: ellipsis;
+			}
+		}
+
+		@media (max-width: 24rem) {
+			.site-title-text {
+				display: none;
+			}
 		}
 	}
 </style>

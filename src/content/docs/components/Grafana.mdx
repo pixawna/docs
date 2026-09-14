@@ -2,7 +2,7 @@
 title: "Grafana"
 ---
 
-Connect Grafana alerts, alert rules, dashboards, annotations, silences, and data queries to SuperPlane workflows
+Connect Grafana alerts, alert rules, dashboards, annotations, silences and data queries to SuperPlane workflows
 
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
@@ -168,7 +168,7 @@ The Create Alert Rule component creates a Grafana-managed alert rule using the A
 - **Data Source**: Existing Grafana data source the query should use
 - **Query**: Expression Grafana evaluates when checking the alert
 - **Lookback Window**: How far back to query when evaluating the rule
-- **Reducer / Condition / Threshold(s)**: How the series is reduced, how it is compared to thresholds, and optional upper bound for range conditions
+- **Reducer / Condition / Threshold(s)**: How the series is reduced, how it is compared to thresholds and optional upper bound for range conditions
 - **For**: How long the condition must hold before firing
 - **No Data / Execution Error State**: Grafana behavior when the query returns no data or errors
 - **Contact Point**: Optional Grafana contact point for notifications when the rule fires
@@ -344,9 +344,9 @@ The Create HTTP Synthetic Check component creates an HTTP synthetic check in Gra
 Fields are grouped like other synthetic check components:
 
 - **Job** and **Labels**: Check display name and optional key/value labels
-- **Request**: URL, HTTP method, headers, body, redirects, basic auth, and bearer token
-- **Schedule**: Whether the check is enabled, frequency (seconds), timeout (ms), and probe locations
-- **Response validation**: SSL expectations, accepted status codes, and body/header regex rules (optional)
+- **Request**: URL, HTTP method, headers, body, redirects, basic auth and bearer token
+- **Schedule**: Whether the check is enabled, frequency (seconds), timeout (ms) and probe locations
+- **Response validation**: SSL expectations, accepted status codes and body/header regex rules (optional)
 - **Per-Check Alerts**: Optional Grafana synthetic monitoring alerts configured after check creation
 
 ### Output
@@ -474,7 +474,7 @@ The Declare Drill component creates a new drill incident in Grafana IRM.
 ### Use Cases
 
 - **Operational exercises**: Run incident response drills without affecting production metrics
-- **Process validation**: Test runbooks, roles, and integrations in a safe environment
+- **Process validation**: Test runbooks, roles and integrations in a safe environment
 
 ### Configuration
 
@@ -590,7 +590,7 @@ The Delete Alert Rule component deletes a Grafana-managed alert rule using the A
 
 ### Output
 
-Returns a confirmation object with the deleted alert rule UID, title, and deletion status.
+Returns a confirmation object with the deleted alert rule UID, title and deletion status.
 
 ### Example Output
 
@@ -726,7 +726,7 @@ The Get Alert Rule component fetches a Grafana-managed alert rule using the Aler
 
 ### Output
 
-Returns the full Grafana alert rule object, including title, folder, group, condition, queries, labels, and annotations.
+Returns the full Grafana alert rule object, including title, folder, group, condition, queries, labels and annotations.
 
 ### Example Output
 
@@ -853,7 +853,7 @@ The Get Dashboard component fetches a Grafana dashboard using the Grafana Dashbo
 
 ### Output
 
-Returns the Grafana dashboard object, including title, slug, URL, folder, tags, and panel summaries.
+Returns the Grafana dashboard object, including title, slug, URL, folder, tags and panel summaries.
 
 ### Example Output
 
@@ -1055,7 +1055,7 @@ The Get Silence component fetches the details of a single silence from Grafana A
 
 ### Use Cases
 
-- **Inspect a silence**: Retrieve full details of a silence including state, comment, matchers, and times
+- **Inspect a silence**: Retrieve full details of a silence including state, comment, matchers and times
 - **Verify a silence**: Confirm a silence is still active before taking action in a workflow
 
 ### Configuration
@@ -1064,7 +1064,7 @@ The Get Silence component fetches the details of a single silence from Grafana A
 
 ### Output
 
-Returns the silence object including ID, state, comment, matchers, start/end times, and the author.
+Returns the silence object including ID, state, comment, matchers, start/end times and the author.
 
 ### Example Output
 
@@ -1171,7 +1171,7 @@ The List Annotations component retrieves annotations from Grafana, optionally fi
 
 ### Output
 
-Returns a list of annotation objects including ID, text, tags, time, and dashboard/panel references.
+Returns a list of annotation objects including ID, text, tags, time and dashboard/panel references.
 
 ### Example Output
 
@@ -1234,7 +1234,7 @@ The List Silences component retrieves silences from Grafana Alertmanager.
 
 ### Output
 
-Returns a list of silence objects, each including ID, state, comment, matchers, start/end times, and the author.
+Returns a list of silence objects, each including ID, state, comment, matchers, start/end times and the author.
 
 ### Example Output
 
@@ -1355,7 +1355,7 @@ The Query Logs component executes a LogQL query against a Loki-backed Grafana da
 
 		- **Data Source**: The Loki data source to query (required)
 		- **Query**: A LogQL query expression (required), e.g. `{app="myservice"} |= "error"`
-		- **Time From / Time To**: Optional log query range. Supports expr-golang values like `{{ now() + duration("1m") }}`, absolute values like `2026-04-08T15:30Z`, and relative Grafana values like `now-15m` or `now+2h`. Datetime values without an explicit offset are interpreted as UTC.
+		- **Time From / Time To**: Optional log query range. Supports expr-golang values like `{{ now() + duration("1m") }}`, absolute values like `2026-04-08T15:30Z` and relative Grafana values like `now-15m` or `now+2h`. Datetime values without an explicit offset are interpreted as UTC.
 		- **Limit**: Maximum number of log lines to return (optional)
 
 ### Output
@@ -1437,7 +1437,7 @@ The Query Traces component executes a TraceQL query against a Tempo-backed Grafa
 
 		- **Data Source**: The Tempo data source to query (required)
 		- **Query**: A TraceQL query expression (required), e.g. `{ .http.status_code = 500 }`
-		- **Time From / Time To**: Optional trace search range. Supports expr-golang values like `{{ now() + duration("1m") }}`, absolute values like `2026-04-08T15:30Z`, and relative Grafana values like `now-15m` or `now+2h`. Datetime values without an explicit offset are interpreted as UTC.
+		- **Time From / Time To**: Optional trace search range. Supports expr-golang values like `{{ now() + duration("1m") }}`, absolute values like `2026-04-08T15:30Z` and relative Grafana values like `now-15m` or `now+2h`. Datetime values without an explicit offset are interpreted as UTC.
 
 ### Output
 
@@ -1736,7 +1736,7 @@ The Update HTTP Synthetic Check component updates an existing Grafana Synthetic 
 ### Configuration
 
 - **Synthetic Check**: The synthetic check to update (required)
-- **Job**, **Labels**, **Request**, **Schedule**, **Response validation**, and **Per-Check Alerts** are **togglable**. Enable a section only when you want to change it; disabled sections keep the values currently stored in Grafana.
+- **Job**, **Labels**, **Request**, **Schedule**, **Response validation** and **Per-Check Alerts** are **togglable**. Enable a section only when you want to change it; disabled sections keep the values currently stored in Grafana.
 
 ### Output
 

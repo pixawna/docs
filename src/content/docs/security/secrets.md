@@ -3,7 +3,7 @@ title: Secrets
 description: How to store and use secrets in SuperPlane workflows.
 ---
 
-Secrets let you securely store sensitive credentials like API keys, passwords, and tokens for use in component configurations.
+Secrets let you securely store sensitive credentials like API keys, passwords and tokens for use in component configurations.
 
 ## How It Works
 
@@ -59,4 +59,4 @@ Secret management requires specific permissions:
 - `secrets.update` - Update existing secrets
 - `secrets.delete` - Delete secrets
 
-By default, `Admin` and `Maintainer` have these permissions. See [Access Control](/security/access-control) for details.
+By default, only `Admin` and `Owner` roles have these permissions. See [Access Control](/security/access-control) for details.

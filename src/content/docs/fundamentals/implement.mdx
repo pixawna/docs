@@ -1,0 +1,68 @@
+---
+title: Implement
+description: See how an approved task becomes a reviewable software change.
+---
+
+import { Image } from "astro:assets";
+import implementBoard from "../../../assets/agent_config.png";
+import implementRun from "../../../assets/implementation_phase.png";
+
+Implement is where an approved task becomes a concrete change. The Factory owns the sequence and the guardrails. The coding agent works inside them: it inspects the repository, changes the code, runs the available checks and prepares the result for review.
+
+<figure class="sp-media-figure not-content">
+  <Image src={implementBoard} alt="A SuperPlane board with one task moving from Backlog into the Implement stage." />
+  <figcaption>A task leaves Backlog only after the team authorizes execution.</figcaption>
+</figure>
+
+## The workflow and the agent have different jobs
+
+The workflow decides when implementation begins, what context enters the run and what must happen after it. The agent decides how to perform the assigned code change within that boundary.
+
+This division keeps process rules outside the prompt. A repository connection, a pull request requirement or a failure route should be a visible part of the automation. The agent prompt can then focus on the work itself.
+
+## A typical implementation run
+
+The exact graph is configurable but most implementation runs follow the same practical shape.
+
+<div class="factory-execution-flow not-content" role="list" aria-label="Implementation run steps">
+  <span role="listitem">Read the task</span>
+  <span role="listitem">Inspect the repository</span>
+  <span role="listitem">Plan the change</span>
+  <span role="listitem">Edit and check</span>
+  <span role="listitem">Create or update the pull request</span>
+</div>
+
+### Understand before editing
+
+The agent starts with the task, source issue and repository instructions. It should find the relevant code path and identify the behavior that must stay unchanged. For a small task, this may be only a few files. For a broader task, the plan creates a useful checkpoint before code is touched.
+
+### Produce a reviewable change
+
+Implementation is not complete when files have changed locally. The result needs a durable form that the rest of the engineering system can inspect. That normally means a commit on a branch and a pull request that explains the change, its checks and any remaining uncertainty.
+
+### Keep the process observable
+
+Every component in the automation receives an input and emits an output. Those messages build a record of the run. You can inspect the path that executed, the step that failed and the artifact created for the task.
+
+<figure class="sp-media-figure not-content">
+  <Image src={implementRun} alt="The Implement automation with a running agent and a workflow graph for creating or updating a pull request." />
+  <figcaption>The implementation run and its workflow path remain visible together.</figcaption>
+</figure>
+
+## Durable execution changes how failures are handled
+
+A long-running implementation can cross API calls, agent sessions and external checks. SuperPlane records the state between those steps. If a service is temporarily unavailable, the run can resume from a known boundary instead of beginning the entire task again.
+
+Durability does not mean retrying every failure blindly. A retry is appropriate for a transient system error. A failing test is useful information about the change and should be returned to the agent with its output. A product decision should pause for a person. Each case needs a different route.
+
+## What should leave Implement
+
+Before the task moves forward, the stage should have produced:
+
+- a change tied to the original task
+- a branch or pull request that the team can inspect
+- a concise explanation of what changed
+- the checks already run during implementation
+- explicit notes about assumptions or unresolved questions
+
+The next stage should not have to reconstruct the agent's intent. It should receive the change and the evidence needed to evaluate it. Continue to [Verify](/fundamentals/verify).

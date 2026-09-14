@@ -1,0 +1,119 @@
+---
+title: Fix a GitHub issue
+description: Use SuperPlane to turn a focused GitHub issue into a verified pull request that is ready for review.
+---
+
+import { Image } from "astro:assets";
+import finalDone from "../../../assets/final_done.png";
+import initialCheck from "../../../assets/initial_check.png";
+import mainScreenshot from "../../../assets/main_screenshot.png";
+import workflowPage from "../../../assets/workflow_page.png";
+import implementationWorkflow from "../../../assets/screenshot-background.png";
+import verifyPhase from "../../../assets/verify_phase.png";
+
+<figure class="sp-media-figure not-content">
+  <Image src={finalDone} alt="SuperPlane factory board with Backlog, Implement, Verify and Done stages" />
+</figure>
+
+Turn a well-scoped GitHub issue into a verified pull request without coordinating every step by hand. SuperPlane listens for work in your repository, evaluates which issues are suitable for an agent, runs the implementation workflow, verifies the result and asks your team for judgment when needed.
+
+<figure class="sp-media-figure not-content">
+  <Image src={initialCheck} alt="Flow from a GitHub issue through SuperPlane analysis, implementation, verification and review" />
+  <figcaption>SuperPlane surrounds the coding agent with intake, verification and human review.</figcaption>
+</figure>
+
+## The challenge
+
+A GitHub issue may look simple, but finishing it usually involves much more than writing code. An engineer still needs to:
+
+1. Understand the issue and its context.
+2. Decide whether it is safe to delegate.
+3. Inspect the repository.
+4. Plan the change.
+5. Implement it.
+6. Run tests and continuous integration checks.
+7. Create a pull request.
+8. Respond to failed checks or review comments.
+9. Decide whether the result is ready to merge.
+
+Coding agents can help with individual steps. Engineers often still coordinate the process around them. A [software factory](/reference/glossary#software-factory) turns that process into a visible and repeatable workflow.
+
+## How SuperPlane fixes a GitHub issue
+
+### 1. The issue enters the backlog
+
+Once your repository is connected SuperPlane can listen for GitHub issues and bring them into the factory Backlog. The GitHub issue remains the source of the work. SuperPlane adds the execution process around it.
+
+<figure class="sp-media-figure not-content">
+  <Image src={mainScreenshot} alt="GitHub issues listed in the Backlog stage of a SuperPlane factory" />
+  <figcaption>Connected GitHub issues appear in Backlog with a confidence indicator and a clear action to start the work.</figcaption>
+</figure>
+
+### 2. SuperPlane analyzes the work
+
+Before an agent starts coding SuperPlane evaluates whether the issue is a good candidate for automated execution. The assessment considers:
+
+- How focused the scope is
+- How much context is available
+- Whether the expected result can be checked
+- Whether relevant tests are available
+
+Focused work can move forward with higher confidence. Ambiguous work or work that needs judgment stays with the team.
+
+<figure class="sp-media-figure not-content">
+  <Image src={workflowPage} alt="SuperPlane backlog showing confidence indicators for imported GitHub issues" />
+  <figcaption>The YouTube logo issue has a high confidence indicator, so it can move into implementation without a manual approval step.</figcaption>
+</figure>
+
+### 3. The implementation agent works on the issue
+
+When the task starts it moves into Implement. The configured agent receives the task and works against the repository.
+
+<div class="factory-execution-flow not-content">
+  <span>Read issue</span>
+  <span>Inspect repository</span>
+  <span>Plan the change</span>
+  <span>Modify code</span>
+  <span>Run tests</span>
+  <span>Push changes</span>
+  <span>Prepare pull request</span>
+</div>
+
+The exact implementation process depends on how you configure the agent.
+
+<figure class="sp-media-figure not-content">
+  <Image src={implementationWorkflow} alt="SuperPlane implementation automation running an agent and recording task artifacts" />
+  <figcaption>The implementation automation runs the agent, records failures and attaches the resulting artifacts to the task.</figcaption>
+</figure>
+
+The automation controls the process. It owns rules such as required checks, review policies, allowed scope and escalation behavior. The model focuses on the assigned engineering work.
+
+<div class="use-case-signals not-content">
+  <div><strong>Agent</strong><span>Performs the engineering work.</span></div>
+  <div><strong>Automation</strong><span>Controls how the work moves.</span></div>
+</div>
+
+### 4. Verify the pull request
+
+Once implementation produces a pull request SuperPlane moves the task into Verify. This stage checks whether the result is ready for review. Depending on your factory it can include:
+
+- Continuous integration status checks
+- Tests
+- Pull request review comments
+- Agent review
+- Deterministic validation
+- Human approval
+
+<figure class="sp-media-figure not-content">
+  <Image src={verifyPhase} alt="A pull request task waiting in the Verify stage of a SuperPlane factory" />
+  <figcaption>Verify keeps the pull request and its outstanding checks visible before the work reaches Done.</figcaption>
+</figure>
+
+If a check fails or a reviewer requests a change the workflow can return that context to the agent for another attempt. Human judgment remains available for decisions the factory should not make on its own.
+
+## Next steps
+
+<div class="sp-next-grid not-content">
+  <a href="/get-started/build-first-factory"><strong>Try it with your issue</strong><span>Connect a repository and build the factory that will process your GitHub issue.</span></a>
+  <a href="/use-cases/small-code-improvements"><strong>Make small code improvements</strong><span>Use the same factory pattern for focused cleanup and narrow refactors.</span></a>
+</div>

@@ -1,0 +1,78 @@
+---
+title: Factory performance
+description: Read delivery, cycle-time and cost signals from completed Factory work.
+---
+
+import { Image } from "astro:assets";
+import performanceOverview from "../../../assets/performance-overview.png";
+
+Factory performance connects completed [tasks](/reference/glossary#task) with pull request activity, elapsed time and recorded cost. Use the Velocity view to understand how work moves through one workspace and where the process needs attention.
+
+<figure class="sp-media-figure not-content">
+  <Image src={performanceOverview} alt="The SuperPlane Velocity view showing tasks closed, task waste, median cycle time, cost per task and merged pull requests." />
+  <figcaption>Velocity brings delivery, time and cost into the same reporting period.</figcaption>
+</figure>
+
+## Start with the reporting window
+
+Select **14d** or **30d** before reading the report. Every summary and chart should be interpreted within that period. When enough earlier data exists, use the comparison to understand direction rather than treating one number as a permanent baseline.
+
+A new Factory may have only a few closed tasks. In that case, read the individual task records before drawing a conclusion from the percentage or median. One failed task can dominate a small sample.
+
+## Read the four headline metrics together
+
+| Metric | What it tells you | What it does not tell you |
+| --- | --- | --- |
+| **Tasks closed** | How many Factory tasks reached a recorded closed outcome in the period | Whether every result was useful or merged |
+| **Task waste** | The share of closed work recorded without a useful delivery outcome | Why the work failed or whether the task was worth attempting |
+| **Median cycle time** | The middle completion time for tasks closed in the period | How long every task took or where the time accumulated |
+| **Cost per task** | The recorded spend relative to closed Factory work | The value of the change or every charge from connected providers |
+
+Do not optimize one metric in isolation. More closed tasks can hide more wasted work. Lower cost can be a poor trade when it creates retries. Faster execution can still leave tasks waiting for review.
+
+## Understand what the Factory delivered
+
+The merged pull request chart adds repository context to the task totals. Change the grouping to answer a specific question:
+
+- **Who created:** Compare pull requests created through SuperPlane with manual repository work.
+- **Outcome:** Separate results by the recorded pull request outcome.
+- **Intake source:** See which source supplied the work that reached delivery.
+
+These views explain the shape of delivery. They are not a contest between people and agents. Manual work may include larger changes, emergency fixes or work outside the Factory's intended scope.
+
+## Move from a metric to the task record
+
+When a number changes, inspect the tasks behind it. A useful performance review follows this path:
+
+<div class="factory-execution-flow not-content" role="list" aria-label="Factory performance review path">
+  <span role="listitem">Notice the trend</span>
+  <span role="listitem">Choose a comparable segment</span>
+  <span role="listitem">Inspect the task history</span>
+  <span role="listitem">Change the workflow</span>
+  <span role="listitem">Review the next period</span>
+</div>
+
+Open the task and review its source, stage history, automation runs, pull request, checks and recorded decisions. The metric points to the pattern. The task record explains what happened.
+
+## Compare like with like
+
+Keep the repository, task shape and completion rule consistent when you compare periods. A documentation edit, dependency upgrade and production repair have different validation paths. Combining them can make a healthy workflow look slow or make a risky workflow look efficient.
+
+Use Factory performance to improve selection and process design. Do not use it as an individual productivity score.
+
+## Explore the report
+
+<div class="sp-next-grid not-content">
+  <a href="/fundamentals/performance-task-time">
+    <strong>Task time →</strong>
+    <span>Separate execution time from review and dispatch waiting.</span>
+  </a>
+  <a href="/fundamentals/performance-costs">
+    <strong>Costs →</strong>
+    <span>Connect token and compute spend to completed tasks.</span>
+  </a>
+  <a href="/fundamentals/performance-people-automations">
+    <strong>People and automations →</strong>
+    <span>Find ownership, activity and workflow reliability patterns.</span>
+  </a>
+</div>

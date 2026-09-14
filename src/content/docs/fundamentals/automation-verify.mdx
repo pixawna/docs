@@ -1,0 +1,52 @@
+---
+title: Verify automation
+description: Customize checks, pull request feedback and correction routes.
+---
+
+import { Image } from "astro:assets";
+import feedbackAutomation from "../../../assets/automation-pr-feedback.png";
+
+The Verify automation decides whether an implementation is ready to move forward. Customize it around the evidence your repository trusts, then route failed checks and pull request feedback back to the step that can act on them.
+
+<figure class="sp-media-figure not-content">
+  <Image src={feedbackAutomation} alt="An Address PR feedback automation triggered by pull request comments and reviews, followed by an agent that applies the requested changes." />
+  <figcaption>Pull request comments and reviews can start a focused correction run.</figcaption>
+</figure>
+
+## Start from the events your review process uses
+
+A Verify canvas can react to continuous integration status, pull request comments, review submissions or replies to review threads. Use the event that carries enough context to identify the task and pull request.
+
+The example listens for several GitHub review events. Each path finds the pull request, records the activity and sends the feedback to an agent. Browse [continuous integration and delivery](/integrations/ci-cd) for check providers and [source control](/integrations/source-control) for review events.
+
+## Put deterministic evidence first
+
+Run objective checks before asking another model to judge the change. Builds, tests, type checks, lint rules and policy checks give the workflow stable signals that are cheaper to repeat.
+
+Use an agent review when the requirement cannot be reduced to a command. Give it the original task, the current diff and a focused rubric. Ask for structured findings that another node can route instead of an open-ended opinion.
+
+## Send focused feedback to implementation
+
+A correction run needs the failed requirement and enough evidence to reproduce it. Include:
+
+- the check or review event that triggered the run
+- the relevant failure output or comment thread
+- the current pull request and branch
+- the original task boundary
+- the check that must pass after the correction
+
+Avoid replaying the complete execution history when a short failure excerpt identifies the problem. Focused context improves the response and reduces token use.
+
+## Bound the correction loop
+
+Define what happens after the agent pushes a correction. The pull request should return through the required checks before the task advances.
+
+Set a limit for repeated failures. Route the task to human attention when the same check keeps failing, the feedback conflicts with the original scope or a reviewer asks for a product decision. Preserve every attempt in the task history so the reviewer can see what changed.
+
+## Match verification cost to risk
+
+Do not use the same verification stack for every task. A text-only change may need a documentation build and link check. A dependency update may need security scanning and a broader test suite. A production fix may need an observability check after merge.
+
+Run inexpensive deterministic checks first. Start model-based review only after those checks pass and require a person only where judgment changes the outcome.
+
+When all required evidence passes, [Done automation](/fundamentals/automation-done) applies the Factory's completion rule.

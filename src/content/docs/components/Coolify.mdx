@@ -2,7 +2,7 @@
 title: "Coolify"
 ---
 
-List and control Coolify applications and services, and trigger deployments
+List and control Coolify applications and services and trigger deployments
 
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
@@ -21,7 +21,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 **Setup steps:**
 
 1. **Base URL:** Use your Coolify instance URL (for example `https://coolify.example.com` for self-hosted, or `https://app.coolify.io` for Coolify Cloud).
-2. **API Token:** In Coolify, go to **Keys & Tokens → API tokens**, click **Create new token**, give it a name, select the required permissions (read + write), and copy the generated token.
+2. **API Token:** In Coolify, go to **Keys & Tokens → API tokens**, click **Create new token**, give it a name, select the required permissions (read + write) and copy the generated token.
 3. The API token is **team-scoped** — SuperPlane will see all applications and services available to that team.
 
 <a id="control-application"></a>
@@ -108,7 +108,7 @@ The Deploy Application component queues a deployment for a Coolify application. 
 
 ### Output
 
-A `coolify.application.deploy.queued` payload with `applicationUuid`, `deploymentUuid` (when returned), and `message`.
+A `coolify.application.deploy.queued` payload with `applicationUuid`, `deploymentUuid` (when returned) and `message`.
 
 ### Example Output
 
@@ -136,7 +136,7 @@ The List Applications component fetches every application available to the Cooli
 ### How It Works
 
 1. Calls `GET /api/v1/applications` on the configured Coolify instance
-2. Emits the array of applications, each with `uuid`, `name`, `status`, `fqdn`, `description`, `gitRepository`, and `gitBranch`
+2. Emits the array of applications, each with `uuid`, `name`, `status`, `fqdn`, `description`, `gitRepository` and `gitBranch`
 
 ### Use Cases
 
@@ -186,7 +186,7 @@ The List Services component fetches every Coolify service (one-click and custom 
 ### How It Works
 
 1. Calls `GET /api/v1/services` on the configured Coolify instance
-2. Emits the array of services, each with `uuid`, `name`, `status`, `fqdn`, `description`, and `serverUuid`
+2. Emits the array of services, each with `uuid`, `name`, `status`, `fqdn`, `description` and `serverUuid`
 
 ### Use Cases
 

@@ -2,7 +2,7 @@
 title: "Cloudflare"
 ---
 
-Manage Cloudflare zones, rules, and DNS
+Manage Cloudflare zones, rules and DNS
 
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
@@ -18,7 +18,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 <CardGrid>
   <LinkCard title="Create DNS Record" href="#create-dns-record" description="Create a DNS record in a Cloudflare zone" />
   <LinkCard title="Create KV Namespace" href="#create-kv-namespace" description="Create a Cloudflare Workers KV namespace" />
-  <LinkCard title="Create Load Balancer" href="#create-load-balancer" description="Create a Cloudflare Load Balancer on a zone, with support for private/public visibility, monitor attachment, and custom rules" />
+  <LinkCard title="Create Load Balancer" href="#create-load-balancer" description="Create a Cloudflare Load Balancer on a zone, with support for private/public visibility, monitor attachment and custom rules" />
   <LinkCard title="Create Monitor" href="#create-monitor" description="Create a Cloudflare load balancing health monitor" />
   <LinkCard title="Create Origin Rule" href="#create-origin-rule" description="Create a rule to override the origin server for matching requests" />
   <LinkCard title="Create Pool" href="#create-pool" description="Create a Cloudflare Load Balancer origin pool" />
@@ -33,7 +33,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Delete Pool" href="#delete-pool" description="Delete a Cloudflare Load Balancer origin pool" />
   <LinkCard title="Delete Tunnel" href="#delete-tunnel" description="Delete a Cloudflare Tunnel and clean up its connector credentials" />
   <LinkCard title="Delete Worker" href="#delete-worker" description="Delete a Worker script from your Cloudflare account" />
-  <LinkCard title="Deploy Worker" href="#deploy-worker" description="Provision a Worker if needed, upload a script version, and deploy it to traffic" />
+  <LinkCard title="Deploy Worker" href="#deploy-worker" description="Provision a Worker if needed, upload a script version and deploy it to traffic" />
   <LinkCard title="Get KV Value" href="#get-kv-value" description="Read a value by key from a Cloudflare Workers KV namespace" />
   <LinkCard title="Get Load Balancer" href="#get-load-balancer" description="Retrieve a Cloudflare Load Balancer by ID" />
   <LinkCard title="Get Monitor" href="#get-monitor" description="Retrieve a Cloudflare load balancing health monitor's configuration" />
@@ -75,7 +75,7 @@ To connect Cloudflare to SuperPlane:
    - **Rules & Configuration** → **Origin** → **Edit**
    - **Developer Platform** → **Workers Routes** → **Edit**
    - **Network Services** → **Zone Load Balancers** → **Edit**
-4. Optionally set an expiration date, review, create the token, and paste the generated token below. Cloudflare only shows the token once.
+4. Optionally set an expiration date, review, create the token and paste the generated token below. Cloudflare only shows the token once.
 5. Copy the **Account ID** from the same account's home page right sidebar and paste it into **Account ID** below.
 
 <a id="on-load-balancing-health-alert"></a>
@@ -112,7 +112,7 @@ In the workflow execution chain, the trigger's **Details** tab lists:
 - **New Health**: The health state in the notification (for example `Unhealthy`).
 - **Pool**: Pool name when Cloudflare sends it; otherwise the pool ID.
 
-The trigger **title** still prefers an origin name, then pool name, then load balancer name when those fields are present in the payload. Use the **Payload** tab (or expressions such as `$.trigger.data`) for every field Cloudflare sends, including **origin name**, **load balancer id/name**, and **account id**.
+The trigger **title** still prefers an origin name, then pool name, then load balancer name when those fields are present in the payload. Use the **Payload** tab (or expressions such as `$.trigger.data`) for every field Cloudflare sends, including **origin name**, **load balancer id/name** and **account id**.
 
 ### Example Data
 
@@ -352,8 +352,8 @@ The Create Monitor component creates a Cloudflare Load Balancing health monitor.
 
 ### Configuration
 
-- **Name / Type / Path / Port**: Basic monitor settings. Path is required for HTTP and HTTPS monitors. Port is required for HTTP, HTTPS, TCP, UDP ICMP, and SMTP monitors.
-- **Advanced Health Check Settings**: Optional method, expected response, headers, redirects, TLS, probe zone, **interval** and **timeout** (seconds; omit both to let Cloudflare pick plan defaults), **retries**, and consecutive thresholds. Plan minimum interval: Pro 60s, Business 15s, Enterprise 10s.
+- **Name / Type / Path / Port**: Basic monitor settings. Path is required for HTTP and HTTPS monitors. Port is required for HTTP, HTTPS, TCP, UDP ICMP and SMTP monitors.
+- **Advanced Health Check Settings**: Optional method, expected response, headers, redirects, TLS, probe zone, **interval** and **timeout** (seconds; omit both to let Cloudflare pick plan defaults), **retries** and consecutive thresholds. Plan minimum interval: Pro 60s, Business 15s, Enterprise 10s.
 - **Pool**: Optional pool to attach the created monitor to immediately.
 
 ### Output
@@ -459,7 +459,7 @@ The Create Pool component creates a new Cloudflare Load Balancer origin pool.
 
 - **Name**: A unique, human-readable name for the pool
 - **Description**: Optional description
-- **Origins**: List of origin servers with name, address, enabled flag, weight, optional port, and optional coordinates
+- **Origins**: List of origin servers with name, address, enabled flag, weight, optional port and optional coordinates
 - **Enabled**: Whether the pool is active
 - **Minimum Origins**: Minimum number of healthy origins before marking pool unhealthy
 - **Origin Steering Policy**: How requests are distributed across origins
@@ -568,7 +568,7 @@ The Delete Certificate Pack component removes a custom SSL/TLS certificate pack 
 
 ### Output
 
-Emits the deleted pack ID, resolved zone ID, zone name when known from integration metadata, certificate hostnames when returned by the Cloudflare API (before deletion), and `deleted: true`.
+Emits the deleted pack ID, resolved zone ID, zone name when known from integration metadata, certificate hostnames when returned by the Cloudflare API (before deletion) and `deleted: true`.
 
 ### Example Output
 
@@ -650,7 +650,7 @@ The Delete KV Namespace component permanently removes a Cloudflare Workers KV na
 
 ### Output
 
-Emits a confirmation with the account ID, namespace ID, and a deleted flag.
+Emits a confirmation with the account ID, namespace ID and a deleted flag.
 
 > **Warning**: This operation is irreversible. All keys stored in the namespace will be permanently deleted.
 
@@ -691,7 +691,7 @@ The Delete KV Value component removes a key-value pair from a Cloudflare Workers
 
 ### Output
 
-Emits a confirmation with the account ID, namespace ID, and key that was deleted.
+Emits a confirmation with the account ID, namespace ID and key that was deleted.
 
 > **Warning**: This operation is irreversible. The key and its value will be permanently removed.
 
@@ -955,7 +955,7 @@ The Deploy Worker component uploads a single-module Worker (`worker.js`) to a **
 
 ### Output
 
-Emits the account ID, script name, new version ID, and deployment object.
+Emits the account ID, script name, new version ID and deployment object.
 
 ### Example Output
 
@@ -1004,7 +1004,7 @@ The Get KV Value component reads a value by key from a Cloudflare Workers KV nam
 
 ### Output
 
-Returns the account ID, namespace ID, key, and the retrieved value string.
+Returns the account ID, namespace ID, key and the retrieved value string.
 
 ### Example Output
 
@@ -1041,7 +1041,7 @@ The Get Load Balancer component fetches the current state of a Cloudflare Load B
 
 ### Output
 
-Returns the full load balancer configuration including pools, steering policy, and session affinity settings.
+Returns the full load balancer configuration including pools, steering policy and session affinity settings.
 
 ### Example Output
 
@@ -1089,7 +1089,7 @@ The Get Monitor component fetches the current configuration of a Cloudflare Load
 
 ### Output
 
-Returns the full monitor configuration including type, path, port, intervals, and health thresholds.
+Returns the full monitor configuration including type, path, port, intervals and health thresholds.
 
 ### Example Output
 
@@ -1138,7 +1138,7 @@ The Get Pool component fetches the current state of a Cloudflare Load Balancer o
 
 ### Output
 
-Returns the full pool configuration including its origins, enabled state, and health monitor.
+Returns the full pool configuration including its origins, enabled state and health monitor.
 
 ### Example Output
 
@@ -1190,7 +1190,7 @@ The Get Tunnel component fetches the current state of a Cloudflare Tunnel (cloud
 
 ### Output
 
-Returns the tunnel object from the Cloudflare API (ID, name, status, config source, timestamps, and related fields).
+Returns the tunnel object from the Cloudflare API (ID, name, status, config source, timestamps and related fields).
 
 ### Example Output
 
@@ -1287,7 +1287,7 @@ The Order Certificate Pack component orders an advanced SSL/TLS certificate pack
 
 ### Output
 
-Emits the resolved zone ID, zone name when known from integration metadata, pack ID, and the ordered certificate pack object (including covered hostnames). Status will typically be `initializing` or `pending_validation` immediately after ordering.
+Emits the resolved zone ID, zone name when known from integration metadata, pack ID and the ordered certificate pack object (including covered hostnames). Status will typically be `initializing` or `pending_validation` immediately after ordering.
 
 ### Example Output
 
@@ -1339,7 +1339,7 @@ The Purge Cache component clears cached content from the Cloudflare CDN.
 
 ### Output
 
-Emits the Cloudflare purge result ID, zone ID, zone name (when known from integration metadata), and the purge scope (mode + items).
+Emits the Cloudflare purge result ID, zone ID, zone name (when known from integration metadata) and the purge scope (mode + items).
 
 ### Example Output
 
@@ -1383,7 +1383,7 @@ The Put KV Value component writes a key-value pair to a Cloudflare Workers KV na
 
 ### Output
 
-Emits a confirmation with the account ID, namespace ID, and key that was written.
+Emits a confirmation with the account ID, namespace ID and key that was written.
 
 ### Example Output
 
@@ -1528,7 +1528,7 @@ The Update Monitor component modifies an existing Cloudflare Load Balancing heal
 
 - **Monitor**: The health monitor to update (required)
 - **Type / Description / Path / Port**: Override basic monitor settings. Only toggled fields are applied.
-- **Advanced Health Check Settings**: Override method, expected response, headers, redirect, TLS, and timing thresholds.
+- **Advanced Health Check Settings**: Override method, expected response, headers, redirect, TLS and timing thresholds.
 
 ### Output
 
@@ -1753,7 +1753,7 @@ The Update Worker Route component manages **zone routes** for Workers.
 
 ### Output
 
-Emits the route id, pattern, and script returned by the Cloudflare API.
+Emits the route id, pattern and script returned by the Cloudflare API.
 
 ### Example Output
 

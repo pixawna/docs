@@ -1,0 +1,109 @@
+<reading-progress class="reading-progress" aria-label="Page reading progress">
+  <div class="reading-progress__status">
+    <span class="reading-progress__star" data-progress-star aria-hidden="true">★</span>
+    <span class="reading-progress__message" data-progress-message>Keep going!</span>
+  </div>
+  <div class="reading-progress__track" aria-hidden="true">
+    <span data-progress-bar></span>
+  </div>
+</reading-progress>
+
+<script>
+  class ReadingProgress extends HTMLElement {
+    connectedCallback() {
+      const bar = this.querySelector<HTMLElement>("[data-progress-bar]");
+      const star = this.querySelector<HTMLElement>("[data-progress-star]");
+      const message = this.querySelector<HTMLElement>("[data-progress-message]");
+
+      const update = () => {
+        const scrollRange = document.documentElement.scrollHeight - window.innerHeight;
+        const ratio = scrollRange > 0 ? Math.min(Math.max(window.scrollY / scrollRange, 0), 1) : 1;
+        if (bar) bar.style.width = `${ratio * 100}%`;
+        if (star) {
+          star.style.setProperty("--reading-progress", String(ratio));
+          star.classList.toggle("is-complete", ratio > 0.985);
+        }
+        if (message) message.textContent = ratio > 0.985 ? "Hurry, hurry!" : "Keep going!";
+        this.setAttribute("aria-valuenow", String(Math.round(ratio * 100)));
+      };
+
+      update();
+      window.addEventListener("scroll", update, { passive: true });
+      window.addEventListener("resize", update);
+    }
+  }
+
+  if (!customElements.get("reading-progress")) {
+    customElements.define("reading-progress", ReadingProgress);
+  }
+</script>
+
+<style>
+  @layer starlight.components {
+    .reading-progress {
+      display: block;
+      margin-top: 0;
+      border-top: 1px solid var(--sl-color-hairline);
+      padding: 1.25rem 1rem;
+    }
+
+    .reading-progress__status {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      margin-bottom: 0.6rem;
+      color: var(--sl-color-gray-4);
+      font-size: var(--sl-text-xs);
+    }
+
+    .reading-progress__star {
+      color: color-mix(
+        in srgb,
+        var(--sp-color-yellow) calc(var(--reading-progress, 0) * 100%),
+        var(--sp-color-text-dim)
+      );
+      font-size: 1.55rem;
+      line-height: 1;
+      filter: drop-shadow(0 0 calc(var(--reading-progress, 0) * 0.7rem) rgb(255 178 28 / 0.8));
+      transform: scale(calc(0.86 + var(--reading-progress, 0) * 0.14));
+      transition: color 180ms ease, filter 180ms ease, transform 180ms ease;
+    }
+
+    .reading-progress__star.is-complete {
+      animation: star-celebrate 700ms ease both;
+    }
+
+    .reading-progress__message {
+      border: 1px solid var(--sl-color-gray-5);
+      border-radius: 999px;
+      padding: 0.35rem 0.65rem;
+      color: var(--sl-color-gray-2);
+      background: var(--sp-color-surface-raised);
+    }
+
+    .reading-progress__track {
+      height: 0.3rem;
+      overflow: hidden;
+      border-radius: 999px;
+      background: var(--sp-color-border);
+    }
+
+    .reading-progress__track span {
+      display: block;
+      width: 0;
+      height: 100%;
+      border-radius: inherit;
+      background: var(--sp-color-yellow);
+      box-shadow: 0 0 0.6rem rgb(255 178 28 / 0.55);
+      transition: width 100ms linear;
+    }
+
+    @keyframes star-celebrate {
+      50% { transform: scale(1.35) rotate(18deg); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reading-progress__star.is-complete { animation: none; }
+    }
+  }
+</style>

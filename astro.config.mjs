@@ -1,3 +1,5 @@
+import { createRequire } from 'node:module';
+const require = createRequire(import.meta.url);
 // @ts-check
 import starlight from "@astrojs/starlight";
 import { defineConfig } from "astro/config";
@@ -7,18 +9,28 @@ import { sidebar } from "./src/config/sidebar.mjs";
 
 // https://astro.build/config
 export default defineConfig({
+  site: "https://docs.superplane.com",
+  redirects: {
+    "/": "/get-started/overview",
+  },
   integrations: [
     mermaid({ autoTheme: true }),
     starlight({
       plugins: [starlightImageZoom()],
-      title: "SuperPlane Docs",
+      title: "SuperPlane Factory Docs",
       customCss: ["./src/styles/custom.css"],
       logo: {
         src: "./src/assets/superplane-logo.svg",
       },
       components: {
         Head: "./src/components/CustomHead.astro",
+        Header: "./src/components/CustomHeader.astro",
+        ContentPanel: "./src/components/CustomContentPanel.astro",
         SiteTitle: "./src/components/CustomSiteTitle.astro",
+        SocialIcons: "./src/components/CustomSocialIcons.astro",
+        PageTitle: "./src/components/CustomPageTitle.astro",
+        TableOfContents: "./src/components/CustomTableOfContents.astro",
+        Footer: "./src/components/CustomFooter.astro",
       },
       social: [
         {

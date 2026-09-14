@@ -56,7 +56,7 @@ SuperPlane authenticates to OCI using API Key authentication tied to a dedicated
 1. Go to **Identity & Security → Policies**.
 2. Make sure you are in the **root compartment** (check the Compartment selector on the left).
 3. Click **Create Policy**, name it `SuperPlanePolicies`, add a description and enable the **manual editor**.
-4. Paste in the following statements, replacing `<your-compartment>` with your target compartment name, and then Click **Create**.:
+4. Paste in the following statements, replacing `<your-compartment>` with your target compartment name and then Click **Create**.:
 ```
 Allow group SuperPlaneIntegration to manage instances in tenancy
 Allow group SuperPlaneIntegration to manage volumes in tenancy
@@ -572,7 +572,7 @@ The Get Image component retrieves metadata for an OCI Compute custom image. Orac
 
 - **Deployment checks**: Verify that an image is available before launching instances
 - **Traceability**: Resolve image details by OCID
-- **Audit workflows**: Capture operating system, launch mode, and lifecycle state metadata
+- **Audit workflows**: Capture operating system, launch mode and lifecycle state metadata
 
 ### Example Output
 
@@ -608,7 +608,7 @@ The Get Instance component fetches the latest details for an Oracle Cloud Infras
 
 ### Use Cases
 
-- **Inventory checks**: Read instance state, shape, region, and network addresses during a workflow
+- **Inventory checks**: Read instance state, shape, region and network addresses during a workflow
 - **Deployment gates**: Verify a target instance exists and is in the expected lifecycle state
 - **Audit workflows**: Capture instance metadata before another operation runs
 

@@ -39,7 +39,6 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Create Release" href="#create-release" description="Create a new release in a GitHub repository" />
   <LinkCard title="Create Review" href="#create-review" description="Submit a pull request review on GitHub" />
   <LinkCard title="Delete Release" href="#delete-release" description="Delete a release from a GitHub repository" />
-  <LinkCard title="Find Pull Request" href="#find-pull-request" description="Find an existing pull request in a GitHub repository by branch" />
   <LinkCard title="Get Combined Commit Status" href="#get-combined-commit-status" description="Get the combined GitHub commit status for a commit, branch, or tag" />
   <LinkCard title="Get Issue" href="#get-issue" description="Get a GitHub issue by number" />
   <LinkCard title="Get Release" href="#get-release" description="Get a release from a GitHub repository" />
@@ -125,7 +124,7 @@ This trigger automatically sets up a GitHub webhook when configured. The webhook
 
 The On Check Run trigger starts a workflow execution when a GitHub Checks API check run changes.
 
-GitHub check runs are created by GitHub Apps and power many pull request checks such as Cloudflare Pages, DCO, Sourcery, and GitHub Actions check runs. They are separate from legacy Commit Statuses API statuses. Use On Commit Status for legacy commit status events.
+GitHub check runs are created by GitHub Apps and power many pull request checks such as Cloudflare Pages, DCO, Sourcery and GitHub Actions check runs. They are separate from legacy Commit Statuses API statuses. Use On Commit Status for legacy commit status events.
 
 ### Use Cases
 
@@ -147,7 +146,7 @@ GitHub check runs are created by GitHub Apps and power many pull request checks 
 
 Each event includes:
 - **action**: The check_run webhook action
-- **check_run**: Check run details, including name, status, conclusion, head SHA, app, pull requests, and URLs
+- **check_run**: Check run details, including name, status, conclusion, head SHA, app, pull requests and URLs
 - **repository**: Repository information
 - **sender**: User or app actor associated with the webhook event
 
@@ -218,7 +217,7 @@ GitHub may return an empty pull_requests array for check runs created from forke
 
 The On Commit Status trigger starts a workflow execution when a GitHub commit status is created or updated.
 
-GitHub commit statuses are the legacy status objects created through the Commit Statuses API. They are separate from GitHub Checks API check runs, which power many PR checks from GitHub Apps such as Cloudflare Pages, DCO, and Sourcery. This trigger does not receive those check-run events. For GitHub Actions workflows, use the On Workflow Run trigger instead.
+GitHub commit statuses are the legacy status objects created through the Commit Statuses API. They are separate from GitHub Checks API check runs, which power many PR checks from GitHub Apps such as Cloudflare Pages, DCO and Sourcery. This trigger does not receive those check-run events. For GitHub Actions workflows, use the On Workflow Run trigger instead.
 
 ### Use Cases
 
@@ -1480,7 +1479,7 @@ The On Push trigger starts a workflow execution when code is pushed to a GitHub 
 
 - **Repository**: Select the GitHub repository to monitor
 - **Refs**: Configure which branches/tags to monitor (e.g., `refs/heads/main`, `refs/tags/*`)
-- **Paths** *(optional)*: Glob patterns (GitHub Actions–style) for added, modified, and removed files. Use `!` prefix to exclude (for example `billing/**` with `!billing/**/*.md`). Patterns starting only with `!` assume an include of `**`. Lists stored as legacy ref-style predicates still honor `equals` values as globs; `matches` must be replaced with glob patterns. If the webhook has no per-commit file lists (empty `commits` or missing `added`/`modified`/`removed` arrays), a configured path filter cannot match and the trigger will not fire. Leave empty to fire on all pushes.
+- **Paths** *(optional)*: Glob patterns (GitHub Actions–style) for added, modified and removed files. Use `!` prefix to exclude (for example `billing/**` with `!billing/**/*.md`). Patterns starting only with `!` assume an include of `**`. Lists stored as legacy ref-style predicates still honor `equals` values as globs; `matches` must be replaced with glob patterns. If the webhook has no per-commit file lists (empty `commits` or missing `added`/`modified`/`removed` arrays), a configured path filter cannot match and the trigger will not fire. Leave empty to fire on all pushes.
 
 ### Event Data
 
@@ -2255,7 +2254,7 @@ The Add Reaction component adds a reaction emoji to a GitHub comment.
 
 ### Output
 
-Returns the created GitHub reaction object, including id, content, user, and timestamp.
+Returns the created GitHub reaction object, including id, content, user and timestamp.
 
 ### Example Output
 
@@ -2280,7 +2279,7 @@ Returns the created GitHub reaction object, including id, content, user, and tim
 
 **Component key:** `github.createDeployment`
 
-The Create Deployment component registers a deployment with GitHub for a given ref and environment. This drives the **View deployment** button and environment box on pull requests—the same surface area used by Railway, Vercel, and Netlify.
+The Create Deployment component registers a deployment with GitHub for a given ref and environment. This drives the **View deployment** button and environment box on pull requests—the same surface area used by Railway, Vercel and Netlify.
 
 ### Use Cases
 
@@ -3083,7 +3082,7 @@ The Create Release component creates a new release in a GitHub repository.
 
 ### Output
 
-Returns the created release object with all release information including tag, assets, and metadata.
+Returns the created release object with all release information including tag, assets and metadata.
 
 ### Example Output
 
@@ -3217,527 +3216,6 @@ Returns confirmation of the deletion.
 }
 ```
 
-<a id="find-pull-request"></a>
-
-## Find Pull Request
-
-**Component key:** `github.findPullRequest`
-
-The Find Pull Request component looks up a pull request in a GitHub repository by its head branch, so a workflow can decide whether to create a new pull request or update one that already exists.
-
-### Use Cases
-
-- **Idempotent PR automation**: Check for an existing pull request before creating one, so a workflow that runs more than once does not create duplicates
-- **Branch status checks**: Look up the pull request open for a branch to read its number, URL, or state
-
-### Configuration
-
-- **Repository**: Select the GitHub repository to search
-- **Head Branch**: The branch containing the changes (source branch). Supply a plain branch name; the component qualifies it with the repository owner as GitHub's API requires.
-- **Base Branch**: Optional. When set, only pull requests targeting this branch match.
-- **State**: Which pull requests to consider - Open, Closed, or All. Defaults to Open.
-
-### Output Channels
-
-- **Found**: Emitted with the first matching pull request when one exists
-- **Not Found**: Emitted when no pull request matches
-
-### Example Output
-
-```json
-{
-  "data": {
-    "_links": {
-      "comments": {
-        "href": "https://api.github.com/repos/acme/widgets/issues/42/comments"
-      },
-      "commits": {
-        "href": "https://api.github.com/repos/acme/widgets/pulls/42/commits"
-      },
-      "html": {
-        "href": "https://github.com/acme/widgets/pull/42"
-      },
-      "issue": {
-        "href": "https://api.github.com/repos/acme/widgets/issues/42"
-      },
-      "review_comment": {
-        "href": "https://api.github.com/repos/acme/widgets/pulls/comments{/number}"
-      },
-      "review_comments": {
-        "href": "https://api.github.com/repos/acme/widgets/pulls/42/comments"
-      },
-      "self": {
-        "href": "https://api.github.com/repos/acme/widgets/pulls/42"
-      },
-      "statuses": {
-        "href": "https://api.github.com/repos/acme/widgets/statuses/a1b2c3d4e5f60718293a4b5c6d7e8f9012345678"
-      }
-    },
-    "additions": 10,
-    "assignee": {
-      "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
-      "events_url": "https://api.github.com/users/octocat/events{/privacy}",
-      "followers_url": "https://api.github.com/users/octocat/followers",
-      "following_url": "https://api.github.com/users/octocat/following{/other_user}",
-      "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
-      "gravatar_id": "",
-      "html_url": "https://github.com/octocat",
-      "id": 1,
-      "login": "octocat",
-      "node_id": "U_kgDOA000001",
-      "organizations_url": "https://api.github.com/users/octocat/orgs",
-      "received_events_url": "https://api.github.com/users/octocat/received_events",
-      "repos_url": "https://api.github.com/users/octocat/repos",
-      "site_admin": false,
-      "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
-      "type": "User",
-      "url": "https://api.github.com/users/octocat"
-    },
-    "assignees": [
-      {
-        "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
-        "events_url": "https://api.github.com/users/octocat/events{/privacy}",
-        "followers_url": "https://api.github.com/users/octocat/followers",
-        "following_url": "https://api.github.com/users/octocat/following{/other_user}",
-        "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
-        "gravatar_id": "",
-        "html_url": "https://github.com/octocat",
-        "id": 1,
-        "login": "octocat",
-        "node_id": "U_kgDOA000001",
-        "organizations_url": "https://api.github.com/users/octocat/orgs",
-        "received_events_url": "https://api.github.com/users/octocat/received_events",
-        "repos_url": "https://api.github.com/users/octocat/repos",
-        "site_admin": false,
-        "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
-        "type": "User",
-        "url": "https://api.github.com/users/octocat"
-      }
-    ],
-    "author_association": "CONTRIBUTOR",
-    "base": {
-      "label": "acme:main",
-      "ref": "main",
-      "repo": {
-        "allow_auto_merge": false,
-        "allow_forking": true,
-        "allow_merge_commit": true,
-        "allow_rebase_merge": true,
-        "allow_squash_merge": true,
-        "allow_update_branch": false,
-        "archive_url": "https://api.github.com/repos/acme/widgets/{archive_format}{/ref}",
-        "archived": false,
-        "assignees_url": "https://api.github.com/repos/acme/widgets/assignees{/user}",
-        "blobs_url": "https://api.github.com/repos/acme/widgets/git/blobs{/sha}",
-        "branches_url": "https://api.github.com/repos/acme/widgets/branches{/branch}",
-        "clone_url": "https://github.com/acme/widgets.git",
-        "collaborators_url": "https://api.github.com/repos/acme/widgets/collaborators{/collaborator}",
-        "comments_url": "https://api.github.com/repos/acme/widgets/comments{/number}",
-        "commits_url": "https://api.github.com/repos/acme/widgets/commits{/sha}",
-        "compare_url": "https://api.github.com/repos/acme/widgets/compare/{base}...{head}",
-        "contents_url": "https://api.github.com/repos/acme/widgets/contents/{+path}",
-        "contributors_url": "https://api.github.com/repos/acme/widgets/contributors",
-        "created_at": "2025-01-10T08:00:00Z",
-        "default_branch": "main",
-        "delete_branch_on_merge": false,
-        "deployments_url": "https://api.github.com/repos/acme/widgets/deployments",
-        "description": "Widgets automation platform",
-        "disabled": false,
-        "downloads_url": "https://api.github.com/repos/acme/widgets/downloads",
-        "events_url": "https://api.github.com/repos/acme/widgets/events",
-        "fork": false,
-        "forks_count": 8,
-        "forks_url": "https://api.github.com/repos/acme/widgets/forks",
-        "full_name": "acme/widgets",
-        "git_commits_url": "https://api.github.com/repos/acme/widgets/git/commits{/sha}",
-        "git_refs_url": "https://api.github.com/repos/acme/widgets/git/refs{/sha}",
-        "git_tags_url": "https://api.github.com/repos/acme/widgets/git/tags{/sha}",
-        "git_url": "git://github.com/acme/widgets.git",
-        "has_discussions": false,
-        "has_downloads": true,
-        "has_issues": true,
-        "has_pages": false,
-        "has_projects": true,
-        "has_wiki": true,
-        "homepage": "https://widgets.acme.example",
-        "hooks_url": "https://api.github.com/repos/acme/widgets/hooks",
-        "html_url": "https://github.com/acme/widgets",
-        "id": 123456,
-        "is_template": false,
-        "issue_comment_url": "https://api.github.com/repos/acme/widgets/issues/comments{/number}",
-        "issue_events_url": "https://api.github.com/repos/acme/widgets/issues/events{/number}",
-        "issues_url": "https://api.github.com/repos/acme/widgets/issues{/number}",
-        "keys_url": "https://api.github.com/repos/acme/widgets/keys{/key_id}",
-        "labels_url": "https://api.github.com/repos/acme/widgets/labels{/name}",
-        "language": "Go",
-        "languages_url": "https://api.github.com/repos/acme/widgets/languages",
-        "license": {
-          "key": "mit",
-          "name": "MIT License",
-          "spdx_id": "MIT",
-          "url": "https://api.github.com/licenses/mit"
-        },
-        "merge_commit_message": "PR_TITLE",
-        "merge_commit_title": "MERGE_MESSAGE",
-        "merges_url": "https://api.github.com/repos/acme/widgets/merges",
-        "milestones_url": "https://api.github.com/repos/acme/widgets/milestones{/number}",
-        "name": "widgets",
-        "node_id": "R_kgDOAB1234",
-        "notifications_url": "https://api.github.com/repos/acme/widgets/notifications{?since,all,participating}",
-        "open_issues": 5,
-        "open_issues_count": 5,
-        "owner": {
-          "avatar_url": "https://avatars.githubusercontent.com/u/200001?v=4",
-          "events_url": "https://api.github.com/users/acme/events{/privacy}",
-          "followers_url": "https://api.github.com/users/acme/followers",
-          "following_url": "https://api.github.com/users/acme/following{/other_user}",
-          "gists_url": "https://api.github.com/users/acme/gists{/gist_id}",
-          "gravatar_id": "",
-          "html_url": "https://github.com/acme",
-          "id": 200001,
-          "login": "acme",
-          "node_id": "U_kgDOA200001",
-          "organizations_url": "https://api.github.com/users/acme/orgs",
-          "received_events_url": "https://api.github.com/users/acme/received_events",
-          "repos_url": "https://api.github.com/users/acme/repos",
-          "site_admin": false,
-          "starred_url": "https://api.github.com/users/acme/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/acme/subscriptions",
-          "type": "User",
-          "url": "https://api.github.com/users/acme"
-        },
-        "permissions": {
-          "admin": false,
-          "maintain": false,
-          "pull": true,
-          "push": true,
-          "triage": true
-        },
-        "private": false,
-        "pulls_url": "https://api.github.com/repos/acme/widgets/pulls{/number}",
-        "pushed_at": "2026-04-22T09:58:00Z",
-        "releases_url": "https://api.github.com/repos/acme/widgets/releases{/id}",
-        "size": 2048,
-        "squash_merge_commit_message": "COMMIT_MESSAGES",
-        "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
-        "ssh_url": "git@github.com:acme/widgets.git",
-        "stargazers_count": 120,
-        "stargazers_url": "https://api.github.com/repos/acme/widgets/stargazers",
-        "statuses_url": "https://api.github.com/repos/acme/widgets/statuses/{sha}",
-        "subscribers_url": "https://api.github.com/repos/acme/widgets/subscribers",
-        "subscription_url": "https://api.github.com/repos/acme/widgets/subscription",
-        "svn_url": "https://github.com/acme/widgets",
-        "tags_url": "https://api.github.com/repos/acme/widgets/tags",
-        "teams_url": "https://api.github.com/repos/acme/widgets/teams",
-        "topics": [
-          "automation",
-          "widgets"
-        ],
-        "trees_url": "https://api.github.com/repos/acme/widgets/git/trees{/sha}",
-        "updated_at": "2026-04-22T09:58:00Z",
-        "url": "https://api.github.com/repos/acme/widgets",
-        "visibility": "public",
-        "watchers": 120,
-        "watchers_count": 120,
-        "web_commit_signoff_required": false
-      },
-      "sha": "5e6f708192a3b4c5d6e7f8090a1b2c3d4e5f6a7b",
-      "user": {
-        "avatar_url": "https://avatars.githubusercontent.com/u/200001?v=4",
-        "events_url": "https://api.github.com/users/acme/events{/privacy}",
-        "followers_url": "https://api.github.com/users/acme/followers",
-        "following_url": "https://api.github.com/users/acme/following{/other_user}",
-        "gists_url": "https://api.github.com/users/acme/gists{/gist_id}",
-        "gravatar_id": "",
-        "html_url": "https://github.com/acme",
-        "id": 200001,
-        "login": "acme",
-        "node_id": "U_kgDOA200001",
-        "organizations_url": "https://api.github.com/users/acme/orgs",
-        "received_events_url": "https://api.github.com/users/acme/received_events",
-        "repos_url": "https://api.github.com/users/acme/repos",
-        "site_admin": false,
-        "starred_url": "https://api.github.com/users/acme/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/acme/subscriptions",
-        "type": "User",
-        "url": "https://api.github.com/users/acme"
-      }
-    },
-    "body": "Adds the new feature described in the linked issue.",
-    "changed_files": 3,
-    "comments": 2,
-    "comments_url": "https://api.github.com/repos/acme/widgets/issues/42/comments",
-    "commits": 3,
-    "commits_url": "https://api.github.com/repos/acme/widgets/pulls/42/commits",
-    "created_at": "2026-04-22T10:00:00Z",
-    "deletions": 2,
-    "diff_url": "https://github.com/acme/widgets/pull/42.diff",
-    "draft": false,
-    "head": {
-      "label": "acme:feature-branch",
-      "ref": "feature-branch",
-      "repo": {
-        "allow_auto_merge": false,
-        "allow_forking": true,
-        "allow_merge_commit": true,
-        "allow_rebase_merge": true,
-        "allow_squash_merge": true,
-        "allow_update_branch": false,
-        "archive_url": "https://api.github.com/repos/acme/widgets/{archive_format}{/ref}",
-        "archived": false,
-        "assignees_url": "https://api.github.com/repos/acme/widgets/assignees{/user}",
-        "blobs_url": "https://api.github.com/repos/acme/widgets/git/blobs{/sha}",
-        "branches_url": "https://api.github.com/repos/acme/widgets/branches{/branch}",
-        "clone_url": "https://github.com/acme/widgets.git",
-        "collaborators_url": "https://api.github.com/repos/acme/widgets/collaborators{/collaborator}",
-        "comments_url": "https://api.github.com/repos/acme/widgets/comments{/number}",
-        "commits_url": "https://api.github.com/repos/acme/widgets/commits{/sha}",
-        "compare_url": "https://api.github.com/repos/acme/widgets/compare/{base}...{head}",
-        "contents_url": "https://api.github.com/repos/acme/widgets/contents/{+path}",
-        "contributors_url": "https://api.github.com/repos/acme/widgets/contributors",
-        "created_at": "2025-01-10T08:00:00Z",
-        "default_branch": "main",
-        "delete_branch_on_merge": false,
-        "deployments_url": "https://api.github.com/repos/acme/widgets/deployments",
-        "description": "Widgets automation platform",
-        "disabled": false,
-        "downloads_url": "https://api.github.com/repos/acme/widgets/downloads",
-        "events_url": "https://api.github.com/repos/acme/widgets/events",
-        "fork": false,
-        "forks_count": 8,
-        "forks_url": "https://api.github.com/repos/acme/widgets/forks",
-        "full_name": "acme/widgets",
-        "git_commits_url": "https://api.github.com/repos/acme/widgets/git/commits{/sha}",
-        "git_refs_url": "https://api.github.com/repos/acme/widgets/git/refs{/sha}",
-        "git_tags_url": "https://api.github.com/repos/acme/widgets/git/tags{/sha}",
-        "git_url": "git://github.com/acme/widgets.git",
-        "has_discussions": false,
-        "has_downloads": true,
-        "has_issues": true,
-        "has_pages": false,
-        "has_projects": true,
-        "has_wiki": true,
-        "homepage": "https://widgets.acme.example",
-        "hooks_url": "https://api.github.com/repos/acme/widgets/hooks",
-        "html_url": "https://github.com/acme/widgets",
-        "id": 123456,
-        "is_template": false,
-        "issue_comment_url": "https://api.github.com/repos/acme/widgets/issues/comments{/number}",
-        "issue_events_url": "https://api.github.com/repos/acme/widgets/issues/events{/number}",
-        "issues_url": "https://api.github.com/repos/acme/widgets/issues{/number}",
-        "keys_url": "https://api.github.com/repos/acme/widgets/keys{/key_id}",
-        "labels_url": "https://api.github.com/repos/acme/widgets/labels{/name}",
-        "language": "Go",
-        "languages_url": "https://api.github.com/repos/acme/widgets/languages",
-        "license": {
-          "key": "mit",
-          "name": "MIT License",
-          "spdx_id": "MIT",
-          "url": "https://api.github.com/licenses/mit"
-        },
-        "merge_commit_message": "PR_TITLE",
-        "merge_commit_title": "MERGE_MESSAGE",
-        "merges_url": "https://api.github.com/repos/acme/widgets/merges",
-        "milestones_url": "https://api.github.com/repos/acme/widgets/milestones{/number}",
-        "name": "widgets",
-        "node_id": "R_kgDOAB1234",
-        "notifications_url": "https://api.github.com/repos/acme/widgets/notifications{?since,all,participating}",
-        "open_issues": 5,
-        "open_issues_count": 5,
-        "owner": {
-          "avatar_url": "https://avatars.githubusercontent.com/u/200001?v=4",
-          "events_url": "https://api.github.com/users/acme/events{/privacy}",
-          "followers_url": "https://api.github.com/users/acme/followers",
-          "following_url": "https://api.github.com/users/acme/following{/other_user}",
-          "gists_url": "https://api.github.com/users/acme/gists{/gist_id}",
-          "gravatar_id": "",
-          "html_url": "https://github.com/acme",
-          "id": 200001,
-          "login": "acme",
-          "node_id": "U_kgDOA200001",
-          "organizations_url": "https://api.github.com/users/acme/orgs",
-          "received_events_url": "https://api.github.com/users/acme/received_events",
-          "repos_url": "https://api.github.com/users/acme/repos",
-          "site_admin": false,
-          "starred_url": "https://api.github.com/users/acme/starred{/owner}{/repo}",
-          "subscriptions_url": "https://api.github.com/users/acme/subscriptions",
-          "type": "User",
-          "url": "https://api.github.com/users/acme"
-        },
-        "permissions": {
-          "admin": false,
-          "maintain": false,
-          "pull": true,
-          "push": true,
-          "triage": true
-        },
-        "private": false,
-        "pulls_url": "https://api.github.com/repos/acme/widgets/pulls{/number}",
-        "pushed_at": "2026-04-22T09:58:00Z",
-        "releases_url": "https://api.github.com/repos/acme/widgets/releases{/id}",
-        "size": 2048,
-        "squash_merge_commit_message": "COMMIT_MESSAGES",
-        "squash_merge_commit_title": "COMMIT_OR_PR_TITLE",
-        "ssh_url": "git@github.com:acme/widgets.git",
-        "stargazers_count": 120,
-        "stargazers_url": "https://api.github.com/repos/acme/widgets/stargazers",
-        "statuses_url": "https://api.github.com/repos/acme/widgets/statuses/{sha}",
-        "subscribers_url": "https://api.github.com/repos/acme/widgets/subscribers",
-        "subscription_url": "https://api.github.com/repos/acme/widgets/subscription",
-        "svn_url": "https://github.com/acme/widgets",
-        "tags_url": "https://api.github.com/repos/acme/widgets/tags",
-        "teams_url": "https://api.github.com/repos/acme/widgets/teams",
-        "topics": [
-          "automation",
-          "widgets"
-        ],
-        "trees_url": "https://api.github.com/repos/acme/widgets/git/trees{/sha}",
-        "updated_at": "2026-04-22T09:58:00Z",
-        "url": "https://api.github.com/repos/acme/widgets",
-        "visibility": "public",
-        "watchers": 120,
-        "watchers_count": 120,
-        "web_commit_signoff_required": false
-      },
-      "sha": "a1b2c3d4e5f60718293a4b5c6d7e8f9012345678",
-      "user": {
-        "avatar_url": "https://avatars.githubusercontent.com/u/200001?v=4",
-        "events_url": "https://api.github.com/users/acme/events{/privacy}",
-        "followers_url": "https://api.github.com/users/acme/followers",
-        "following_url": "https://api.github.com/users/acme/following{/other_user}",
-        "gists_url": "https://api.github.com/users/acme/gists{/gist_id}",
-        "gravatar_id": "",
-        "html_url": "https://github.com/acme",
-        "id": 200001,
-        "login": "acme",
-        "node_id": "U_kgDOA200001",
-        "organizations_url": "https://api.github.com/users/acme/orgs",
-        "received_events_url": "https://api.github.com/users/acme/received_events",
-        "repos_url": "https://api.github.com/users/acme/repos",
-        "site_admin": false,
-        "starred_url": "https://api.github.com/users/acme/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/acme/subscriptions",
-        "type": "User",
-        "url": "https://api.github.com/users/acme"
-      }
-    },
-    "html_url": "https://github.com/acme/widgets/pull/42",
-    "id": 1234567890,
-    "issue_url": "https://api.github.com/repos/acme/widgets/issues/42",
-    "labels": [
-      {
-        "color": "a2eeef",
-        "default": true,
-        "description": "New feature or request",
-        "id": 208045946,
-        "name": "enhancement",
-        "node_id": "MDU6TGFiZWwyMDgwNDU5NDY=",
-        "url": "https://api.github.com/repos/acme/widgets/labels/enhancement"
-      }
-    ],
-    "locked": false,
-    "maintainer_can_modify": true,
-    "mergeable": true,
-    "mergeable_state": "clean",
-    "merged": false,
-    "milestone": {
-      "closed_issues": 8,
-      "created_at": "2026-01-05T10:00:00Z",
-      "creator": {
-        "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
-        "events_url": "https://api.github.com/users/octocat/events{/privacy}",
-        "followers_url": "https://api.github.com/users/octocat/followers",
-        "following_url": "https://api.github.com/users/octocat/following{/other_user}",
-        "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
-        "gravatar_id": "",
-        "html_url": "https://github.com/octocat",
-        "id": 1,
-        "login": "octocat",
-        "node_id": "U_kgDOA000001",
-        "organizations_url": "https://api.github.com/users/octocat/orgs",
-        "received_events_url": "https://api.github.com/users/octocat/received_events",
-        "repos_url": "https://api.github.com/users/octocat/repos",
-        "site_admin": false,
-        "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
-        "type": "User",
-        "url": "https://api.github.com/users/octocat"
-      },
-      "description": "First stable release",
-      "due_on": "2026-03-01T08:00:00Z",
-      "html_url": "https://github.com/acme/widgets/milestone/1",
-      "id": 1002604,
-      "labels_url": "https://api.github.com/repos/acme/widgets/milestones/1/labels",
-      "node_id": "MDk6TWlsZXN0b25lMTAwMjYwNA==",
-      "number": 1,
-      "open_issues": 4,
-      "state": "open",
-      "title": "v1.0",
-      "updated_at": "2026-01-16T17:40:00Z",
-      "url": "https://api.github.com/repos/acme/widgets/milestones/1"
-    },
-    "node_id": "PR_kwDOABCD12MAAAABCDEFGH",
-    "number": 42,
-    "patch_url": "https://github.com/acme/widgets/pull/42.patch",
-    "rebaseable": true,
-    "requested_reviewers": [
-      {
-        "avatar_url": "https://avatars.githubusercontent.com/u/2?v=4",
-        "events_url": "https://api.github.com/users/hubot/events{/privacy}",
-        "followers_url": "https://api.github.com/users/hubot/followers",
-        "following_url": "https://api.github.com/users/hubot/following{/other_user}",
-        "gists_url": "https://api.github.com/users/hubot/gists{/gist_id}",
-        "gravatar_id": "",
-        "html_url": "https://github.com/hubot",
-        "id": 2,
-        "login": "hubot",
-        "node_id": "U_kgDOA000002",
-        "organizations_url": "https://api.github.com/users/hubot/orgs",
-        "received_events_url": "https://api.github.com/users/hubot/received_events",
-        "repos_url": "https://api.github.com/users/hubot/repos",
-        "site_admin": false,
-        "starred_url": "https://api.github.com/users/hubot/starred{/owner}{/repo}",
-        "subscriptions_url": "https://api.github.com/users/hubot/subscriptions",
-        "type": "User",
-        "url": "https://api.github.com/users/hubot"
-      }
-    ],
-    "review_comment_url": "https://api.github.com/repos/acme/widgets/pulls/comments{/number}",
-    "review_comments": 1,
-    "review_comments_url": "https://api.github.com/repos/acme/widgets/pulls/42/comments",
-    "state": "open",
-    "statuses_url": "https://api.github.com/repos/acme/widgets/statuses/a1b2c3d4e5f60718293a4b5c6d7e8f9012345678",
-    "title": "Add new feature",
-    "updated_at": "2026-04-22T10:00:00Z",
-    "url": "https://api.github.com/repos/acme/widgets/pulls/42",
-    "user": {
-      "avatar_url": "https://avatars.githubusercontent.com/u/1?v=4",
-      "events_url": "https://api.github.com/users/octocat/events{/privacy}",
-      "followers_url": "https://api.github.com/users/octocat/followers",
-      "following_url": "https://api.github.com/users/octocat/following{/other_user}",
-      "gists_url": "https://api.github.com/users/octocat/gists{/gist_id}",
-      "gravatar_id": "",
-      "html_url": "https://github.com/octocat",
-      "id": 1,
-      "login": "octocat",
-      "node_id": "U_kgDOA000001",
-      "organizations_url": "https://api.github.com/users/octocat/orgs",
-      "received_events_url": "https://api.github.com/users/octocat/received_events",
-      "repos_url": "https://api.github.com/users/octocat/repos",
-      "site_admin": false,
-      "starred_url": "https://api.github.com/users/octocat/starred{/owner}{/repo}",
-      "subscriptions_url": "https://api.github.com/users/octocat/subscriptions",
-      "type": "User",
-      "url": "https://api.github.com/users/octocat"
-    }
-  },
-  "timestamp": "2026-04-22T10:00:00.000000000Z",
-  "type": "github.pullRequest"
-}
-```
-
 <a id="get-combined-commit-status"></a>
 
 ## Get Combined Commit Status
@@ -3762,7 +3240,7 @@ This component uses the Commit Statuses API. It summarizes legacy commit statuse
 
 ### Output
 
-Emits a combined commit status object on the default output channel. The payload includes the combined **state**, **sha**, **total_count**, and the latest status for each status context in **statuses**.
+Emits a combined commit status object on the default output channel. The payload includes the combined **state**, **sha**, **total_count** and the latest status for each status context in **statuses**.
 
 ### Example Output
 
@@ -3829,7 +3307,7 @@ The Get Issue component retrieves a specific issue from a GitHub repository by i
 ### Output
 
 Returns the complete issue object including:
-- Issue number, title, and body
+- Issue number, title and body
 - State (open/closed)
 - Labels and assignees
 - Created and updated timestamps
@@ -4041,7 +3519,7 @@ The Get Release component retrieves release information from a GitHub repository
 ### Output
 
 Returns release information including:
-- Release ID, name, and tag name
+- Release ID, name and tag name
 - Release body/description
 - Draft and prerelease status
 - Created and published timestamps
@@ -4160,7 +3638,7 @@ Returns usage data with:
 ### Node Metadata
 
 The component stores repository information in node metadata:
-- Repository ID, name, and URL for each selected repository (max 5)
+- Repository ID, name and URL for each selected repository (max 5)
 - This metadata is displayed in the workflow canvas for easy reference
 
 ### Use Cases
@@ -4228,7 +3706,7 @@ Use it after On Check Run or other GitHub triggers to inspect the full set of Ch
 
 ### Output
 
-Returns GitHub's check run list response, including total_count and check_runs. Each check run includes its name, status, conclusion, URLs, app metadata, associated pull requests, and timestamps.
+Returns GitHub's check run list response, including total_count and check_runs. Each check run includes its name, status, conclusion, URLs, app metadata, associated pull requests and timestamps.
 
 ### Example Output
 
@@ -4367,7 +3845,7 @@ The Merge Pull Request component merges an open pull request in a GitHub reposit
 
 ### Output
 
-Returns GitHub's merge result, including whether the pull request was merged, the resulting commit SHA, and GitHub's message.
+Returns GitHub's merge result, including whether the pull request was merged, the resulting commit SHA and GitHub's message.
 
 ### Example Output
 
@@ -4643,7 +4121,7 @@ The **Update Issue Comment** component edits an existing comment on a GitHub iss
 
 ### Output
 
-Returns the updated comment object including comment ID, URL, body, and timestamps.
+Returns the updated comment object including comment ID, URL, body and timestamps.
 
 ### Notes
 
@@ -4699,7 +4177,7 @@ Returns the updated comment object including comment ID, URL, body, and timestam
 
 **Component key:** `github.updatePullRequest`
 
-The Update Pull Request component updates an existing pull request in a GitHub repository. Use it instead of Update Issue when the change is about a pull request - GitHub models a pull request's title, body, state, labels, and assignees on its underlying issue, but "Update Issue" is confusing to reach for when working with pull requests.
+The Update Pull Request component updates an existing pull request in a GitHub repository. Use it instead of Update Issue when the change is about a pull request - GitHub models a pull request's title, body, state, labels and assignees on its underlying issue, but "Update Issue" is confusing to reach for when working with pull requests.
 
 ### Use Cases
 
@@ -5299,11 +4777,11 @@ GitHub does not report the expected total number of checks. When you leave the c
 - **Failed**: A selected check has a failing conclusion
 - **Timed Out**: The timeout expired, or a selected check never appeared
 
-Each output includes the repository, SHA, all observed checks, selected checks, failed checks, and timestamps.
+Each output includes the repository, SHA, all observed checks, selected checks, failed checks and timestamps.
 
 ### Notes
 
-- The component listens for check_run, check_suite, and status webhooks
+- The component listens for check_run, check_suite and status webhooks
 - A five-minute poll runs only when a webhook does not arrive
 - Unknown non-terminal conclusions stay pending
 

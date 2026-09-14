@@ -1,19 +1,20 @@
 # SuperPlane Documentation
 
-This repository contains the documentation for [SuperPlane](https://github.com/superplanehq/superplane), the open source DevOps control plane.
+This repository contains the documentation for [SuperPlane Factory](https://github.com/superplanehq/superplane), the AI software factory for tracked agent work.
 
 ## About
 
 This documentation site is built with [Starlight](https://starlight.astro.build), a documentation framework built on [Astro](https://astro.build) and deployed to [docs.superplane.com](https://docs.superplane.com) via Cloudflare Pages.
 
-## LLM Context Files
+## Crawler and agent discovery
 
-This repo publishes two LLM-oriented files at:
+The deployed site publishes:
 
-- `/llms.txt`
-- `/llms-full.txt`
+- `/robots.txt` — crawler access policy and sitemap location
+- `/llms.txt` — concise, structured documentation index for agents
+- `/llms-full.txt` — complete documentation context for tools that need it
 
-These files are generated automatically during `npm run build` (via `prebuild`) and should not be edited manually.
+The LLM context files are generated automatically during `npm run build` (via `prebuild`) and should not be edited manually. `robots.txt` controls crawler access; `llms.txt` does not grant access and instead helps an agent find the most relevant documentation.
 
 ## Contributing
 

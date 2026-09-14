@@ -23,3 +23,5 @@ pnpm-debug.log*
 # generated LLM index files
 public/llms.txt
 public/llms-full.txt
+.vercel
+.env*

@@ -9,7 +9,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 ## Actions
 
 <CardGrid>
-  <LinkCard title="Create Repository Sandbox" href="#create-repository-sandbox" description="Create a sandbox, clone a repository, and run a bootstrap script" />
+  <LinkCard title="Create Repository Sandbox" href="#create-repository-sandbox" description="Create a sandbox, clone a repository and run a bootstrap script" />
   <LinkCard title="Create Sandbox" href="#create-sandbox" description="Create an isolated sandbox environment for code execution" />
   <LinkCard title="Delete Sandbox" href="#delete-sandbox" description="Delete a sandbox environment" />
   <LinkCard title="Execute Code" href="#execute-code" description="Execute code in a sandbox environment" />
@@ -23,7 +23,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
 **Component key:** `daytona.createRepositorySandbox`
 
-The Create Repository Sandbox component creates a new Daytona sandbox, clones a repository, and runs a bootstrap script.
+The Create Repository Sandbox component creates a new Daytona sandbox, clones a repository and runs a bootstrap script.
 
 ### Use Cases
 
@@ -83,7 +83,7 @@ The Create Sandbox component creates an isolated environment for executing code 
 
 ### Common Pattern
 
-Use this pattern when you want to create a sandbox, run one or more commands in it, and delete it when the flow is done.
+Use this pattern when you want to create a sandbox, run one or more commands in it and delete it when the flow is done.
 
 1. Add a **Create Sandbox** node. Its output includes the sandbox ID that downstream nodes need:
 ```json

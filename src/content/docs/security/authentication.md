@@ -1,9 +1,9 @@
 ---
 title: Authentication and accounts
-description: Manage your user account, authenticate via the UI and CLI, and configure API tokens.
+description: Manage your user account, authenticate via the UI and CLI and configure API tokens.
 ---
 
-This page explains how to authenticate with SuperPlane as a human user or an automated system. It covers UI login methods, account management, API tokens, and CLI authentication.
+This page explains how to authenticate with SuperPlane as a human user or an automated system. It covers UI login methods, account management, API tokens and CLI authentication.
 
 ## Log in to the UI
 

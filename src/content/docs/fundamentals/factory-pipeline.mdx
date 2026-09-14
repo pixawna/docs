@@ -1,0 +1,77 @@
+---
+title: The Factory pipeline
+description: Follow a task from intake through implementation, verification and completion.
+---
+
+import { Image } from "astro:assets";
+import pipelineOverview from "../../../assets/superplane_work_asset.png";
+import factoryBoard from "../../../assets/final_done.png";
+
+The Factory pipeline is the operating path that turns an incoming request into a checked result. It gives people and agents the same view of what is happening, what evidence exists and who must decide what happens next.
+
+<figure class="sp-media-figure not-content">
+  <Image src={pipelineOverview} alt="A SuperPlane task moving from connected work sources through discovery, implementation, verification and completion, with paths for retries and human decisions." />
+  <figcaption>Work follows a visible path from discovery to a verified result.</figcaption>
+</figure>
+
+## Pipeline at a glance
+
+The board is more than a set of status columns. Each stage has a different responsibility and a clear exit condition.
+
+| Stage | The question it answers | Expected result |
+| --- | --- | --- |
+| **Backlog** | Is this task clear, useful and safe to start? | An approved task with enough context to act on |
+| **Implement** | Can an agent produce the requested change within the stated constraints? | A branch or pull request with an explanation of the work |
+| **Verify** | Does the result satisfy the task and the repository's checks? | Evidence that the change works or useful feedback for another attempt |
+| **Done** | Have the Factory's completion rules been met? | A completed task with its result and history preserved |
+
+This separation matters. A change can be technically complete but still fail verification. A pull request can pass its checks but still require a product decision. Keeping these states distinct makes failure visible instead of hiding it behind a single progress label.
+
+## What moves through the pipeline
+
+A [task](/reference/glossary#task) is the unit of work. It begins with a request from an issue tracker or another connected source and gathers context as it moves. The task can hold links, agent output, pull requests, checks, approvals and notes from the people involved.
+
+An [automation](/reference/glossary#automation) defines what a stage does. A [run](/reference/glossary#run) is one execution of that automation for a particular task. This distinction is useful when debugging: the stage describes the policy while the run shows exactly what happened this time.
+
+<div class="factory-execution-flow not-content" role="list" aria-label="Factory pipeline stages">
+  <span role="listitem">Qualify the task</span>
+  <span role="listitem">Implement the change</span>
+  <span role="listitem">Verify the result</span>
+  <span role="listitem">Record completion</span>
+</div>
+
+## A pipeline should survive interruption
+
+Software work rarely runs in one uninterrupted session. An API can time out, a check can fail or an approval can take several hours. SuperPlane keeps the run state and the messages produced by each step so the workflow can continue from a known point. It does not need to reconstruct the process from chat history or ask an agent to remember what happened.
+
+Durability also makes retries safer. The Factory can return a failed check to the implementation stage with the relevant output attached. A person can review the same trail before approving a sensitive action. Both continue from recorded evidence.
+
+## The board is the shared view
+
+The board shows where every task sits and whether it needs attention. Open the task to inspect its source, recent activity, attached artifacts and the run that moved it there.
+
+<figure class="sp-media-figure not-content">
+  <Image src={factoryBoard} alt="A SuperPlane Factory board with Backlog, Implement, Verify and Done columns and completed tasks recorded in Done." />
+  <figcaption>The board keeps active work, waiting work and completed work in one view.</figcaption>
+</figure>
+
+## Read the pipeline stage by stage
+
+<div class="sp-next-grid not-content">
+  <a href="/fundamentals/work-intake">
+    <strong>Work intake and backlog →</strong>
+    <span>Decide which requests are ready to become Factory work.</span>
+  </a>
+  <a href="/fundamentals/implement">
+    <strong>Implement →</strong>
+    <span>See how an approved task becomes a code change.</span>
+  </a>
+  <a href="/fundamentals/verify">
+    <strong>Verify →</strong>
+    <span>Turn checks and review into evidence or useful feedback.</span>
+  </a>
+  <a href="/fundamentals/done">
+    <strong>Done →</strong>
+    <span>Understand what the Factory records when work completes.</span>
+  </a>
+</div>

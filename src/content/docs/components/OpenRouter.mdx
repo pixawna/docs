@@ -61,7 +61,7 @@ The Chat Completion component sends a prompt to any of the models OpenRouter bro
 
 ### Provider Routing
 
-A model ID on OpenRouter is a listing, not a server: several providers compete to serve the same model and they are not equivalent. Across the providers serving one popular model, input price can vary more than fourfold, the context ceiling can vary tenfold, and quantization ranges from fp4 to fp8 — which affects answer quality. Left alone, OpenRouter picks one and the choice can change between requests.
+A model ID on OpenRouter is a listing, not a server: several providers compete to serve the same model and they are not equivalent. Across the providers serving one popular model, input price can vary more than fourfold, the context ceiling can vary tenfold and quantization ranges from fp4 to fp8 — which affects answer quality. Left alone, OpenRouter picks one and the choice can change between requests.
 
 - **Optimize For**: Sort candidate providers by price, throughput, or latency
 - **Allowed Providers** / **Excluded Providers**: Restrict routing to (or away from) specific providers. The list is narrowed to the providers actually serving the selected model.
@@ -91,7 +91,7 @@ Returns the completion including:
 - Web search is billed per request on top of tokens, so it costs money even when the model itself is free.
 - Structured Output is supported by most but not all models. Because a provider that does not support it accepts the request and ignores the schema, enabling it forces Require Parameter Support on, overriding that setting in Provider Routing. This can make a request fail outright rather than silently return prose, which is the intended trade: an unparseable reply is harder to notice than an error.
 - The schema is validated before the request and sent in strict mode. Strict mode marks every property required, so express optional fields by making their type nullable.
-- Image generation is not available here. OpenRouter generates images through a separate endpoint, and the `modalities` parameter is ignored by chat completions.
+- Image generation is not available here. OpenRouter generates images through a separate endpoint and the `modalities` parameter is ignored by chat completions.
 
 ### Example Output
 
@@ -187,7 +187,7 @@ The Get Credits component fetches the credit balance of your OpenRouter account 
 ### Use Cases
 
 - **Budget alerts**: Trigger a notification when the remaining balance drops below a threshold
-- **Spend reporting**: Track daily, weekly, and monthly usage on a schedule
+- **Spend reporting**: Track daily, weekly and monthly usage on a schedule
 - **Pre-flight checks**: Gate an expensive workflow on there being enough credit left
 
 ### How It Works
@@ -206,11 +206,11 @@ The output includes:
 - **totalCredits**: Credits purchased on the account
 - **totalUsage**: Credits consumed on the account
 - **balance**: Credits purchased minus credits consumed
-- **key**: Usage recorded against the configured key — its label, all-time and daily/weekly/monthly usage, any credit limit and how much of it remains, and whether the account is on the free tier
+- **key**: Usage recorded against the configured key — its label, all-time and daily/weekly/monthly usage, any credit limit and how much of it remains and whether the account is on the free tier
 
 ### Notes
 
-- Requires a Provisioning API Key on the integration. OpenRouter documents `/credits` as a management-key endpoint, and OAuth cannot issue that kind of key.
+- Requires a Provisioning API Key on the integration. OpenRouter documents `/credits` as a management-key endpoint and OAuth cannot issue that kind of key.
 - The key figures describe the OAuth-issued inference key, while the credit totals describe the account.
 - `key.limit` and `key.limitRemaining` are null when the key has no credit limit set
 - Account credit totals cover the whole account, while the key figures cover only the configured key

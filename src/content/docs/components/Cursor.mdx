@@ -34,7 +34,7 @@ The Get Daily Usage Data component fetches team usage metrics from Cursor's Admi
 ### How It Works
 
 1. Fetches usage data for the specified date range from Cursor's Admin API
-2. Returns detailed metrics per user including lines added/deleted, requests, and model usage
+2. Returns detailed metrics per user including lines added/deleted, requests and model usage
 
 ### Configuration
 
@@ -46,7 +46,7 @@ The Get Daily Usage Data component fetches team usage metrics from Cursor's Admi
 The output includes per-user daily metrics:
 - Lines added/deleted (total and accepted)
 - Tab completions shown/accepted
-- Composer, chat, and agent requests
+- Composer, chat and agent requests
 - Subscription vs usage-based request counts
 - Most used model and file extensions
 
@@ -109,7 +109,7 @@ The Launch Cloud Agent component triggers a Cursor AI coding agent and waits for
 ### How It Works
 1. Launches a Cursor Cloud Agent with the specified prompt and configuration
 2. Waits for the agent to complete (monitored via webhook and polling)
-3. On success, fetches the agent's conversation and artifacts, and emits the result together with the messages and artifact links
+3. On success, fetches the agent's conversation and artifacts and emits the result together with the messages and artifact links
 
 ### Output
 On completion the component emits:
