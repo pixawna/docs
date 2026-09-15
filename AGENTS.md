@@ -215,7 +215,7 @@ When making content or navigation changes, run `npm run build` to catch:
 
 | Type | Example |
 | --- | --- |
-| Tutorial | `src/content/docs/get-started/create-workspace.md` |
-| Conceptual | `src/content/docs/get-started/overview.md` |
+| Tutorial | `src/content/docs/get-started/quickstart.mdx` |
+| Conceptual | `src/content/docs/get-started/overview.mdx` |
 | Reference | `src/content/docs/reference/api.md` |
-| Landing | `src/content/docs/index.md` |
+| Landing | `src/content/docs/use-cases/overview.mdx` |

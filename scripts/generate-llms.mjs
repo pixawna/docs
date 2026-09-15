@@ -59,7 +59,7 @@ function firstMeaningfulLine(body) {
 }
 
 function slugToUrl(slug) {
-  return slug === "" ? `${BASE_URL}/` : `${BASE_URL}/${slug}`;
+  return slug === "" ? `${BASE_URL}/` : `${BASE_URL}/${slug}/`;
 }
 
 function slugToFilePath(slug) {

@@ -17,4 +17,4 @@ Make investigation steps read-only unless a person explicitly approves a product
 
 Treat agent conclusions as a starting point. Confirm timestamps, sources, affected systems and proposed causes before changing production.
 
-Browse [Observability integrations](/integrations/observability) and incident components under [All components](/components/core).
+Browse [observability integrations](/integrations/observability) and incident components in the [component catalog](/components).

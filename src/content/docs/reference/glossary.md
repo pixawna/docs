@@ -9,6 +9,10 @@ Use this glossary to map Factory terms between the SuperPlane interface, documen
 
 A **factory** coordinates software tasks, repositories, delivery lines and coding agents. The SuperPlane interface calls a factory a **workspace**.
 
+## Software factory
+
+A **software factory** is a factory that coordinates task intake, coding agents, verification and review. In these docs, **software factory** and **factory** refer to the same SuperPlane resource.
+
 ## Workspace
 
 A **workspace** is the user-interface name for a factory. It groups tasks, lines, automations, integrations and Factory settings.
@@ -44,6 +48,10 @@ A **component** is a reusable trigger or action. Components can use SuperPlane f
 ## Node
 
 A **node** is one configured component on a canvas. A node receives input, performs work and emits a payload.
+
+## Agent
+
+An **agent** performs assigned work in a configured execution environment. A Factory supplies the repository, task context, model and tools, then records the agent's output.
 
 ## Trigger
 

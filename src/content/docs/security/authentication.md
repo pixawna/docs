@@ -15,6 +15,19 @@ When logging into the SuperPlane UI, choose between the following methods (depen
 
 The login screen remembers your last-used login method to speed up future sign-ins.
 
+## Configure self-hosted login methods
+
+Set a method to `yes` to expose it on a self-hosted login page:
+
+| Method | Configuration |
+| --- | --- |
+| Email and password | `ENABLE_PASSWORD_LOGIN=yes` |
+| Email access code | `ENABLE_MAGIC_CODE_LOGIN=yes` and outbound email configured in the installation settings |
+| Google OAuth | `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` |
+| GitHub OAuth | `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` |
+
+Restart the API service after changing environment variables. Configure each OAuth application's callback for the public HTTPS address of the SuperPlane deployment.
+
 ## Manage your account
 
 Access your **Profile** settings in the UI to manage your account details:
