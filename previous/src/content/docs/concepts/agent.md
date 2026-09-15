@@ -13,7 +13,7 @@ The agent adapts to your current task using two modes:
 
 Build mode gives the agent write access to your app. Use it to design workflows from scratch, or install an existing app and chat with the agent to adjust it to your use case.
 
-![Agent in Build mode — swapping Claude for OpenAI with a rubric](https://assets.superplane.com/previous/src/assets/agent-build-mode.png)
+![Agent in Build mode — swapping Claude for OpenAI with a rubric](https://docs-assets.superplane.com/previous/src/assets/agent-build-mode.png)
 
 **What the agent can do in Build mode:**
 
@@ -44,7 +44,7 @@ Build mode gives the agent write access to your app. Use it to design workflows 
 
 Ask mode is read-only. The agent can inspect your app's state, analyze runs, and answer questions without making changes.
 
-![Agent in Ask mode — cross-referencing events from multiple sources](https://assets.superplane.com/previous/src/assets/agent-ask-mode.png)
+![Agent in Ask mode — cross-referencing events from multiple sources](https://docs-assets.superplane.com/previous/src/assets/agent-ask-mode.png)
 
 1. **Add trigger components** that record events from your external tools (alerts, deployments, CI pipelines)
 2. **Wait for data to collect** — each trigger event creates a run with its payload
@@ -70,7 +70,7 @@ Ask mode is read-only. The agent can inspect your app's state, analyze runs, and
 
 The agent can render charts, tables, and statistical analysis inline in the chat:
 
-![Agent analyzing deployment durations with charts and outlier detection](https://assets.superplane.com/previous/src/assets/agent-ask-mode-analytics.png)
+![Agent analyzing deployment durations with charts and outlier detection](https://docs-assets.superplane.com/previous/src/assets/agent-ask-mode-analytics.png)
 
 1. **Set up a workflow** through SuperPlane (e.g., a deployment pipeline)
 2. **Ask the agent** for analysis — duration trends, outliers, optimization opportunities

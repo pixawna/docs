@@ -102,13 +102,13 @@ can execute simultaneously.
 
 Each node on the canvas shows a quick overview of its current or most recent run item.
 
-![Node with run item status](https://assets.superplane.com/previous/src/assets/data-flow-node-status.png)
+![Node with run item status](https://docs-assets.superplane.com/previous/src/assets/data-flow-node-status.png)
 
 ### Run history
 
 The **Runs** sidebar on the Canvas page shows all workflow runs. Each entry represents a complete execution chain triggered by an event. Click any run to see which nodes fired and inspect their payloads.
 
-![Run history sidebar](https://assets.superplane.com/previous/src/assets/data-flow-run-history.png)
+![Run history sidebar](https://docs-assets.superplane.com/previous/src/assets/data-flow-run-history.png)
 
 ### Run chain
 
@@ -116,13 +116,13 @@ Select a run to see its full execution chain. The canvas renders the workflow at
 
 You can inspect individual node executions by clicking on them in the sidebar or directly on the canvas.
 
-![Run chain view](https://assets.superplane.com/previous/src/assets/data-flow-run-chain.png)
+![Run chain view](https://docs-assets.superplane.com/previous/src/assets/data-flow-run-chain.png)
 
 ### Inspecting run items
 
 Select a node in the run sidebar or click directly on it in the canvas. A bottom panel opens showing the run item details for that node, with three tabs: **Details** (execution metadata), **Payload** (output data), and **Config** (configuration snapshot at execution time).
 
-![Run item details expanded](https://assets.superplane.com/previous/src/assets/data-flow-run-details.png)
+![Run item details expanded](https://docs-assets.superplane.com/previous/src/assets/data-flow-run-details.png)
 
 ## Payloads
 
@@ -155,7 +155,7 @@ outcomes.
 
 **Example: Pass/Fail Routing**
 
-![Output channels](https://assets.superplane.com/previous/src/assets/data-flow-output-channels.png)
+![Output channels](https://docs-assets.superplane.com/previous/src/assets/data-flow-output-channels.png)
 
 Subscribe to the `passed` channel to continue on success, or the `failed` channel to handle errors.
 

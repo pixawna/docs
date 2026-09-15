@@ -121,8 +121,8 @@ Use consistently: **factory**, **workspace**, **task**, **work order**, **line**
 ### Images
 
 - Upload raster images and videos to the `docs-assets` Cloudflare R2 bucket
-- Use repository-style object keys such as `src/assets/image-name.png`
-- Reference assets with absolute `https://assets.superplane.com/` URLs
+- Use object keys such as `images/image-name.png` or `videos/video-name.mp4`
+- Reference assets with absolute `https://docs-assets.superplane.com/` URLs
 - Never commit binary assets to this repository
 - Use descriptive filenames
 - Include alt text for accessibility
@@ -161,8 +161,8 @@ Use consistently: **factory**, **workspace**, **task**, **work order**, **line**
 
 ### Adding Images
 
-1. Upload the image to the `docs-assets` R2 bucket with a key such as `src/assets/image-name.png`
-2. Reference it in Markdown: `![Alt text](https://assets.superplane.com/src/assets/image-name.png)`
+1. Upload the image to the `docs-assets` R2 bucket with a key such as `images/image-name.png`
+2. Reference it in Markdown: `![Alt text](https://docs-assets.superplane.com/images/image-name.png)`
 3. Run `npm run check:text-only` before committing
 
 ## Technical Details

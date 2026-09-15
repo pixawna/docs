@@ -96,7 +96,7 @@ Use **Organization Settings > Roles** to review roles and create custom roles.
 
 The Create Role page lets you pick permissions by category.
 
-![Create role page](https://assets.superplane.com/previous/src/assets/rbac-create-role.png)
+![Create role page](https://docs-assets.superplane.com/previous/src/assets/rbac-create-role.png)
 
 ## Groups
 
@@ -105,8 +105,8 @@ Groups map to a single role. When you add a user to a group, they inherit that r
 - Create groups in **Organization Settings > Groups**.
 - Change a group role from the Groups list; all group members inherit the new role immediately.
 
-![Groups page](https://assets.superplane.com/previous/src/assets/rbac-groups.png)
-![Groups creation page](https://assets.superplane.com/previous/src/assets/rbac-create-group.png)
+![Groups page](https://docs-assets.superplane.com/previous/src/assets/rbac-groups.png)
+![Groups creation page](https://docs-assets.superplane.com/previous/src/assets/rbac-create-group.png)
 
 ## Members
 

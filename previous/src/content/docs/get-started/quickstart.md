@@ -38,7 +38,7 @@ Create a new app and name it **Hello world**. This opens the canvas where you bu
 
 When you drop it on the canvas, it will typically show up as a `start` node with a **Run** button. This is the trigger that will start the workflow.
 
-![Manual Run node](https://assets.superplane.com/previous/src/assets/quickstart/start-node.png)
+![Manual Run node](https://docs-assets.superplane.com/previous/src/assets/quickstart/start-node.png)
 
 ### 3) Add an action: HTTP Request
 
@@ -63,7 +63,7 @@ This endpoint will fetch a random cat fact and return JSON like:
 }
 ```
 
-![HTTP Request node](https://assets.superplane.com/previous/src/assets/quickstart/get-cat-fact.png)
+![HTTP Request node](https://docs-assets.superplane.com/previous/src/assets/quickstart/get-cat-fact.png)
 
 ### 4) Add branching: If
 
@@ -80,7 +80,7 @@ $['Get cat fact'].data.body.length <= 160
 
 As you type the expression, you'll see that SuperPlane will provide you with a list of possible data attributes to choose from via autocompletion.
 
-![Writing an expression](https://assets.superplane.com/previous/src/assets/quickstart/if-expression.png)
+![Writing an expression](https://docs-assets.superplane.com/previous/src/assets/quickstart/if-expression.png)
 
 ### 5) End both paths safely: No Operation
 
@@ -102,7 +102,7 @@ Run it a couple more times. You should see nodes update with statuses as each ru
 
 Successfully running the workflow should look like this:
 
-![Full hello world canvas](https://assets.superplane.com/previous/src/assets/quickstart/full-canvas.png)
+![Full hello world canvas](https://docs-assets.superplane.com/previous/src/assets/quickstart/full-canvas.png)
 
 ## Inspect a run (payloads, history, message chain)
 
@@ -115,7 +115,7 @@ You can inspect exactly what happened and what data flowed between nodes.
 
 The canvas highlights the path the run took. The sidebar shows every node that executed, with its result.
 
-![Inspecting a run](https://assets.superplane.com/previous/src/assets/quickstart/run-inspection.png)
+![Inspecting a run](https://docs-assets.superplane.com/previous/src/assets/quickstart/run-inspection.png)
 
 ### 2) Inspect a node
 
