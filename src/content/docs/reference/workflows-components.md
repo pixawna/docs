@@ -20,4 +20,4 @@ Each component can read trigger data or upstream outputs through an [expression]
 
 SuperPlane records runs and payloads across restarts. Define error paths and retry rules for expected failures instead of rebuilding state in external scripts.
 
-Browse [All components](/components/core).
+Browse the [component catalog](/components).

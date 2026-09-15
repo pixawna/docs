@@ -5,7 +5,7 @@ description: How to store and use secrets in SuperPlane workflows.
 
 Secrets let you securely store sensitive credentials like API keys, passwords and tokens for use in component configurations.
 
-## How It Works
+## How secrets work
 
 Secrets are key-value stores scoped to your organization. Each secret contains one or more named keys that hold sensitive values.
 
@@ -14,7 +14,7 @@ Secrets are key-value stores scoped to your organization. Each secret contains o
 - **Referenced in configurations**: Components reference secrets by name and key, not by value
 - **Resolved at runtime**: Secret values are decrypted and resolved when components execute
 
-## Creating Secrets
+## Create secrets
 
 Create secrets in **Organization Settings > Secrets**.
 
@@ -26,13 +26,13 @@ A secret named `production-ssh-keys` containing:
 
 Each secret can contain multiple key-value pairs.
 
-## Using Secrets in Components
+## Use secrets in components
 
 In the **core** component set, organization secrets are used by the **SSH Command** component for authentication (SSH key or password). Select a secret and key from your organization's secrets when configuring SSH.
 
 Integrations may store their own credentials separately from organization secrets. If a component supports organization secrets in the future, it will be called out in that component’s documentation.
 
-## Secret Resolution
+## Resolve secrets during a run
 
 During workflow execution, SuperPlane:
 
@@ -43,7 +43,7 @@ During workflow execution, SuperPlane:
 
 If a secret or key doesn't exist, the component execution fails with an error.
 
-## Best Practices
+## Protect secret values
 
 - **Use descriptive names**: Name secrets clearly (e.g. `production-keys` and `staging-keys`)
 - **Organize by service**: Group related credentials in a single secret with multiple keys
@@ -59,4 +59,4 @@ Secret management requires specific permissions:
 - `secrets.update` - Update existing secrets
 - `secrets.delete` - Delete secrets
 
-By default, only `Admin` and `Owner` roles have these permissions. See [Access Control](/security/access-control) for details.
+By default, `Maintainer` and `Admin` roles have these permissions. See [access control](/security/access-control) for details.

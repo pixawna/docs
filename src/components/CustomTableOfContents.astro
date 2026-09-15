@@ -5,7 +5,7 @@ import ReadingProgress from "./ReadingProgress.astro";
 
 const { entry } = Astro.locals.starlightRoute;
 const isIntroduction = entry.slug === "get-started/overview";
-const repositoryUrl = "https://github.com/superplanehq/new_docs";
+const repositoryUrl = "https://github.com/superplanehq/docs";
 const pageTitle = entry.data.title;
 const pagePath = path.relative(process.cwd(), entry.filePath).split(path.sep).join("/");
 const encodedPagePath = pagePath.split("/").map(encodeURIComponent).join("/");
