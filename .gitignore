@@ -23,3 +23,18 @@ pnpm-debug.log*
 # generated LLM index files
 public/llms.txt
 public/llms-full.txt
+.vercel
+.env*
+
+# Binary assets are hosted in Cloudflare R2.
+*.png
+*.ico
+*.webp
+*.jpg
+*.jpeg
+*.gif
+*.avif
+*.mp4
+*.mov
+*.webm
+*.pdf

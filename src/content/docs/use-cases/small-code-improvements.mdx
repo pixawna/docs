@@ -1,0 +1,177 @@
+---
+title: Make small code improvements
+description: Use SuperPlane to turn focused code improvements into verified pull requests.
+---
+
+Turn small and well scoped improvements into verified pull requests without spending more engineering time coordinating the work than the change requires. Small interface fixes, cleanup tasks, copy changes, minor refactors and developer experience improvements often stay in the backlog because they compete with larger work.
+
+SuperPlane gives these tasks a repeatable path from backlog through implementation and verification to a pull request that is ready for review.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/demo_issue_1.png" alt="Flow for taking a small improvement from GitHub through SuperPlane implementation and verification" />
+  <figcaption>A [software factory](/reference/glossary#software-factory) coordinates the work around a focused code change.</figcaption>
+</figure>
+
+## The challenge
+
+Small engineering improvements are easy to postpone. A developer may notice that:
+
+- A component needs a small visual adjustment
+- A label or piece of copy should change
+- Duplicated code could be simplified
+- A minor interaction could be improved
+- An accessibility issue needs attention
+- An unnecessary element should be removed
+
+None of these changes may justify interrupting a developer working on a larger feature. Over time they accumulate.
+
+Writing ten lines of code is rarely the difficult part. The work around those lines still needs someone to:
+
+1. Pick up the issue.
+2. Find where the change belongs.
+3. Keep the scope small.
+4. Preserve nearby behavior.
+5. Run the relevant checks.
+6. Open a pull request.
+7. Review the diff.
+8. Respond when something fails.
+
+SuperPlane turns that coordination into a repeatable factory workflow.
+
+## How SuperPlane handles small improvements
+
+### 1. The improvement enters the backlog
+
+Create the improvement as a normal GitHub issue. Once the repository is connected SuperPlane brings that work into the factory Backlog.
+
+The issue remains the definition of the work. SuperPlane adds the process for getting it finished.
+
+<div class="use-case-signals not-content">
+  <div><strong>GitHub</strong><span>Issue describes the small code improvement.</span></div>
+  <div><strong>SuperPlane</strong><span>Backlog receives and tracks the work.</span></div>
+</div>
+
+### 2. SuperPlane checks whether the task is suitable
+
+Not every small issue is easy to automate. A request such as “Make this page better” still requires interpretation. A stronger task clearly identifies:
+
+- What should change
+- Where it should change
+- What should stay untouched
+- What result is expected
+
+SuperPlane analyzes the available context before the task moves into implementation.
+
+<div class="factory-task-check not-content">
+  <strong>A strong small improvement has:</strong>
+  <ul>
+    <li>Focused scope</li>
+    <li>Clear expected result</li>
+    <li>Small surface area</li>
+    <li>Easy verification</li>
+  </ul>
+</div>
+
+### 3. The agent makes the targeted change
+
+Once you start the task it moves into Implement. For a small code improvement the implementation agent should usually do less, not more.
+
+<div class="factory-execution-flow not-content">
+  <span>Read the issue</span>
+  <span>Find relevant code</span>
+  <span>Understand nearby behavior</span>
+  <span>Make the smallest change</span>
+  <span>Run checks</span>
+  <span>Push changes</span>
+  <span>Prepare pull request</span>
+</div>
+
+The goal is not to rewrite nearby code. It is to solve the issue while keeping the change focused and easy to review.
+
+## Example: add a theme toggle
+
+The Factory Starter App has a GitHub issue requesting a toggle that switches the website between light and dark themes. The issue gives the factory enough context to understand the goal without turning it into a redesign.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/github_issue.png" alt="GitHub issue 5 requesting a light and dark theme toggle for the Factory Starter App" />
+  <figcaption>Issue #5 defines one visible improvement with a clear expected result.</figcaption>
+</figure>
+
+This is a good factory task because it is small, bounded and easy to review. It asks for a specific improvement to the existing codebase without requiring a new product decision.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/issue_flow.png" alt="Issue 5 moving from GitHub through backlog, analysis, implementation and verification" />
+  <figcaption>The factory keeps the issue moving while preserving clear checkpoints for the team.</figcaption>
+</figure>
+
+Before trying this example, follow [Build your first Factory](/get-started/build-first-factory) to connect a repository and prepare the workflow. The example uses the [Factory Starter App](https://github.com/pixawna/Factory-Starter-App) and its [deployed website](https://factoryapp-ashen.vercel.app/).
+
+## Follow issue #5 through the factory
+
+### 1. Backlog
+
+SuperPlane imports the GitHub issue into Backlog and analyzes its suitability. The clear scope and visible result give the task a high confidence score, so it is ready to start.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/backlog_check.png" alt="Theme toggle issue in the Backlog stage with a high confidence indicator" />
+  <figcaption>The issue is visible in Backlog with its confidence indicator and Start action.</figcaption>
+</figure>
+
+### 2. Implement
+
+Starting the task moves it into Implement. The configured agent reads the issue, inspects the application and changes only the files required for the theme toggle.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/implement_check.png" alt="Theme toggle task running in the Implement stage" />
+  <figcaption>The factory board shows the task moving from Backlog into Implement.</figcaption>
+</figure>
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/work_in_check.png" alt="Implementation agent inspecting the Factory Starter App and working on the theme toggle" />
+  <figcaption>The task view records the agent run, repository context and implementation progress.</figcaption>
+</figure>
+
+### 3. Verify
+
+After implementation SuperPlane checks the result and prepares the pull request for review. The task view keeps the completed analysis and implementation steps together with the review instructions.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/review_section.png" alt="SuperPlane task ready for pull request review after verification" />
+  <figcaption>Verification confirms the result and gives the reviewer a clear next action.</figcaption>
+</figure>
+
+### 4. Review
+
+The pull request contains the focused theme toggle change and links back to the original issue. A reviewer can inspect the diff, leave feedback or merge the result.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/pull_request_1.png" alt="GitHub pull request for the Factory Starter App theme toggle" />
+  <figcaption>The pull request is ready to merge with the scope and behavior summarized for review.</figcaption>
+</figure>
+
+### 5. Done
+
+When the pull request is merged the task moves to Done. The board keeps the completed work and its pull request visible as part of the factory history.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/complete_done.png" alt="Merged theme toggle task in the Done stage" />
+  <figcaption>The merged pull request closes the factory task.</figcaption>
+</figure>
+
+The deployed application now includes the requested theme toggle while preserving the original interface and layout.
+
+<a href="https://factoryapp-ashen.vercel.app/" target="_blank" rel="noreferrer">
+  <figure class="sp-media-figure not-content">
+    <img src="https://docs-assets.superplane.com/images/final_web.png" alt="Factory Starter App with the completed theme toggle in its header" />
+    <figcaption>Open the Factory Starter App to try the completed improvement.</figcaption>
+  </figure>
+</a>
+
+## Next steps
+
+Small improvements work best when the issue has a narrow boundary and a result that tests or review can confirm. Keep larger redesigns and architecture decisions with the team until the expected outcome is clear.
+
+<div class="sp-next-grid not-content">
+  <a href="/get-started/build-first-factory"><strong>Build your first Factory</strong><span>Connect a repository and configure the workflow that will process your tasks.</span></a>
+  <a href="/use-cases/fix-github-issue"><strong>Fix a GitHub issue</strong><span>Follow the complete path from an imported issue to a verified pull request.</span></a>
+</div>

@@ -70,7 +70,7 @@ trigger - unlike `jira.onIssue`, JSM Ops has no "one URL per connection" limit, 
 `jira.onAlert` trigger gets its own registration, removed automatically when the trigger is deleted.
 
 **Requires a Premium or Enterprise Jira Service Management plan** - Atlassian gates outgoing
-webhook integrations to those tiers, and requires the `enableOpsFeatures` option on this connection
+webhook integrations to those tiers and requires the `enableOpsFeatures` option on this connection
 to be turned on (Settings tab), since it needs the JSM Ops OAuth scopes.
 
 ### Output
@@ -112,7 +112,7 @@ The On Incident trigger starts a workflow execution when an incident is created,
 
 An incident is a Jira issue on a request type that belongs to the Incident management work
 category (the same request types `jira.createIncident` can open) - this trigger reuses the
-project-wide issue webhook every `jira.onIssue` trigger shares, and matches events to the
+project-wide issue webhook every `jira.onIssue` trigger shares and matches events to the
 request types you select here by their underlying issue type.
 
 ### Use Cases
@@ -525,7 +525,7 @@ The Create Heartbeat component registers a new heartbeat in Jira Service Managem
 
 ### Output
 
-Returns the created heartbeat object from the JSM Operations API, including **name**, **interval**, **intervalUnit**, **enabled**, and **status**.
+Returns the created heartbeat object from the JSM Operations API, including **name**, **interval**, **intervalUnit**, **enabled** and **status**.
 
 ### Notes
 
@@ -587,7 +587,7 @@ The Create Incident component opens a new incident in Jira Service Management.
 
 ### Output
 
-Returns **id** (numeric issue id), **key** (e.g. ITSM-30), and **self** (issue REST URL) from the create response.
+Returns **id** (numeric issue id), **key** (e.g. ITSM-30) and **self** (issue REST URL) from the create response.
 
 ### Notes
 
@@ -897,7 +897,7 @@ The Get Incident component returns incident details from Jira Service Management
 ### Use Cases
 
 - **Enrichment**: Load incident DTO after an issue webhook or workflow step
-- **Status checks**: Read priority, status, responders, and affected services from JSM
+- **Status checks**: Read priority, status, responders and affected services from JSM
 
 ### Configuration
 
@@ -1024,12 +1024,12 @@ Returns:
 - `workflowName` and `workflowSchemeName` — the workflow scheme assigned to the project and the workflow it routes the issue's type to.
 - `currentStatus` / `currentStatusId` — where the issue is now.
 - `statuses` — every status the workflow defines (with `isCurrent` set on the current one).
-- `availableTransitions` — transitions reachable from the issue's current state, each with the transition id, name, and target status.
+- `availableTransitions` — transitions reachable from the issue's current state, each with the transition id, name and target status.
 
 ### Notes
 
 - Resolving the bound workflow goes `issue → project + issue type → workflow scheme → workflow`. Team-managed (next-gen) projects don't expose a workflow scheme; in that case `workflowName` and `statuses` are empty but `currentStatus` and `availableTransitions` are still populated.
-- The `availableTransitions` list reflects workflow rules, conditions, and the calling user's permissions — it is exactly what Jira would offer in the issue view.
+- The `availableTransitions` list reflects workflow rules, conditions and the calling user's permissions — it is exactly what Jira would offer in the issue view.
 
 ### Example Output
 

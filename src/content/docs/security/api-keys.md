@@ -14,7 +14,8 @@ API keys are non-human credentials for API access. Use them for scripts and inte
 
 1. In the SuperPlane UI, go to **Organization Settings > API keys**.
 2. Create an API key and assign it a role.
-3. Copy the generated token immediately. It is shown only once.
+3. Set an expiration and restrict the key to the apps or canvases it needs.
+4. Copy the generated token immediately. It is shown only once.
 
 ## Use the token to configure the SuperPlane CLI
 
@@ -26,13 +27,15 @@ superplane connect <superplane_url> <api_key_token>
 
 The token can only do what the API key's role allows. Permissions are organization-scoped and governed by [RBAC](/security/access-control).
 
-- **Operator**: Read-only (for example, list canvases and read run history).
-- **Maintainer**, **Admin**, or a custom role: Create or update canvases, integrations, or secrets when required.
+- **Operator**: Read-only access, such as listing canvases or reading run history.
+- **Maintainer** or a custom role: Create or update canvases, integrations or secrets when required.
+- **Admin**: Manage organization-level settings. Avoid this role unless the client needs those operations.
 
-API keys cannot be owners. Ownership is a membership flag for human members only. See [Access Control](/security/access-control).
+Scopes further limit which apps or canvases the key can access. Role permissions still apply within the selected scope.
 
 ## Best practices
 
 - One API key per external system: Create a dedicated API key per integration or script so you can revoke access or rotate credentials without impacting others.
-- Rotate: Regenerate tokens periodically and update any stored copies.
-- Least privilege: Use the minimum role that satisfies the use case (for example, Operator for read-only).
+- Expire and rotate: Set a bounded lifetime, regenerate the token before it expires and update stored copies.
+- Revoke unused keys: Delete a key when its client is retired or compromised.
+- Least privilege: Use the minimum role and narrowest app or canvas scope that satisfies the use case.

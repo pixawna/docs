@@ -1,0 +1,102 @@
+---
+import config from "virtual:starlight/user-config";
+import LanguageSelect from "virtual:starlight/components/LanguageSelect";
+import Search from "virtual:starlight/components/Search";
+import SiteTitle from "virtual:starlight/components/SiteTitle";
+import SocialIcons from "virtual:starlight/components/SocialIcons";
+
+const shouldRenderSearch =
+  config.pagefind || config.components.Search !== "@astrojs/starlight/components/Search.astro";
+---
+
+<div class="header">
+  <div class="left-group sl-flex">
+    <div class="title-wrapper sl-flex"><SiteTitle /></div>
+    {/* Careers link intentionally hidden while there are no open roles. */}
+  </div>
+
+  <div class="right-group print:hidden">
+    {shouldRenderSearch && <div class="search-slot sl-flex"><Search /></div>}
+    <div class="social-icons sl-hidden md:sl-flex"><SocialIcons /></div>
+    <LanguageSelect />
+  </div>
+</div>
+
+<style>
+  @layer starlight.components {
+    .header,
+    .left-group,
+    .right-group,
+    .social-icons {
+      display: flex;
+      align-items: center;
+    }
+
+    .header {
+      justify-content: space-between;
+      gap: 1rem;
+      height: 100%;
+    }
+
+    .left-group {
+      min-width: 0;
+      gap: 1.25rem;
+    }
+
+    .title-wrapper {
+      min-width: 0;
+      overflow: clip;
+      padding: 0.25rem;
+      margin: -0.25rem;
+    }
+
+    .right-group {
+      justify-content: flex-end;
+      gap: 1rem;
+      min-width: 0;
+      margin-inline-start: auto;
+    }
+
+    .search-slot {
+      width: clamp(13rem, 28vw, 22rem);
+    }
+
+    .social-icons {
+      gap: 1rem;
+    }
+
+    @media (max-width: 49.999rem) {
+      .header {
+        gap: 0.75rem;
+      }
+
+      .left-group {
+        flex: 1 1 auto;
+        overflow: hidden;
+      }
+
+      .title-wrapper {
+        flex: 1 1 auto;
+      }
+
+      .right-group {
+        flex: 0 0 auto;
+        margin-inline-start: 0;
+      }
+
+      .search-slot {
+        flex: 0 0 2.75rem;
+        width: 2.75rem;
+        max-width: 2.75rem;
+      }
+    }
+
+    @media (max-width: 30rem) {
+      .header,
+      .right-group {
+        gap: 0.5rem;
+      }
+
+    }
+  }
+</style>

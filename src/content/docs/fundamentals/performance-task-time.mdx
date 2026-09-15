@@ -1,0 +1,52 @@
+---
+title: Task time
+description: Understand cycle time, active execution and waiting in the Factory.
+---
+
+Task time shows how long completed Factory work takes and where that elapsed time accumulates. Use it to separate slow execution from work that waits for review, approval or the next dispatch.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/performance-task-time.png" alt="The Task time view showing median cycle time, time running and time in waiting across the selected period." />
+  <figcaption>Cycle time includes both active execution and time spent waiting between decisions.</figcaption>
+</figure>
+
+## Read median cycle time
+
+Cycle time measures elapsed time for SuperPlane tasks that closed in the selected period. The report uses the median so one stalled task does not pull the headline as far as an average would.
+
+The median describes the middle task in this sample. It does not mean half of every task was spent in the same stage. Check the number of closed tasks shown under the metric before comparing it with another period.
+
+## Separate running from waiting
+
+The time view distinguishes two parts of the workflow:
+
+- **Time running:** Time when an automation or agent is actively executing work.
+- **Time in Waiting:** Review time or a pause before the next dispatch. It is not agent runtime.
+
+This distinction changes the remedy. Slow running time can point to a long test suite, a broad agent task, a constrained runner or a slow external service. Long waiting time can point to a concurrency limit, review delay, approval gate or work that needs human attention.
+
+## Investigate a slower period
+
+Start with the days where the chart rises. Review the closed tasks from those days and ask:
+
+1. Did one task wait much longer than the others?
+2. Was the task queued before a line stage could accept it?
+3. Did verification return the task for another implementation attempt?
+4. Did an approval or pull request review remain open?
+5. Did an external continuous integration or repository event arrive late?
+
+Use the run history for execution delays and the task chronology for time between stages. The two records answer different questions.
+
+## Improve time without weakening the checks
+
+Do not remove a useful verification step only to shorten cycle time. First reduce avoidable waiting and repeated work.
+
+- Clarify intake so implementation does not begin with missing requirements.
+- Set concurrency from the capacity of the repository, reviewer pool and test environment.
+- Return focused failure output to the agent.
+- Route product decisions to a person before another attempt starts.
+- Automate status updates that otherwise wait for manual coordination.
+
+Compare similar tasks after the change. A lower median is meaningful only when accepted output and task waste remain stable or improve.
+
+Continue to [Costs](/fundamentals/performance-costs) to see what the completed work consumed.

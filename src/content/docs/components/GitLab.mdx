@@ -63,9 +63,9 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 1. Optionally set a **Group ID** (ID or full path, e.g. `my-org/my-subgroup`) to work with a group's projects. Leave it empty to use your personal projects.
 2. Pick an **Auth Type** and connect:
    - **App OAuth**: leave **Application ID** and **Secret** empty and click **Save** to start the setup wizard.
-   - **Personal Access Token**: [create a token](https://gitlab.com/-/user_settings/personal_access_tokens?name=SuperPlane&scopes=api,read_user,read_api,write_repository,read_repository) with scopes api, read_user, read_api, write_repository, read_repository (the link prefills them), paste it into **Access Token**, and click **Save**.
+   - **Personal Access Token**: [create a token](https://gitlab.com/-/user_settings/personal_access_tokens?name=SuperPlane&scopes=api,read_user,read_api,write_repository,read_repository) with scopes api, read_user, read_api, write_repository, read_repository (the link prefills them), paste it into **Access Token** and click **Save**.
 
-**Note:** Triggers create project webhooks, so the connected user needs at least the **Maintainer** role on the projects you want to monitor. Components act as that user as well: creating, updating, or merging merge requests, approving, deploying, publishing commit statuses, and editing issue comments follow the project's roles and protected branch/environment rules.
+**Note:** Triggers create project webhooks, so the connected user needs at least the **Maintainer** role on the projects you want to monitor. Components act as that user as well: creating, updating, or merging merge requests, approving, deploying, publishing commit statuses and editing issue comments follow the project's roles and protected branch/environment rules.
 
 <a id="on-branch-created"></a>
 
@@ -172,7 +172,7 @@ The On Issue trigger starts a workflow execution when issue events occur in a Gi
 
 ### Outputs
 
-- **Default channel**: Emits issue payload including issue IID, title, state, labels, assignees, author, and action type
+- **Default channel**: Emits issue payload including issue IID, title, state, labels, assignees, author and action type
 
 ### Webhook Setup
 
@@ -272,7 +272,7 @@ The On Issue Comment trigger starts a workflow execution when a comment is added
 ### Event Data
 
 Each comment event includes:
-- **object_attributes**: Comment information including note body, author, and URL
+- **object_attributes**: Comment information including note body, author and URL
 - **issue**: Issue the comment was added to
 - **user**: User who added the comment
 - **project**: Project information
@@ -372,7 +372,7 @@ Jobs are the individual units of work inside a pipeline. Where the On Pipeline t
 - **Per-job automation**: Run a workflow the moment the `deploy` job succeeds, without waiting for the whole pipeline
 - **Targeted failure handling**: Page or open an issue when a named job fails
 - **Stage gates**: React when a job in a specific stage finishes
-- **Build observability**: Record durations, runners, and failure reasons per job
+- **Build observability**: Record durations, runners and failure reasons per job
 
 ### Configuration
 
@@ -384,18 +384,18 @@ Jobs are the individual units of work inside a pipeline. Where the On Pipeline t
 ### Event Data
 
 Each event includes:
-- **build_name**, **build_stage**, **build_status**: The job, its stage, and its new status
+- **build_name**, **build_stage**, **build_status**: The job, its stage and its new status
 - **build_started_at**, **build_finished_at**, **build_duration**, **build_queued_duration**: Job timings
 - **build_failure_reason**, **build_allow_failure**, **retries_count**: Failure and retry details
 - **pipeline_id**, **ref**, **sha**, **tag**: The pipeline and ref the job belongs to
 - **runner**: The runner that executed the job
 - **commit**, **project**, **repository**, **user**, **environment**: Surrounding context
 
-Note that GitLab excludes trigger jobs from this event, and commit statuses published by external systems are not jobs, so they do not produce job events.
+Note that GitLab excludes trigger jobs from this event and commit statuses published by external systems are not jobs, so they do not produce job events.
 
 ### Permissions
 
-The connected token needs the `api` scope, and the connected user needs at least the **Maintainer** role on the project so SuperPlane can create the webhook.
+The connected token needs the `api` scope and the connected user needs at least the **Maintainer** role on the project so SuperPlane can create the webhook.
 
 ### Webhook Setup
 
@@ -512,7 +512,7 @@ Diff notes (also known as inline comments) are comments left on a specific line 
 ### Event Data
 
 Each diff note event includes:
-- **object_attributes**: Comment information including note body, author, URL, and the diff **position** (file paths, line numbers, and commit SHAs the comment is anchored to)
+- **object_attributes**: Comment information including note body, author, URL and the diff **position** (file paths, line numbers and commit SHAs the comment is anchored to)
 - **merge_request**: Merge request the comment was added to
 - **user**: User who added the comment
 - **project**: Project information
@@ -647,7 +647,7 @@ The On Merge Comment trigger starts a workflow execution when a comment is added
 ### Event Data
 
 Each comment event includes:
-- **object_attributes**: Comment information including note body, author, and URL
+- **object_attributes**: Comment information including note body, author and URL
 - **merge_request**: Merge request the comment was added to
 - **user**: User who added the comment
 - **project**: Project information
@@ -771,7 +771,7 @@ The On Merge Request trigger starts a workflow execution when merge request even
 ### Event Data
 
 Each merge request event includes:
-- **object_attributes**: Complete merge request information including title, description, state, action, source/target branches, and URL
+- **object_attributes**: Complete merge request information including title, description, state, action, source/target branches and URL
 - **changes**: When the merge request is updated, includes what changed (title, description, labels, etc.)
 - **assignees**: Users assigned to the merge request
 - **reviewers**: Users requested to review the merge request
@@ -896,7 +896,7 @@ The On Milestone trigger starts a workflow execution when milestone events occur
 
 ### Outputs
 
-- **Default channel**: Emits milestone payload data with action, project, and object attributes
+- **Default channel**: Emits milestone payload data with action, project and object attributes
 
 ### Example Data
 
@@ -958,7 +958,7 @@ The On Pipeline trigger starts a workflow execution when pipeline events occur i
 
 ### Outputs
 
-- **Default channel**: Emits pipeline webhook payload data including status, ref, SHA, and project information
+- **Default channel**: Emits pipeline webhook payload data including status, ref, SHA and project information
 
 ### Webhook Setup
 
@@ -1010,7 +1010,7 @@ This trigger automatically sets up a GitLab webhook when configured. The webhook
 
 **Trigger key:** `gitlab.onPush`
 
-The On Push trigger starts a workflow execution when code is pushed to an existing branch in a GitLab project. New-branch creation is handled by the dedicated On Branch Created trigger, and branch deletions are ignored.
+The On Push trigger starts a workflow execution when code is pushed to an existing branch in a GitLab project. New-branch creation is handled by the dedicated On Branch Created trigger and branch deletions are ignored.
 
 ### Use Cases
 
@@ -1220,7 +1220,7 @@ The On Tag trigger starts a workflow execution when tag push events occur in a G
 
 ### Outputs
 
-- **Default channel**: Emits tag push payload data including ref, before/after SHA, and project information
+- **Default channel**: Emits tag push payload data including ref, before/after SHA and project information
 
 ### Example Data
 
@@ -1285,7 +1285,7 @@ The On Vulnerability trigger starts a workflow execution when vulnerability even
 
 ### Outputs
 
-- **Default channel**: Emits vulnerability payload data including severity, state, location, and linked issues
+- **Default channel**: Emits vulnerability payload data including severity, state, location and linked issues
 
 ### Example Data
 
@@ -1389,7 +1389,7 @@ default, unless the branch's **Allowed to merge** setting includes Developers.
 
 ### Output
 
-Returns the merged merge request object, including state, merge commit SHA, source and target branches, and the merge request URL.
+Returns the merged merge request object, including state, merge commit SHA, source and target branches and the merge request URL.
 
 ### Example Output
 
@@ -1610,7 +1610,7 @@ The Add Reaction component adds an award emoji reaction to a GitLab merge reques
 
 ### Output
 
-Returns the created GitLab award emoji object, including id, name, user, and timestamp.
+Returns the created GitLab award emoji object, including id, name, user and timestamp.
 
 ### Example Output
 
@@ -1664,7 +1664,7 @@ requests unless the project allows it.
 
 ### Output
 
-Returns the merge request approval state, including the number of approvals required and left, and who approved.
+Returns the merge request approval state, including the number of approvals required and left and who approved.
 
 ### Example Output
 
@@ -1734,7 +1734,7 @@ Returns the created deployment object, including:
 
 ### Requirements
 
-The connected user needs at least the **Developer** role on the project, and for protected environments must be in the environment's **Allowed to deploy** list.
+The connected user needs at least the **Developer** role on the project and for protected environments must be in the environment's **Allowed to deploy** list.
 
 ### Example Output
 
@@ -1797,7 +1797,7 @@ Returns the updated deployment object, including:
 
 ### Requirements
 
-The connected user needs at least the **Developer** role on the project, and for protected environments must be in the environment's **Allowed to deploy** list.
+The connected user needs at least the **Developer** role on the project and for protected environments must be in the environment's **Allowed to deploy** list.
 
 ### Example Output
 
@@ -2414,7 +2414,7 @@ Returns the deleted release object, plus a "tag_deleted" field that is true only
 
 The Get Commit Status component reads a commit's overall CI status.
 
-In GitLab a commit's statuses are jobs grouped under pipelines, and GitLab rolls them up for you: every commit carries a single overall **status** and a **last_pipeline**. This component returns that native result - one meaningful state plus a link to the pipeline - rather than a list of every job.
+In GitLab a commit's statuses are jobs grouped under pipelines and GitLab rolls them up for you: every commit carries a single overall **status** and a **last_pipeline**. This component returns that native result - one meaningful state plus a link to the pipeline - rather than a list of every job.
 
 ### Use Cases
 
@@ -2625,7 +2625,7 @@ The Get Pipeline component retrieves details for a specific GitLab pipeline.
 
 ### Output
 
-Returns pipeline data including status, ref, SHA, and pipeline URL.
+Returns pipeline data including status, ref, SHA and pipeline URL.
 
 ### Example Output
 
@@ -2701,7 +2701,7 @@ Returns:
 - `monthIso8601`: The usage month as an ISO date, e.g. "2026-07-01"
 - `minutes`: Total compute minutes used
 - `sharedRunnersDuration`: Total shared runner duration, in seconds
-- `projects`: Per-project breakdown (minutes, shared runner duration, and project details)
+- `projects`: Per-project breakdown (minutes, shared runner duration and project details)
 
 ### Use Cases
 
@@ -3331,7 +3331,7 @@ The Update Issue Comment component edits an existing comment (note) on a GitLab 
 - **Project** (required): The GitLab project containing the issue
 - **Issue IID** (required): The internal ID (IID) of the issue the comment belongs to (supports expressions)
 - **Comment ID** (required): The numeric ID of the comment (note) to update (supports expressions)
-- **Body** (toggle): The new comment text (supports Markdown and expressions). It is the only editable field on a GitLab note, so it must be enabled for the update to change anything, and cannot be empty when enabled.
+- **Body** (toggle): The new comment text (supports Markdown and expressions). It is the only editable field on a GitLab note, so it must be enabled for the update to change anything and cannot be empty when enabled.
 
 ### Permissions
 
@@ -3339,7 +3339,7 @@ The connected user must be the comment's author, or have at least the **Maintain
 
 ### Output
 
-Returns the updated note object, including its ID, body, author, and timestamps.
+Returns the updated note object, including its ID, body, author and timestamps.
 
 ### Notes
 
@@ -3403,7 +3403,7 @@ The Update Merge Request component modifies an existing GitLab merge request: it
 - **Labels to Add** (toggle): Labels to add, keeping any existing labels
 - **Assignees** (toggle): Users to assign, replacing any existing assignees
 
-Each field besides Project and Merge Request IID is toggled on individually, so only the fields you enable are sent in the update. At least one must be enabled. Title and Target Branch are the exception: GitLab rejects a blank title, and an empty target branch cannot resolve to a real branch, so both must have a value when enabled.
+Each field besides Project and Merge Request IID is toggled on individually, so only the fields you enable are sent in the update. At least one must be enabled. Title and Target Branch are the exception: GitLab rejects a blank title and an empty target branch cannot resolve to a real branch, so both must have a value when enabled.
 
 #### List fields: append vs. replace
 

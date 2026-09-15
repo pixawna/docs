@@ -39,9 +39,9 @@ This documentation site is built with [Starlight](https://starlight.astro.build)
 **Key concepts:**
 
 - Starlight looks for `.md` or `.mdx` files in the `src/content/docs/` directory. Each file is exposed as a route based on its file name.
-- Images can be added to `src/assets/` and embedded in Markdown with a relative link.
-- Static assets, like favicons, can be placed in the `public/` directory.
-- Configure your site's sidebar, title, and other settings in `astro.config.mjs`.
+- Text-based assets such as SVG files can be added to `src/assets/`.
+- Raster images, videos and other binaries must be uploaded to the `docs-assets` Cloudflare R2 bucket and referenced through `https://docs-assets.superplane.com/`.
+- Configure your site's sidebar, title and other settings in `astro.config.mjs`.
 
 ## Available Commands
 
@@ -63,14 +63,14 @@ All commands are run from the root of the project:
 - Follow the writing style guidelines in [AGENTS.md](./AGENTS.md)
 - Use clear, concise language
 - Include code examples where helpful
-- Add images to `src/assets/` and reference them with relative paths
+- Upload binary assets to the `docs-assets` R2 bucket and reference their absolute `https://docs-assets.superplane.com/` URLs
 - Keep markdown files to 120 characters width
 
 ### File Organization
 
 - Documentation files go in `src/content/docs/`
-- Images go in `src/assets/`
-- Static assets go in `public/`
+- Text-based assets go in `src/assets/` or `public/`
+- Binary assets go in the `docs-assets` R2 bucket
 
 ### Testing Your Changes
 

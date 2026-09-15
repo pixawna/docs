@@ -5,8 +5,8 @@ This document provides guidelines for AI agents working with the SuperPlane docu
 ## Repository Overview
 
 This repository contains the documentation for
-[SuperPlane](https://github.com/superplanehq/superplane), an open source DevOps
-control plane. The documentation site is built with
+[SuperPlane Factory](https://github.com/superplanehq/superplane), an AI software
+factory for tracked agent work. The documentation site is built with
 [Starlight](https://starlight.astro.build), a documentation framework built on
 [Astro](https://astro.build).
 
@@ -16,21 +16,21 @@ control plane. The documentation site is built with
 
 - `src/content/docs/` - All documentation content (`.md` and `.mdx` files)
   - Each file becomes a route based on its file name
-  - Organized by topic (e.g., `installation/`, `reference/`)
-- `src/assets/` - Images and other assets referenced in documentation
-- `public/` - Static assets like favicons
+  - Organized by topic (for example, `get-started/` and `reference/`)
+- `src/assets/` - Text-based assets such as SVG logos
+- `public/` - Text-based static assets
+- `docs-assets` R2 bucket - Raster images, videos and other binary assets
 - `astro.config.mjs` - Starlight configuration (sidebar, title, etc.)
 
 ### File Organization
 
 Documentation files follow a hierarchical structure:
 
-- `get-started/` - Getting started guides
-- `installation/` - Installation instructions
-  - `local.md` - Local installation
-  - `single-host/` - Single host deployments
-  - `kubernetes/` - Kubernetes deployments
-- `reference/` - Reference documentation
+- `get-started/` - Factory onboarding and first-task guides
+- `components/` - Core and integration component reference
+- `expressions/` - Expression syntax and function reference
+- `security/` - Authentication, secrets and access control
+- `reference/` - API reference and glossary
 
 ## Content Guidelines
 
@@ -88,14 +88,14 @@ Classic devtool docs: clear, direct, pragmatic. Minimal marketing; anchor value 
 - MUST: Descriptive section headings; the reader should guess the section from the title alone.
 - SHOULD: Keep paragraphs to 2–4 sentences. Use lists when you have 3+ parallel items.
 - SHOULD: Spell out acronyms on first use: `Content Security Policy (CSP)`.
-- MUST: Link the first mention of a SuperPlane term to [glossary](/concepts/glossary/) when a page exists.
+- MUST: Link the first mention of a SuperPlane term to [glossary](/reference/glossary/) when a page exists.
 
 #### Formatting
 
 - MUST: **Bold** UI elements (buttons, tabs, menu items). Don't quote them.
 - MUST: Inline code for paths, flags, identifiers: `canvas`, `/api/v1`, `.yaml`.
 - MUST: Descriptive link text. Never "click here" or bare URLs in prose.
-- MUST: Internal links use site-root paths (`/concepts/glossary`, `/installation/local`).
+- MUST: Internal links use site-root paths (`/reference/glossary`, `/get-started/overview`).
 - DON'T: Hard-wrap prose in source (one line per paragraph). Cap code at ~80 columns.
 - DON'T: Bold for emphasis in prose. Use callouts (`**Note:**`, `**Warning:**`) when needed.
 
@@ -108,8 +108,10 @@ Classic devtool docs: clear, direct, pragmatic. Minimal marketing; anchor value 
 
 #### Terminology
 
-Use consistently: **canvas**, **node**, **component**, **run**, **run item**, **payload**, **channel**,
-**subscription**, **expression**. Link to the glossary on first use per page.
+Use consistently: **factory**, **workspace**, **task**, **work order**, **line**, **automation**, **canvas**,
+**node**, **component**, **run**, **payload**, **channel**, **subscription**, **expression**. Link to the glossary on first use per page.
+
+- MUST: Write **open source** without a hyphen when it is a noun or an adjective: "open source project" and "SuperPlane is open source." Keep literal paths, slugs and identifiers unchanged.
 
 #### Examples
 
@@ -118,10 +120,21 @@ Use consistently: **canvas**, **node**, **component**, **run**, **run item**, **
 
 ### Images
 
-- Place images in `src/assets/`
-- Reference them with relative paths in Markdown
+- Upload raster images and videos to the `docs-assets` Cloudflare R2 bucket
+- Use object keys such as `images/image-name.png` or `videos/video-name.mp4`
+- Reference assets with absolute `https://docs-assets.superplane.com/` URLs
+- Never commit binary assets to this repository
 - Use descriptive filenames
 - Include alt text for accessibility
+
+### Diagrams
+
+- Prefer Mermaid diagrams in the page source for workflows, state changes and architecture. A contributor should be able to update a diagram in the same pull request as its text.
+- Use sentence case labels and describe observable system states or actions. Do not use slogans as node labels.
+- Model the normal path first. Show retries as labeled loops and exceptional human decisions as branches. Do not add repeated human review nodes when the standard workflow has one final review.
+- Add one sentence below every diagram that explains the path and any important exception. The prose must remain useful when the diagram is not rendered.
+- Use a raster diagram only when the source cannot be represented clearly in Mermaid. Store the editable source beside the exported asset or document the source tool and export steps in the pull request.
+- Run `npm run build` after editing a Mermaid diagram and inspect it in the dark theme at desktop and mobile widths.
 
 ### Navigation and information architecture
 
@@ -148,9 +161,9 @@ Use consistently: **canvas**, **node**, **component**, **run**, **run item**, **
 
 ### Adding Images
 
-1. Save the image to `src/assets/`
-2. Reference it in Markdown: `![Alt text](../assets/image-name.png)`
-3. Adjust the relative path based on the documentation file's location
+1. Upload the image to the `docs-assets` R2 bucket with a key such as `images/image-name.png`
+2. Reference it in Markdown: `![Alt text](https://docs-assets.superplane.com/images/image-name.png)`
+3. Run `npm run check:text-only` before committing
 
 ## Technical Details
 
@@ -181,7 +194,7 @@ When making content or navigation changes, run `npm run build` to catch:
 3. **Completeness**: Include all necessary steps and prerequisites
 4. **Accuracy**: Ensure code examples and commands are correct and tested
 5. **Organization**: Place content in the appropriate directory based on topic
-6. **Links**: Use site-root paths for internal links (`/concepts/...`); relative paths for images
+6. **Links**: Use site-root paths for internal links (`/get-started/...`); relative paths for images
 7. **Versioning**: When mentioning versions or tags, be specific (e.g., `v0.4`, `stable`, `beta`)
 
 ## Notes for AI Agents
@@ -194,12 +207,15 @@ When making content or navigation changes, run `npm run build` to catch:
 - Preserve frontmatter structure when editing files
 - Run `npm run build` after content or navigation changes
 - Treat `public/llms.txt` and `public/llms-full.txt` as generated artifacts (do not edit manually)
+- Keep the Git repository text-only. Store raster images, videos and other binaries in the `docs-assets` R2 bucket.
+- Keep `public/robots.txt` limited to crawler policy, sitemap discovery, and comments that point to agent-readable indexes. Do not use non-standard directives to advertise `llms.txt`.
+- Keep the `<link rel="describedby" href="/llms.txt">` discovery hint in the shared document head when changing head metadata.
 
 ### Exemplar pages
 
 | Type | Example |
 | --- | --- |
-| Tutorial | `src/content/docs/get-started/quickstart.md` |
-| Conceptual | `src/content/docs/concepts/data-flow.md` |
-| Installation | `src/content/docs/installation/local.md` |
-| Landing | `src/content/docs/index.md` |
+| Tutorial | `src/content/docs/get-started/quickstart.mdx` |
+| Conceptual | `src/content/docs/get-started/overview.mdx` |
+| Reference | `src/content/docs/reference/api.md` |
+| Landing | `src/content/docs/use-cases/overview.mdx` |

@@ -2,7 +2,7 @@
 title: "Hetzner Cloud"
 ---
 
-Create and delete Hetzner Cloud servers/load balancers, manage snapshots, and interact with Hetzner Object Storage via the S3-compatible API
+Create and delete Hetzner Cloud servers/load balancers, manage snapshots and interact with Hetzner Object Storage via the S3-compatible API
 
 import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
@@ -39,7 +39,7 @@ Creates a new bucket in Hetzner Object Storage using the S3-compatible API.
 
 ### Requirements
 
-S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured on the Hetzner integration.
+S3 credentials (Access Key ID, Secret Access Key and Region) must be configured on the Hetzner integration.
 
 ### Configuration
 
@@ -47,7 +47,7 @@ S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured
 
 ### Output
 
-Emits the bucket name, region, and S3 endpoint on the default channel.
+Emits the bucket name, region and S3 endpoint on the default channel.
 
 ### Example Output
 
@@ -73,7 +73,7 @@ The Create Load Balancer component creates a load balancer in Hetzner Cloud.
 
 ### How It Works
 
-1. Creates a load balancer with the specified name, type, location, and algorithm via the Hetzner API
+1. Creates a load balancer with the specified name, type, location and algorithm via the Hetzner API
 2. Emits the created load balancer details on the default output channel
 
 ### Configuration
@@ -107,7 +107,7 @@ The Create Server component creates a new server in Hetzner Cloud and waits for 
 
 ### How It Works
 
-1. Creates a server with the given name, server type, image (system image or snapshot), and optional location/SSH keys/user data
+1. Creates a server with the given name, server type, image (system image or snapshot) and optional location/SSH keys/user data
 2. Polls the Hetzner API until the create action finishes
 3. Emits the server details on the default output when ready. If creation fails, the execution errors.
 
@@ -182,7 +182,7 @@ Deletes a bucket from Hetzner Object Storage using the S3-compatible API.
 
 ### Requirements
 
-S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured on the Hetzner integration.
+S3 credentials (Access Key ID, Secret Access Key and Region) must be configured on the Hetzner integration.
 The bucket must be empty before it can be deleted.
 
 ### Configuration
@@ -240,7 +240,7 @@ Deletes an object from a Hetzner Object Storage bucket using the S3-compatible A
 
 ### Requirements
 
-S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured on the Hetzner integration.
+S3 credentials (Access Key ID, Secret Access Key and Region) must be configured on the Hetzner integration.
 
 ### Configuration
 
@@ -326,7 +326,7 @@ Lists objects in a Hetzner Object Storage bucket using the S3-compatible API.
 
 ### Requirements
 
-S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured on the Hetzner integration.
+S3 credentials (Access Key ID, Secret Access Key and Region) must be configured on the Hetzner integration.
 
 ### Configuration
 
@@ -336,7 +336,7 @@ S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured
 
 ### Output
 
-Emits the bucket, prefix, an array of objects (each with key, size, lastModified, etag), count, and a truncated flag on the default channel. When truncated is true, more objects exist beyond maxKeys; narrow the prefix or increase Max Keys to see them.
+Emits the bucket, prefix, an array of objects (each with key, size, lastModified, etag), count and a truncated flag on the default channel. When truncated is true, more objects exist beyond maxKeys; narrow the prefix or increase Max Keys to see them.
 
 ### Example Output
 
@@ -377,7 +377,7 @@ Generates a time-limited presigned URL for a Hetzner Object Storage object using
 
 ### Requirements
 
-S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured on the Hetzner integration.
+S3 credentials (Access Key ID, Secret Access Key and Region) must be configured on the Hetzner integration.
 
 ### Configuration
 
@@ -388,7 +388,7 @@ S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured
 
 ### Output
 
-Emits the bucket, key, the presigned URL, and the expiry timestamp (ISO 8601) on the default channel.
+Emits the bucket, key, the presigned URL and the expiry timestamp (ISO 8601) on the default channel.
 
 ### Use cases
 
@@ -420,7 +420,7 @@ Uploads content to an object in a Hetzner Object Storage bucket using the S3-com
 
 ### Requirements
 
-S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured on the Hetzner integration.
+S3 credentials (Access Key ID, Secret Access Key and Region) must be configured on the Hetzner integration.
 
 ### Configuration
 
@@ -431,7 +431,7 @@ S3 credentials (Access Key ID, Secret Access Key, and Region) must be configured
 
 ### Output
 
-Emits the bucket, key, size in bytes, and ETag on the default channel.
+Emits the bucket, key, size in bytes and ETag on the default channel.
 
 ### Example Output
 

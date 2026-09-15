@@ -1,0 +1,43 @@
+---
+import EditLink from "virtual:starlight/components/EditLink";
+import LastUpdated from "virtual:starlight/components/LastUpdated";
+import Pagination from "virtual:starlight/components/Pagination";
+import PageFeedback from "./PageFeedback.astro";
+
+const { entry } = Astro.locals.starlightRoute;
+---
+
+<footer class="sl-flex">
+  <PageFeedback />
+  <div class="meta sl-flex">
+    <EditLink />
+    <LastUpdated />
+  </div>
+  <Pagination />
+</footer>
+
+<style>
+  @layer starlight.core {
+    footer {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .meta {
+      gap: 0.75rem 3rem;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      margin-top: 3rem;
+      color: var(--sl-color-gray-3);
+      font-size: var(--sl-text-sm);
+    }
+
+    .meta > :global(p:only-child) {
+      margin-inline-start: auto;
+    }
+
+    footer > :global(.page-feedback) + .meta {
+      margin-top: 0;
+    }
+  }
+</style>

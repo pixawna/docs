@@ -24,7 +24,7 @@ Create an [OpenAI API key](https://platform.openai.com/api-keys) and copy it.
 
 ## Admin API Key (optional)
 
-Add this key to track your OpenAI usage and costs with the **Get Usage Data** component.
+Only required for the **Get Usage Data** component.
 
 Create an [Admin API key](https://platform.openai.com/settings/organization/admin-keys) and copy it (starts with `sk-admin-`).
 
@@ -146,7 +146,7 @@ Returns the generated response including:
 - **usage**: Token usage information (prompt tokens, completion tokens, total tokens)
 - **id**: Response ID for tracking
 - **parsed**: When Structured Output is configured, the response parsed into an object.
-- **artifacts**: When Code Interpreter is enabled, the files the model generated, with the file content included: text files as plain text (`encoding: "text"`), everything else base64-encoded (`encoding: "base64"`). Each artifact carries fileId, containerId, filename, bytes, and a downloadUrl; files over 10MB include metadata and the download URL only (note that containers expire about 20 minutes after their last activity).
+- **artifacts**: When Code Interpreter is enabled, the files the model generated, with the file content included: text files as plain text (`encoding: "text"`), everything else base64-encoded (`encoding: "base64"`). Each artifact carries fileId, containerId, filename, bytes and a downloadUrl; files over 10MB include metadata and the download URL only (note that containers expire about 20 minutes after their last activity).
 
 ### Notes
 

@@ -1,0 +1,48 @@
+---
+title: Done automation
+description: Define completion, update connected systems and preserve the final result.
+---
+
+The Done automation closes the loop after verification. Customize it to define what completion means, update connected systems and leave the task with a record that another engineer can understand later.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/complete_done.png" alt="A SuperPlane Factory board with completed and merged tasks recorded in the Done column." />
+  <figcaption>Done records the outcome after the Factory's required checks and decisions have completed.</figcaption>
+</figure>
+
+## Choose the completion boundary
+
+Done should represent an outcome rather than the moment an agent stops. Decide which boundary fits the Factory:
+
+- **Ready for review:** Required checks pass and the pull request is handed to its owners.
+- **Approved:** Required reviewers or policy gates have accepted the result.
+- **Merged:** The pull request is merged into the target branch.
+- **Verified in production:** The change is merged and the original production signal confirms recovery.
+
+Use one meaning consistently within a Factory. If different task classes need different boundaries, route them through separate paths or lines so the board remains honest.
+
+## Update the systems that follow the work
+
+The final path can use integration components to close the source issue, update a ticket, post a notification or publish a deployment result. Browse [Integrations and Components](/components) to find the service and action you need.
+
+Keep side effects explicit. A merge, issue closure or deployment should have its own node with a visible success and failure route. Do not hide these actions inside an agent prompt.
+
+## Preserve a useful completion record
+
+Before the task closes, attach the information that explains the result:
+
+- the final pull request and commit
+- the checks that established success
+- approvals and recorded decisions
+- the deployment or release reference when relevant
+- a short closure note for the next reader
+
+This record supports review, auditing and future debugging. It also gives [Factory performance](/fundamentals/factory-performance) reliable stage and completion data.
+
+## Keep the final step inexpensive
+
+Most Done actions are deterministic. Use integration components for status updates and notifications. Add an agent only when the completion note needs synthesis that a template cannot produce.
+
+If you generate a summary, pass the original task, final pull request and verification results. Avoid sending every intermediate log. The final note should describe what changed, what proved it and what remains for a person.
+
+Return to [Automation overview](/fundamentals/automations) to review editing, integration and cost guidance across the full Factory.

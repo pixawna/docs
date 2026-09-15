@@ -41,7 +41,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Get Database" href="#get-database" description="Retrieve details of a specific managed database instance" />
   <LinkCard title="Get Database Cluster" href="#get-database-cluster" description="Retrieve details of a specific database cluster" />
   <LinkCard title="Get Droplet" href="#get-droplet" description="Fetch details of a DigitalOcean Droplet by ID" />
-  <LinkCard title="Get Droplet Metrics" href="#get-droplet-metrics" description="Fetch CPU, memory, and network bandwidth metrics for a DigitalOcean Droplet" />
+  <LinkCard title="Get Droplet Metrics" href="#get-droplet-metrics" description="Fetch CPU, memory and network bandwidth metrics for a DigitalOcean Droplet" />
   <LinkCard title="Get GPU Droplet" href="#get-gpu-droplet" description="Fetch details of a DigitalOcean GPU Droplet by ID" />
   <LinkCard title="Get Knowledge Base" href="#get-knowledge-base" description="Retrieve detailed information about a DigitalOcean Gradient AI knowledge base" />
   <LinkCard title="Get Object" href="#get-object" description="Retrieve an object and its metadata from DigitalOcean Spaces Object Storage" />
@@ -50,7 +50,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Put Object" href="#put-object" description="Upload an object to DigitalOcean Spaces Object Storage" />
   <LinkCard title="Run Evaluation" href="#run-evaluation" description="Run a Gradient AI evaluation test case against an agent and report pass or fail" />
   <LinkCard title="Update Alert Policy" href="#update-alert-policy" description="Update an existing DigitalOcean monitoring alert policy" />
-  <LinkCard title="Update App" href="#update-app" description="Update a DigitalOcean App Platform application's configuration, environment, and deployment settings" />
+  <LinkCard title="Update App" href="#update-app" description="Update a DigitalOcean App Platform application's configuration, environment and deployment settings" />
   <LinkCard title="Update GPU Droplet" href="#update-gpu-droplet" description="Rename or upsize a DigitalOcean GPU Droplet" />
   <LinkCard title="Upsert DNS Record" href="#upsert-dns-record" description="Idempotently create or update a DNS record for a DigitalOcean domain" />
 </CardGrid>
@@ -385,7 +385,7 @@ You can do so by creating a sample app in the DigitalOcean control panel as illu
 - **Deploy workers**: Run background workers for processing tasks
 - **Deploy jobs**: Run one-off or scheduled jobs (pre-deploy, post-deploy, or failed-deploy)
 - **Automated provisioning**: Create app instances as part of infrastructure automation workflows
-- **Multi-environment setup**: Deploy separate app instances for dev, staging, and production
+- **Multi-environment setup**: Deploy separate app instances for dev, staging and production
 
 ### Configuration
 
@@ -398,11 +398,11 @@ You can do so by creating a sample app in the DigitalOcean control panel as illu
 - **Deploy on Push**: Automatically deploy when code is pushed to the branch (default: true)
 - **Environment Slug**: The runtime environment/buildpack (e.g., go, node-js, python, html)
 - **Build Command**: Custom build command (e.g., npm install && npm run build)
-- **Run Command**: Custom run command for services, workers, and jobs (e.g., npm start)
+- **Run Command**: Custom run command for services, workers and jobs (e.g., npm start)
 - **Source Directory**: Path to the source code within the repository (defaults to /)
 - **HTTP Port**: The port the service listens on (services only)
-- **Instance Size**: The instance size slug (e.g., apps-s-1vcpu-1gb) for services, workers, and jobs
-- **Instance Count**: Number of instances to run (services, workers, and jobs)
+- **Instance Size**: The instance size slug (e.g., apps-s-1vcpu-1gb) for services, workers and jobs
+- **Instance Count**: Number of instances to run (services, workers and jobs)
 - **Output Directory**: Build output directory for static sites (e.g., build, dist, public)
 - **Index Document**: Index document for static sites (defaults to index.html)
 - **Error Document**: Custom error document for static sites (e.g., 404.html)
@@ -613,7 +613,7 @@ Returns the created database cluster including:
 ### Important Notes
 
 - If you use custom token scopes, this action requires `database:create` and `database:read`
-- Valid versions, sizes, and node counts depend on the selected engine. Use the DigitalOcean Database Options API or dashboard values when configuring this component
+- Valid versions, sizes and node counts depend on the selected engine. Use the DigitalOcean Database Options API or dashboard values when configuring this component
 - The component polls until the cluster status becomes `online`
 
 ### Example Output
@@ -739,8 +739,8 @@ The Create GPU Droplet component creates a new GPU-powered droplet in DigitalOce
 - **Region**: Region slug where the GPU droplet will be created (required, only shows GPU-capable regions)
 - **Size**: GPU size slug for the droplet (required, only shows GPU sizes)
 - **Image Type**: Choose between a pre-configured one-click application or a base OS image (required)
-- **One-Click Application**: Pre-configured GPU-optimized applications like ML-in-a-Box (with PyTorch, TensorFlow, CUDA), CUDA Toolkit, and other marketplace apps (shown when Image Type is "One-Click Application")
-- **Base OS Image**: GPU-compatible base operating systems including Ubuntu, Debian, Rocky Linux, and Fedora (shown when Image Type is "Base OS Image")
+- **One-Click Application**: Pre-configured GPU-optimized applications like ML-in-a-Box (with PyTorch, TensorFlow, CUDA), CUDA Toolkit and other marketplace apps (shown when Image Type is "One-Click Application")
+- **Base OS Image**: GPU-compatible base operating systems including Ubuntu, Debian, Rocky Linux and Fedora (shown when Image Type is "Base OS Image")
 - **SSH Keys**: SSH keys to add to the droplet. Must have been added to the DigitalOcean team. (optional)
 - **Tags**: Tags to apply to the droplet (optional)
 - **User Data**: Cloud-init user data script (optional)
@@ -881,9 +881,9 @@ The Create Load Balancer component creates a new load balancer in DigitalOcean a
 
 ### Configuration
 
-- **Name**: The name of the load balancer (required, only letters, numbers, and hyphens)
+- **Name**: The name of the load balancer (required, only letters, numbers and hyphens)
 - **Region**: Region where the load balancer will be created (required)
-- **Forwarding Rules**: One or more forwarding rules specifying entry/target protocol, port, and optional TLS passthrough (required)
+- **Forwarding Rules**: One or more forwarding rules specifying entry/target protocol, port and optional TLS passthrough (required)
 - **Droplets**: The droplets to add as targets — must be in the same region as the load balancer (optional, mutually exclusive with Tag)
 - **Tag**: Tag used to dynamically target droplets (optional, mutually exclusive with Droplets)
 
@@ -902,7 +902,7 @@ Returns the created load balancer object including:
 
 - The component polls until the load balancer status becomes **active**
 - Specify either **Droplet IDs** or **Tag** to define targets, not both
-- The load balancer name must contain only letters, numbers, and hyphens
+- The load balancer name must contain only letters, numbers and hyphens
 - All specified droplets must be in the same region as the load balancer
 
 ### Example Output
@@ -1576,9 +1576,9 @@ The Get App component retrieves detailed information about a specific DigitalOce
 ### Use Cases
 
 - **Status checks**: Verify app state and deployment status before performing operations
-- **Information retrieval**: Get current app configuration, URLs, and deployment details
+- **Information retrieval**: Get current app configuration, URLs and deployment details
 - **Pre-flight validation**: Check app exists before operations like update or delete
-- **Monitoring**: Track app configuration, active deployments, and ingress URLs
+- **Monitoring**: Track app configuration, active deployments and ingress URLs
 - **Integration workflows**: Retrieve app details for use in downstream workflow steps
 
 ### Configuration
@@ -1595,7 +1595,7 @@ Returns the app object including:
 - **region**: The region where the app is deployed
 - **active_deployment**: Information about the active deployment
 - **in_progress_deployment**: Information about any in-progress deployment
-- **spec**: Complete app specification including services, workers, jobs, static sites, databases, and configuration
+- **spec**: Complete app specification including services, workers, jobs, static sites, databases and configuration
 
 ### Notes
 
@@ -1823,7 +1823,7 @@ The Get Database component retrieves a managed database from a DigitalOcean clus
 ### Use Cases
 
 - **Routing decisions**: Inspect the database and cluster state before directing traffic or jobs
-- **Operational checks**: Review engine, region, and connection details before maintenance steps
+- **Operational checks**: Review engine, region and connection details before maintenance steps
 - **Audit workflows**: Retrieve the current database and cluster context for reporting or validation
 
 ### Configuration
@@ -1889,7 +1889,7 @@ The Get Database Cluster component retrieves the details of an existing DigitalO
 ### Use Cases
 
 - **Status checks**: Verify a cluster is online before creating databases or users
-- **Information retrieval**: Fetch connection details, sizing, engine, and region information
+- **Information retrieval**: Fetch connection details, sizing, engine and region information
 - **Pre-flight validation**: Confirm a cluster exists before downstream operations
 
 ### Configuration
@@ -1953,7 +1953,7 @@ The Get Droplet component retrieves detailed information about a specific drople
 ### Use Cases
 
 - **Status checks**: Verify droplet state before performing operations
-- **Information retrieval**: Get current IP addresses, configuration, and status
+- **Information retrieval**: Get current IP addresses, configuration and status
 - **Pre-flight validation**: Check droplet exists before operations like snapshot or power management
 - **Monitoring**: Track droplet configuration and network details
 
@@ -2022,7 +2022,7 @@ Returns the droplet object including:
 
 **Component key:** `digitalocean.getDropletMetrics`
 
-The Get Droplet Metrics component retrieves CPU usage, memory utilization, and network bandwidth metrics for a droplet over a specified lookback window.
+The Get Droplet Metrics component retrieves CPU usage, memory utilization and network bandwidth metrics for a droplet over a specified lookback window.
 
 > **Note:** Monitoring is only available for droplets that had monitoring enabled during creation. Droplets created without monitoring will not report metrics.
 
@@ -2088,7 +2088,7 @@ The Get GPU Droplet component retrieves detailed information about a specific GP
 ### Use Cases
 
 - **Status checks**: Verify GPU droplet state before performing operations
-- **Information retrieval**: Get current IP addresses, GPU configuration, and status
+- **Information retrieval**: Get current IP addresses, GPU configuration and status
 - **Pre-flight validation**: Check GPU droplet exists before operations like snapshot or power management
 - **Monitoring**: Track GPU droplet configuration and network details
 
@@ -2164,14 +2164,14 @@ The Get Knowledge Base component retrieves comprehensive information about an ex
 
 ### How it works
 
-Fetches the knowledge base details including its OpenSearch database, all attached data sources, and the latest indexing job status.
+Fetches the knowledge base details including its OpenSearch database, all attached data sources and the latest indexing job status.
 
 ### Use Cases
 
 - **Pre-flight checks**: Inspect a knowledge base before attaching it to an agent or running evaluations
 - **Health monitoring**: Check indexing status and data source count on a schedule
 - **Teardown workflows**: Fetch the database ID before deleting the knowledge base
-- **Auditing**: Verify region, embedding model, and data source configuration
+- **Auditing**: Verify region, embedding model and data source configuration
 
 ### Output
 
@@ -2179,9 +2179,9 @@ Returns the full knowledge base object including:
 - **uuid**, **name**, **status**, **region**, **tags** — core properties
 - **embeddingModelUUID**, **embeddingModelName** — embedding model details
 - **projectId**, **projectName** — associated project
-- **database** — OpenSearch database object with id, name, and status
+- **database** — OpenSearch database object with id, name and status
 - **dataSources** — array of all attached data sources with type and source details
-- **lastIndexingJob** — full indexing job details: status, phase, totalTokens, data source progress, timing, and report availability
+- **lastIndexingJob** — full indexing job details: status, phase, totalTokens, data source progress, timing and report availability
 - **createdAt**, **updatedAt** — timestamps
 
 ### Example Output
@@ -2265,7 +2265,7 @@ Spaces Access Key ID and Secret Access Key must be configured in the DigitalOcea
 
 ### Output Channels
 
-- **Found**: The object exists — metadata, tags, and optional body are returned
+- **Found**: The object exists — metadata, tags and optional body are returned
 - **Not Found**: The object does not exist in the bucket (404)
 
 ### Output
@@ -2498,11 +2498,11 @@ Spaces Access Key ID and Secret Access Key must be configured in the DigitalOcea
 
 **Component key:** `digitalocean.runEvaluation`
 
-The Run Evaluation component triggers a Gradient AI evaluation test case against an agent, waits for it to complete, and reports whether the agent passed or failed.
+The Run Evaluation component triggers a Gradient AI evaluation test case against an agent, waits for it to complete and reports whether the agent passed or failed.
 
 ### How it works
 
-Runs a pre-configured evaluation test case against the selected agent. The test case already defines the prompts, metrics, and pass/fail thresholds. The component polls until the evaluation finishes, then fetches the results and routes to the appropriate output channel.
+Runs a pre-configured evaluation test case against the selected agent. The test case already defines the prompts, metrics and pass/fail thresholds. The component polls until the evaluation finishes, then fetches the results and routes to the appropriate output channel.
 
 ### Use Cases
 
@@ -2512,7 +2512,7 @@ Runs a pre-configured evaluation test case against the selected agent. The test 
 
 ### Configuration
 
-- **Test Case**: A pre-configured evaluation test case with prompts, metrics, and thresholds (required)
+- **Test Case**: A pre-configured evaluation test case with prompts, metrics and thresholds (required)
 - **Agent**: The agent to evaluate (required)
 - **Run Name**: A name for this evaluation run, visible in the DigitalOcean console (required, max 64 characters). Supports expressions for dynamic naming.
 
@@ -2531,7 +2531,7 @@ Returns the evaluation results including:
 - **status**: Final status of the evaluation run
 - **starMetric**: The primary metric result (name, numberValue, stringValue)
 - **runLevelMetrics**: All run-level metric results (name, numberValue, stringValue)
-- **prompts**: Per-prompt results including input, output, ground truth, and per-prompt metric scores
+- **prompts**: Per-prompt results including input, output, ground truth and per-prompt metric scores
 - **startedAt / finishedAt**: Timing information
 - **errorDescription**: Present on the Failed channel if the run itself errored
 
@@ -2570,7 +2570,7 @@ Returns the evaluation results including:
         "output": "A Droplet is a type of virtual private server (VPS) provided by a cloud platform."
       },
       {
-        "groundTruth": "Droplets have flexible pricing based on instance type, region, and options you select.",
+        "groundTruth": "Droplets have flexible pricing based on instance type, region and options you select.",
         "input": "What is the pricing for Droplet?",
         "metrics": [
           {
@@ -2707,13 +2707,13 @@ The Update App component modifies an existing DigitalOcean App Platform applicat
 
 ### Use Cases
 
-- **Update configuration**: Change app settings like environment variables, branch, build commands, and more
+- **Update configuration**: Change app settings like environment variables, branch, build commands and more
 - **Rename apps**: Update the app name
 - **Migrate regions**: Move the app to a different region
 - **Inject secrets**: Add or update environment variables such as database connection strings
 - **Switch branches**: Change the deployed branch without recreating the app
-- **Scale resources**: Adjust instance size and count for services, workers, and jobs
-- **Configure networking**: Update ingress paths, CORS settings, and VPC connections
+- **Scale resources**: Adjust instance size and count for services, workers and jobs
+- **Configure networking**: Update ingress paths, CORS settings and VPC connections
 - **Manage databases**: Add or update database attachments (dev or managed)
 
 ### Configuration

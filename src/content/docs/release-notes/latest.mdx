@@ -1,0 +1,128 @@
+---
+title: SuperPlane releases
+description: Product releases, integration updates and reliability improvements for SuperPlane.
+tableOfContents: false
+---
+
+<div class="release-feed-intro not-content">
+  <a href="https://github.com/superplanehq/superplane/releases" target="_blank" rel="noreferrer">
+    View all releases <span aria-hidden="true">↗</span>
+  </a>
+</div>
+
+<div class="release-feed not-content">
+  <article class="release-entry release-entry--latest" id="v0-30-0">
+    <aside class="release-meta">
+      <a class="release-version" href="https://github.com/superplanehq/superplane/releases/tag/v0.30.0" target="_blank" rel="noreferrer">v0.30.0</a>
+      <span class="release-latest">Latest</span>
+      <time datetime="2026-07-27">July 27, 2026</time>
+    </aside>
+    <div class="release-body">
+      <h2>Factory first onboarding and expanded integrations</h2>
+      <p>This release introduces a factory first onboarding flow, direct links to workflow runs and a broader set of GitLab capabilities. It also adds Linear integration and improves cross app runs, runner tasks and canvas versioning.</p>
+
+      <h3>What else is in this release</h3>
+
+      <div class="release-groups">
+        <details>
+          <summary><span aria-hidden="true">↗</span> New capabilities</summary>
+          <ul>
+            <li>New apps open on a factory first landing page with inline setup and a direct path to production.</li>
+            <li>The new <code>run()</code> expression exposes the run ID, URL and start time so components can link back to the workflow that created an output.</li>
+            <li>Linear joins the integrations list with actions and triggers for creating, finding and updating issues.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary><span aria-hidden="true">↗</span> Integrations</summary>
+          <ul>
+            <li>GitLab adds new push, branch, issue and merge request capabilities.</li>
+            <li>GitHub adds an action for updating pull requests.</li>
+            <li>Claude and Cursor gain structured output support plus improved agent configuration and session recovery.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary><span aria-hidden="true">↗</span> Reliability and security</summary>
+          <ul>
+            <li>Cross app runs can run synchronously with a configurable timeout while active runs can be cancelled asynchronously.</li>
+            <li>Canvas history and staged drafts stay synchronized when you return to the current version.</li>
+            <li>API keys support scopes and expiration while organization boundaries and outgoing mail headers receive stronger protection.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </article>
+
+  <article class="release-entry" id="v0-29-0">
+    <aside class="release-meta">
+      <a class="release-version" href="https://github.com/superplanehq/superplane/releases/tag/v0.29.0" target="_blank" rel="noreferrer">v0.29.0</a>
+      <time datetime="2026-07-16">July 16, 2026</time>
+    </aside>
+    <div class="release-body">
+      <h2>Dashboards, run inspection and broadcast messaging</h2>
+      <p>This release adds richer console dashboards, a faster run inspector and one way broadcast messaging between apps. It also makes long configuration fields easier to edit and expands file support across integrations.</p>
+
+      <h3>What else is in this release</h3>
+
+      <div class="release-groups">
+        <details>
+          <summary><span aria-hidden="true">↗</span> New capabilities</summary>
+          <ul>
+            <li>Scorecard widgets show a key metric with status, target progress and a trend.</li>
+            <li>Apps can broadcast one way messages to other apps in the same organization.</li>
+            <li>Multi line configuration fields can open in a focused full page editor.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary><span aria-hidden="true">↗</span> Improvements</summary>
+          <ul>
+            <li>The run inspector displays queued steps, runner logs and clearer runtime controls.</li>
+            <li>GitLab adds deployment and merge request actions.</li>
+            <li>Claude, OpenAI, Cursor, Discord and GitHub gain broader file and artifact support.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </article>
+
+  <article class="release-entry" id="v0-28-0">
+    <aside class="release-meta">
+      <a class="release-version" href="https://github.com/superplanehq/superplane/releases/tag/v0.28.0" target="_blank" rel="noreferrer">v0.28.0</a>
+      <time datetime="2026-07-09">July 9, 2026</time>
+    </aside>
+    <div class="release-body">
+      <h2>A refined app experience and new integrations</h2>
+      <p>This release refreshes the canvas experience with dark mode, a redesigned runs sidebar and a clearer editing workflow. It expands GitLab, Cloudsmith and GCP integrations and adds structured output to AI prompt components.</p>
+
+      <h3>What else is in this release</h3>
+
+      <div class="release-groups">
+        <details>
+          <summary><span aria-hidden="true">↗</span> App experience</summary>
+          <ul>
+            <li>Dark mode applies across the app and remembers your preference.</li>
+            <li>The runs sidebar provides a dedicated inspection view for inputs, outputs and timelines.</li>
+            <li>App starring and pinning keep important workflows easy to reach.</li>
+          </ul>
+        </details>
+
+        <details>
+          <summary><span aria-hidden="true">↗</span> Integrations and agents</summary>
+          <ul>
+            <li>Hetzner Object Storage joins the S3 compatible storage integrations.</li>
+            <li>GitLab, Cloudsmith, GCP and AWS receive new actions and triggers.</li>
+            <li>OpenAI and Claude prompt components accept file attachments and structured JSON output.</li>
+          </ul>
+        </details>
+      </div>
+    </div>
+  </article>
+</div>
+
+<div class="release-archive not-content">
+  <strong>Looking for an earlier version?</strong>
+  <span>Browse the complete release history and download version specific assets on GitHub.</span>
+  <a href="https://github.com/superplanehq/superplane/releases" target="_blank" rel="noreferrer">Open the release archive <span aria-hidden="true">↗</span></a>
+</div>

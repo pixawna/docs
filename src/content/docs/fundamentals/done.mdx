@@ -1,0 +1,67 @@
+---
+title: Done
+description: Understand what completion means and what the Factory preserves afterward.
+---
+
+Done means the task satisfied the completion rules defined by the Factory. It does not simply mean that an agent stopped running. The requested result exists, the required evidence has been collected and any approval or merge condition has been met.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/pull_request_1.png" alt="A completed pull request produced from a SuperPlane task with its code changes ready for review." />
+  <figcaption>The useful output of a Factory is a result the engineering team can inspect and trust.</figcaption>
+</figure>
+
+## Define completion deliberately
+
+Different lines can have different definitions of Done. A scoped documentation fix may complete when its pull request passes the build and is ready for review. A production repair may need an approval, a merge and a check that confirms the original alert has cleared.
+
+Write the rule around the outcome you need rather than the last action the agent performed. “Pull request created” proves that an artifact exists. “Required checks passed and review is requested” proves that it reached a useful engineering handoff.
+
+## What the task should preserve
+
+A completed task should remain understandable after the people involved have moved on. Its record can include:
+
+- the original issue or request
+- the branch, commit and pull request
+- agent output and task notes
+- checks performed and their results
+- human approvals or decisions
+- retries, failures and recovery paths
+- timestamps for the important stage changes
+
+This history is useful during code review but its value lasts longer. It explains why a change entered the repository and which controls were applied. When a similar task fails later, the team has a real execution record to compare instead of an incomplete chat transcript.
+
+## Done can still hand work to a person
+
+Factories do not need to merge every pull request automatically. A task can complete its automated line after the configured checks pass and leave the pull request and recorded evidence for the repository's normal owners to review. For lower-risk work, the Factory can include approval and merge in its completion rule.
+
+The important point is that the boundary is explicit. People should know whether Done means “ready for review,” “approved” or “merged” for this Factory.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/complete_done.png" alt="A SuperPlane board with merged pull requests and completed tasks recorded in the Done column." />
+  <figcaption>Done records completed results without hiding the path that produced them.</figcaption>
+</figure>
+
+## Learn from completed work
+
+Done is also the source of useful operating data. Compare similar work over time and look for patterns such as:
+
+- how long tasks wait before they start
+- how much time each stage takes
+- how often verification returns work for correction
+- where people are asked to intervene
+- which task shapes complete reliably
+
+These signals help improve task selection and workflow design. A rising completion count is less useful if retries or manual interventions rise with it.
+
+## Continue exploring
+
+<div class="sp-next-grid not-content">
+  <a href="/fundamentals/factory-pipeline">
+    <strong>Return to the pipeline →</strong>
+    <span>See how every stage fits into the complete operating path.</span>
+  </a>
+  <a href="/fundamentals/factory-performance">
+    <strong>Factory performance →</strong>
+    <span>Measure delivery, reliability and the places where work gets stuck.</span>
+  </a>
+</div>

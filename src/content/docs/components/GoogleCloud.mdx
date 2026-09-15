@@ -44,7 +44,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Compute • Manage Static IP" href="#compute-•-manage-static-ip" description="Attach or detach a static IP address to/from a Google Compute Engine VM instance" />
   <LinkCard title="Compute • Update Firewall Rule" href="#compute-•-update-firewall-rule" description="Update a VPC firewall rule: its protocols and ports, ranges, priority, targets and source filters, description, or enabled state" />
   <LinkCard title="Compute • Create Image" href="#compute-•-create-image" description="Create a Google Compute Engine custom image from a disk, snapshot, or another image" />
-  <LinkCard title="Compute • Create Virtual Machine" href="#compute-•-create-virtual-machine" description="Create a Google Compute Engine VM. Configure machine type, zone, provisioning model, and more." />
+  <LinkCard title="Compute • Create Virtual Machine" href="#compute-•-create-virtual-machine" description="Create a Google Compute Engine VM. Configure machine type, zone, provisioning model and more." />
   <LinkCard title="Compute • Delete Image" href="#compute-•-delete-image" description="Permanently delete a Google Compute Engine custom image" />
   <LinkCard title="Compute • Delete VM Instance" href="#compute-•-delete-vm-instance" description="Permanently delete a Google Compute Engine VM instance" />
   <LinkCard title="Compute • Get VM Instance" href="#compute-•-get-vm-instance" description="Fetch the current state of a Google Compute Engine VM instance" />
@@ -67,7 +67,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Cloud Storage • Create Bucket" href="#cloud-storage-•-create-bucket" description="Create a Cloud Storage bucket" />
   <LinkCard title="Cloud Storage • Delete Bucket" href="#cloud-storage-•-delete-bucket" description="Delete a Cloud Storage bucket" />
   <LinkCard title="Cloud Storage • Get Bucket" href="#cloud-storage-•-get-bucket" description="Fetch a Cloud Storage bucket's configuration and metadata" />
-  <LinkCard title="Compute • Update Image" href="#compute-•-update-image" description="Update a Google Compute Engine image: deprecate or obsolete it, and update its labels" />
+  <LinkCard title="Compute • Update Image" href="#compute-•-update-image" description="Update a Google Compute Engine image: deprecate or obsolete it and update its labels" />
   <LinkCard title="Compute • Update VM Machine Type" href="#compute-•-update-vm-machine-type" description="Change the machine type of a Google Compute Engine VM instance" />
 </CardGrid>
 
@@ -92,8 +92,8 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 ## Required IAM roles
 
 - `roles/logging.configWriter` — create logging sinks for event triggers
-- `roles/pubsub.admin` — manage Pub/Sub topics, subscriptions, and IAM policies for event delivery
-- Additional roles depending on which components you use (e.g. `roles/compute.admin` for VM management, `roles/compute.securityAdmin` to create, update, and delete firewall rules, `roles/iam.serviceAccountViewer` to populate the firewall service-account picker, `roles/monitoring.viewer` to read VM metrics, `roles/cloudsql.admin` to manage Cloud SQL databases and instances, `roles/storage.admin` to manage Cloud Storage buckets)
+- `roles/pubsub.admin` — manage Pub/Sub topics, subscriptions and IAM policies for event delivery
+- Additional roles depending on which components you use (e.g. `roles/compute.admin` for VM management, `roles/compute.securityAdmin` to create, update and delete firewall rules, `roles/iam.serviceAccountViewer` to populate the firewall service-account picker, `roles/monitoring.viewer` to read VM metrics, `roles/cloudsql.admin` to manage Cloud SQL databases and instances, `roles/storage.admin` to manage Cloud Storage buckets)
 
 <a id="artifact-registry-•-on-artifact-analysis"></a>
 
@@ -122,7 +122,7 @@ The On Artifact Analysis trigger starts a workflow execution when Google Contain
 
 ### Event Data
 
-Each event contains the full Container Analysis Occurrence resource, including `kind`, `resourceUri`, `noteName`, and the occurrence-specific data (e.g. `vulnerability` for vulnerability findings).
+Each event contains the full Container Analysis Occurrence resource, including `kind`, `resourceUri`, `noteName` and the occurrence-specific data (e.g. `vulnerability` for vulnerability findings).
 
 ### Example Data
 
@@ -230,7 +230,7 @@ The On Build Complete trigger starts a workflow execution when a GCP Cloud Build
 
 ### Event Data
 
-Each event contains the full Cloud Build resource, including `id`, `status` (SUCCESS, FAILURE, INTERNAL_ERROR, TIMEOUT, CANCELLED, EXPIRED), `buildTriggerId`, `logUrl`, `createTime`, `finishTime`, and more.
+Each event contains the full Cloud Build resource, including `id`, `status` (SUCCESS, FAILURE, INTERNAL_ERROR, TIMEOUT, CANCELLED, EXPIRED), `buildTriggerId`, `logUrl`, `createTime`, `finishTime` and more.
 
 ### Example Data
 
@@ -274,7 +274,7 @@ SuperPlane automatically creates a Cloud Logging sink to capture VM instance eve
 
 ### Event Data
 
-Each event includes the audit log entry with resourceName (e.g. projects/my-project/zones/us-central1-a/instances/my-vm), serviceName (compute.googleapis.com), methodName (v1.compute.instances.insert), and the full log entry data.
+Each event includes the audit log entry with resourceName (e.g. projects/my-project/zones/us-central1-a/instances/my-vm), serviceName (compute.googleapis.com), methodName (v1.compute.instances.insert) and the full log entry data.
 
 ### Example Data
 
@@ -319,7 +319,7 @@ To route a policy's incidents here, attach this trigger's notification channel t
 
 ### Event Data
 
-Emits one `gcp.monitoring.alert` event per matching incident, including the incident id, state, policy and condition names, the affected resource and metric, the observed/threshold values, and the incident URL.
+Emits one `gcp.monitoring.alert` event per matching incident, including the incident id, state, policy and condition names, the affected resource and metric, the observed/threshold values and the incident URL.
 
 ### Important Notes
 
@@ -422,7 +422,7 @@ Provide either a **Resource URL** or the four fields below:
 
 ### Output
 
-The full Version resource, including `name`, `createTime`, `updateTime`, `description`, `relatedTags`, and `metadata`.
+The full Version resource, including `name`, `createTime`, `updateTime`, `description`, `relatedTags` and `metadata`.
 
 ### Supported Formats
 
@@ -520,7 +520,7 @@ Creates and starts a Google Cloud Build build, then waits for the build to reach
 
 - **Steps** (required): JSON array of build steps. Each step needs at minimum a `name` (builder image) and optional `args`. Example: `[{"name":"gcr.io/cloud-builders/docker","args":["build","-t","gcr.io/$PROJECT_ID/myapp","."]}]`
 - **Source**: Optional JSON object for the build source. This is the most flexible option and supports `gitSource`, `repoSource`, or `storageSource`. Example: `{"gitSource":{"url":"https://github.com/org/repo.git","revision":"main"}}`
-- **Connected Repository**: Optional Cloud Build 2nd-gen repository path. Select a location, connection, repository, and branch/tag/commit directly from GCP. SuperPlane sends `source.connectedRepository` and creates the build in the repository's region.
+- **Connected Repository**: Optional Cloud Build 2nd-gen repository path. Select a location, connection, repository and branch/tag/commit directly from GCP. SuperPlane sends `source.connectedRepository` and creates the build in the repository's region.
 - **Repository / Branch / Tag / Commit SHA**: Convenience shortcut for repository-backed builds. If the repository value looks like a Git URL (`https://...`, `ssh://...`, or `git@...`), SuperPlane creates `source.gitSource`. Otherwise it treats the value as a Cloud Source Repository name and creates `source.repoSource`. Choose exactly one revision field.
 - **Images**: Optional list of Docker image names to push after the build.
 - **Substitutions**: JSON object of substitution key-value pairs (e.g. `{"_ENV":"production"}`).
@@ -529,7 +529,7 @@ Creates and starts a Google Cloud Build build, then waits for the build to reach
 
 ### Output
 
-The terminal Build resource, including `id`, `status`, `logUrl`, `createTime`, `finishTime`, and more.
+The terminal Build resource, including `id`, `status`, `logUrl`, `createTime`, `finishTime` and more.
 
 ### Output Channels
 
@@ -574,7 +574,7 @@ Retrieves the details of a specific Google Cloud Build build.
 
 ### Output
 
-The full Build resource, including `id`, `status` (SUCCESS, FAILURE, WORKING, QUEUED, etc.), `logUrl`, `steps`, `images`, `createTime`, `finishTime`, and more.
+The full Build resource, including `id`, `status` (SUCCESS, FAILURE, WORKING, QUEUED, etc.), `logUrl`, `steps`, `images`, `createTime`, `finishTime` and more.
 
 ### Example Output
 
@@ -609,7 +609,7 @@ Runs an existing Cloud Build trigger and waits for the resulting build to reach 
 
 ### Output
 
-The terminal Build resource, including `id`, `status`, `logUrl`, `createTime`, `finishTime`, and more.
+The terminal Build resource, including `id`, `status`, `logUrl`, `createTime`, `finishTime` and more.
 
 ### Output Channels
 
@@ -851,11 +851,11 @@ The Create Database component adds a new logical database to an existing Cloud S
 
 ### Output
 
-Emits a `gcp.cloudsql.database` payload with the created database's `name`, `instance`, `project`, `charset`, `collation`, and `selfLink`.
+Emits a `gcp.cloudsql.database` payload with the created database's `name`, `instance`, `project`, `charset`, `collation` and `selfLink`.
 
 ### Important Notes
 
-- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role on the integration's service account, and the **Cloud SQL Admin API** enabled
+- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role on the integration's service account and the **Cloud SQL Admin API** enabled
 - Cloud SQL database creation is asynchronous; this component waits for the operation to finish before emitting
 
 ### Example Output
@@ -909,14 +909,14 @@ The Create Instance component provisions a new Cloud SQL instance.
 
 ### Output
 
-Emits a `gcp.cloudsql.instance` payload with the ready instance's `name`, `state`, `databaseVersion`, `region`, `tier`, `connectionName`, `ipAddress`, and `selfLink`.
+Emits a `gcp.cloudsql.instance` payload with the ready instance's `name`, `state`, `databaseVersion`, `region`, `tier`, `connectionName`, `ipAddress` and `selfLink`.
 
 ### Important Notes
 
 - **Instance creation is asynchronous and takes several minutes.** This component polls the instance until it reaches `RUNNABLE` (or times out) before emitting, so downstream steps run only once the instance is ready.
 - A public IP with no **Authorized Networks** is reachable only through the Cloud SQL Auth Proxy or private access; add CIDR ranges to allow direct external clients.
 - With **Deletion Protection** enabled, the Delete Instance component will fail until protection is removed.
-- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role, and the **Cloud SQL Admin API** enabled.
+- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role and the **Cloud SQL Admin API** enabled.
 
 ### Example Output
 
@@ -960,12 +960,12 @@ The Delete Database component permanently deletes a logical database from a Clou
 
 ### Output
 
-Emits a `gcp.cloudsql.database` payload with the deleted database's `name` and `instance`, and `deleted: true`.
+Emits a `gcp.cloudsql.database` payload with the deleted database's `name` and `instance` and `deleted: true`.
 
 ### Important Notes
 
 - **This permanently deletes the database and all its data — it is irreversible.**
-- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role on the integration's service account, and the **Cloud SQL Admin API** enabled
+- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role on the integration's service account and the **Cloud SQL Admin API** enabled
 - Cloud SQL database deletion is asynchronous; this component waits for the operation to finish before emitting
 
 ### Example Output
@@ -1007,7 +1007,7 @@ Emits a `gcp.cloudsql.instance` payload with the instance `name` and `deleted: t
 
 - **This permanently deletes the instance and all its databases and data — it is irreversible.**
 - Instance deletion is asynchronous and takes several minutes; this component polls until the instance is fully deleted (or times out) before emitting.
-- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role, and the **Cloud SQL Admin API** enabled.
+- Requires the `roles/cloudsql.admin` (or `roles/cloudsql.editor`) IAM role and the **Cloud SQL Admin API** enabled.
 
 ### Example Output
 
@@ -1043,11 +1043,11 @@ The Get Database component retrieves a logical database from a Cloud SQL instanc
 
 ### Output
 
-Emits a `gcp.cloudsql.database` payload with the database's `name`, `instance`, `project`, `charset`, `collation`, and `selfLink`.
+Emits a `gcp.cloudsql.database` payload with the database's `name`, `instance`, `project`, `charset`, `collation` and `selfLink`.
 
 ### Important Notes
 
-- Requires the `roles/cloudsql.viewer` (or `roles/cloudsql.admin`) IAM role on the integration's service account, and the **Cloud SQL Admin API** enabled
+- Requires the `roles/cloudsql.viewer` (or `roles/cloudsql.admin`) IAM role on the integration's service account and the **Cloud SQL Admin API** enabled
 
 ### Example Output
 
@@ -1086,11 +1086,11 @@ The Get Instance component retrieves a Cloud SQL instance's configuration and cu
 
 ### Output
 
-Emits a `gcp.cloudsql.instance` payload with the instance `name`, `state`, `databaseVersion`, `region`, `tier`, `connectionName`, `ipAddress`, and `selfLink`.
+Emits a `gcp.cloudsql.instance` payload with the instance `name`, `state`, `databaseVersion`, `region`, `tier`, `connectionName`, `ipAddress` and `selfLink`.
 
 ### Important Notes
 
-- Requires the `roles/cloudsql.viewer` (or `roles/cloudsql.admin`) IAM role, and the **Cloud SQL Admin API** enabled.
+- Requires the `roles/cloudsql.viewer` (or `roles/cloudsql.admin`) IAM role and the **Cloud SQL Admin API** enabled.
 
 ### Example Output
 
@@ -1146,7 +1146,7 @@ The Create Firewall Rule component creates a VPC firewall rule that controls tra
 
 ### Output
 
-Emits the created firewall rule: name, selfLink, network, direction, priority, action, the allowed/denied protocols, source/destination ranges, target/source tags, target/source service accounts, disabled, logging state, creationTimestamp, and a console link.
+Emits the created firewall rule: name, selfLink, network, direction, priority, action, the allowed/denied protocols, source/destination ranges, target/source tags, target/source service accounts, disabled, logging state, creationTimestamp and a console link.
 
 ### Important Notes
 
@@ -1198,7 +1198,7 @@ Emits the created firewall rule: name, selfLink, network, direction, priority, a
 
 **Component key:** `gcp.compute.createLoadBalancer`
 
-The Create Load Balancer component builds a regional external passthrough Network Load Balancer (Layer 4). It gives you one public IP that spreads incoming TCP/UDP traffic across the VMs in an instance group, and routes around unhealthy VMs using a health check.
+The Create Load Balancer component builds a regional external passthrough Network Load Balancer (Layer 4). It gives you one public IP that spreads incoming TCP/UDP traffic across the VMs in an instance group and routes around unhealthy VMs using a health check.
 
 Google Cloud has no single "load balancer" resource — a load balancer is a collection of resources. This component creates them for you, in order:
 
@@ -1226,7 +1226,7 @@ If any step fails, the resources already created are rolled back.
 
 ### Output
 
-Returns the assembled load balancer: **name**, **region**, **ipAddress**, **protocol**, **ports**, and the underlying **forwardingRule**, **backendService**, **healthCheck**, plus **resources** (selfLinks of everything created).
+Returns the assembled load balancer: **name**, **region**, **ipAddress**, **protocol**, **ports** and the underlying **forwardingRule**, **backendService**, **healthCheck**, plus **resources** (selfLinks of everything created).
 
 ### Important Notes
 
@@ -1359,7 +1359,7 @@ Returns the name of the deleted firewall rule.
 
 **Component key:** `gcp.compute.deleteLoadBalancer`
 
-The Delete Load Balancer component tears down a regional external passthrough Network Load Balancer. You select its **forwarding rule** (the load balancer's entry point), and the component follows the references and deletes the pieces in reverse order:
+The Delete Load Balancer component tears down a regional external passthrough Network Load Balancer. You select its **forwarding rule** (the load balancer's entry point) and the component follows the references and deletes the pieces in reverse order:
 
 1. **Forwarding rule** (the public IP + ports)
 2. **Backend service** it pointed at
@@ -1502,7 +1502,7 @@ Returns the instance state after the operation:
 
 **Component key:** `gcp.compute.updateFirewallRule`
 
-The Update Firewall Rule component changes an existing VPC firewall rule. **Toggle on only the fields you want to change; everything left off is untouched.** Enabled state, protocols and ports, targets, source filter, and logs are dropdowns you toggle on and then pick a value.
+The Update Firewall Rule component changes an existing VPC firewall rule. **Toggle on only the fields you want to change; everything left off is untouched.** Enabled state, protocols and ports, targets, source filter and logs are dropdowns you toggle on and then pick a value.
 
 ### Use Cases
 
@@ -1517,7 +1517,7 @@ The Update Firewall Rule component changes an existing VPC firewall rule. **Togg
 - **Enabled state** (toggle): enable or disable the rule
 - **Priority** (toggle): new priority (0-65535); lower numbers take precedence
 - **Protocols and ports** (toggle): "Specified protocols and ports" (replace with a list) or "All protocols and ports" (match everything). The rule keeps its existing action (allow or deny)
-- **Ranges** (toggle): Replace the rule's CIDR ranges. Independent of the **Source filter**; applied as source ranges for INGRESS rules and destination ranges for EGRESS rules (the rule's direction is fixed). `sourceRanges` may legitimately coexist with source tags **or** source service accounts, and editing the source filter does **not** touch ranges.
+- **Ranges** (toggle): Replace the rule's CIDR ranges. Independent of the **Source filter**; applied as source ranges for INGRESS rules and destination ranges for EGRESS rules (the rule's direction is fixed). `sourceRanges` may legitimately coexist with source tags **or** source service accounts and editing the source filter does **not** touch ranges.
 - **Targets** (toggle): "All instances in the network", "Specified target tags", or "Specified service accounts". Choosing tags or service accounts **clears the other automatically** — a rule cannot use both. A specified tags/service-accounts selection with an empty list is rejected (it would silently broaden the rule to all instances).
 - **Source filter (INGRESS only, toggle)**: "IP ranges only" (clears source tags/service accounts), "Source tags", or "Source service accounts". Toggling this on for an EGRESS rule is rejected.
 - **Logs** (toggle): turn Firewall Rules Logging on or off (with optional metadata)
@@ -1527,7 +1527,7 @@ The Update Firewall Rule component changes an existing VPC firewall rule. **Togg
 
 ### Output
 
-Emits the updated firewall rule: name, selfLink, network, direction, priority, action, the allowed/denied protocols, source/destination ranges, target/source tags, target/source service accounts, disabled, logging state, creationTimestamp, and a console link.
+Emits the updated firewall rule: name, selfLink, network, direction, priority, action, the allowed/denied protocols, source/destination ranges, target/source tags, target/source service accounts, disabled, logging state, creationTimestamp and a console link.
 
 ### Important Notes
 
@@ -1967,7 +1967,7 @@ The Create Alerting Policy component creates a Cloud Monitoring alerting policy 
 
 ### Output
 
-Returns the created policy: **name**, **id**, **displayName**, **enabled**, **combiner**, **severity**, **conditionsCount**, and the first condition's **comparison**, **thresholdValue**, **duration**, **filter**.
+Returns the created policy: **name**, **id**, **displayName**, **enabled**, **combiner**, **severity**, **conditionsCount** and the first condition's **comparison**, **thresholdValue**, **duration**, **filter**.
 
 ### Important Notes
 
@@ -2149,7 +2149,7 @@ The Get Alerting Policy component reads the configuration and state of a Cloud M
 
 ### Use Cases
 
-- **Auditing**: Inspect a policy's threshold, comparison, and enabled state
+- **Auditing**: Inspect a policy's threshold, comparison and enabled state
 - **Conditional workflows**: Branch on whether a policy is enabled or how it's configured
 - **Chaining**: Read a policy created upstream before updating or deleting it
 
@@ -2268,13 +2268,13 @@ The Update Alerting Policy component modifies an existing Cloud Monitoring alert
 
 ### Output
 
-Returns the updated policy: **name**, **id**, **displayName**, **enabled**, **combiner**, **severity**, **conditionsCount**, and the first condition summary.
+Returns the updated policy: **name**, **id**, **displayName**, **enabled**, **combiner**, **severity**, **conditionsCount** and the first condition summary.
 
 ### Important Notes
 
 - At least one field must be provided
 - Providing **Conditions** replaces all existing conditions
-- **Auto-close**, **rate limit**, **documentation content**, and **documentation subject** are each updated independently — changing one leaves the others untouched
+- **Auto-close**, **rate limit**, **documentation content** and **documentation subject** are each updated independently — changing one leaves the others untouched
 - Requires the `roles/monitoring.editor` IAM role
 
 ### Example Output
@@ -2595,13 +2595,13 @@ The Create Bucket component creates a new Cloud Storage bucket.
 
 ### Output
 
-Emits a `gcp.storage.bucket` payload with the bucket's `name`, `location`, `locationType`, `storageClass`, `timeCreated`, `selfLink`, and a `consoleUrl` for opening the bucket in the Cloud Console.
+Emits a `gcp.storage.bucket` payload with the bucket's `name`, `location`, `locationType`, `storageClass`, `timeCreated`, `selfLink` and a `consoleUrl` for opening the bucket in the Cloud Console.
 
 ### Important Notes
 
-- **Bucket names are globally unique across all of Cloud Storage** and must follow the [naming guidelines](https://cloud.google.com/storage/docs/buckets#naming) (3–63 characters, lowercase letters, numbers, hyphens, underscores, and dots).
+- **Bucket names are globally unique across all of Cloud Storage** and must follow the [naming guidelines](https://cloud.google.com/storage/docs/buckets#naming) (3–63 characters, lowercase letters, numbers, hyphens, underscores and dots).
 - A bucket's location is permanent and cannot be changed after creation.
-- Requires the `roles/storage.admin` IAM role, and the **Cloud Storage API** (`storage.googleapis.com`) enabled.
+- Requires the `roles/storage.admin` IAM role and the **Cloud Storage API** (`storage.googleapis.com`) enabled.
 
 ### Example Output
 
@@ -2652,7 +2652,7 @@ Emits a `gcp.storage.bucket` payload with the bucket `name` and `deleted: true`.
 - **The bucket must be empty before it can be deleted.** Cloud Storage rejects the request if it still contains objects (including noncurrent object versions).
 - **This permanently deletes the bucket — it is irreversible.** Deleting a bucket frees its globally unique name for reuse by anyone.
 - If the bucket does not exist, the component treats the deletion as already complete (idempotent).
-- Requires the `roles/storage.admin` IAM role, and the **Cloud Storage API** (`storage.googleapis.com`) enabled.
+- Requires the `roles/storage.admin` IAM role and the **Cloud Storage API** (`storage.googleapis.com`) enabled.
 
 ### Example Output
 
@@ -2687,11 +2687,11 @@ The Get Bucket component retrieves a Cloud Storage bucket's configuration and me
 
 ### Output
 
-Emits a `gcp.storage.bucket` payload with the bucket's `name`, `location`, `locationType`, `storageClass`, `timeCreated`, `selfLink`, and a `consoleUrl` for opening the bucket in the Cloud Console.
+Emits a `gcp.storage.bucket` payload with the bucket's `name`, `location`, `locationType`, `storageClass`, `timeCreated`, `selfLink` and a `consoleUrl` for opening the bucket in the Cloud Console.
 
 ### Important Notes
 
-- Requires the `roles/storage.admin` (or `roles/storage.legacyBucketReader`) IAM role, and the **Cloud Storage API** (`storage.googleapis.com`) enabled.
+- Requires the `roles/storage.admin` (or `roles/storage.legacyBucketReader`) IAM role and the **Cloud Storage API** (`storage.googleapis.com`) enabled.
 
 ### Example Output
 
@@ -2728,7 +2728,7 @@ The Update Image component updates an existing Compute Engine custom image. It c
 
 - **Release lifecycle**: Mark older images deprecated or obsolete as newer ones ship
 - **Pointing consumers forward**: Set a replacement image so users are guided to the current version
-- **Inventory hygiene**: Keep image labels accurate for billing, environment, and ownership
+- **Inventory hygiene**: Keep image labels accurate for billing, environment and ownership
 
 ### Configuration
 

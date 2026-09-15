@@ -1,0 +1,192 @@
+/*
+  SuperPlane docs: small, pragmatic styling utilities.
+  Keep changes local (scoped classes), avoid global overrides.
+*/
+
+/* A full-bleed wrapper for wide screenshots (desktop only). */
+@media (min-width: 1024px) {
+  .sp-full-bleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+  }
+}
+
+.sp-canvas-figure {
+  margin: 1.25rem 0;
+}
+
+.sp-canvas-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+}
+
+.sp-canvas-figure figcaption {
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  opacity: 0.85;
+}
+
+/* Big image: blurred gradient backdrop + floating screenshot. */
+.big-image {
+  margin: 1.5rem 0;
+  padding: 20px 10px 12px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #1a3d32;
+  background-image: url("https://superplane.com/images/workflow-bg-2.png");
+  background-size: cover;
+  background-position: center;
+}
+
+.big-image .sp-canvas-figure {
+  margin: 0 auto;
+  max-width: 920px;
+}
+
+.big-image .sp-canvas-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 6px;
+  box-shadow:
+    0 0px 16px rgba(0, 0, 0, 0.2),
+    0 0px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Thumbnail crop for “wide canvas” previews. */
+.sp-thumb {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  object-position: left center;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+}
+
+/* A gentle “screenshot” caption style for inline hints. */
+.sp-muted {
+  opacity: 0.85;
+}
+
+@layer starlight.user {
+  :root,
+  :root[data-theme='light'],
+  :root[data-theme='dark'] {
+    --sl-text-h1: 2.25rem !important; /* 36px */
+    --sl-text-h2: 1.5rem; /* 24px */
+    --sl-text-h3: 1.25rem; /* 20px */
+    --sl-text-h4: 1.125rem; /* 18px */
+    --sl-text-h5: 1rem; /* 16px */
+    --sl-text-h6: 1rem; /* 16px */
+  }
+
+  :root,
+  :root[data-theme='light'],
+  :root[data-theme='dark'] {
+    --sl-color-hairline-shade: var(--sl-color-gray-5) !important;
+
+    .sidebar-content ul ul li a {
+      font-weight: 500 !important;
+    }
+  }
+
+  :root[data-theme='light'] {
+    --sl-color-bg-nav: #ffffff !important;
+    --sl-color-gray-5: #dfe1e8 !important;
+    --sl-color-hairline: var(--sl-color-gray-5) !important;
+    --sl-color-text-accent: #3b6fff !important;
+    --sl-color-blue: #3b6fff !important;
+
+    .sidebar-content ul ul li {
+      border-inline-start-color: var(--sl-color-hairline-shade) !important;
+    }
+
+    .sidebar-content ul ul li a {
+      color: var(--sl-color-gray-3) !important;
+    }
+
+    .sidebar-content ul ul li a[aria-current=page] {
+      color: white !important;
+    }
+
+    .social-icons a {
+      color: var(--sl-color-gray-1) !important;
+    }
+
+    .starlight-aside {
+      border-inline-start-color: var(--sl-color-text-accent) !important;
+    }
+
+    .starlight-aside--note {
+      background-color: #e0efff !important;
+    }
+
+    .starlight-aside__title {
+      color: var(--sl-color-blue) !important;
+    }
+  }
+
+  :root[data-theme='dark'] {
+    --sl-color-bg: var(--sl-color-gray-6) !important;
+    --sl-color-hairline: var(--sl-color-gray-5) !important;
+
+    .social-icons a {
+      color: white !important;
+    }
+
+    .starlight-aside {
+      border-inline-start-color: var(--sl-color-text-accent) !important;
+    }
+
+    .starlight-aside--note {
+      background-color: #2b3359 !important;
+    }
+
+    .starlight-aside__title {
+      color: #b3c7ff !important;
+    }
+  }
+
+  .sl-markdown-content h1:not(:where(.not-content *)) {
+    font-size: 2.25rem !important; /* 36px */
+  }
+  #_top {
+    margin-top: 0 !important;
+  }
+  .right-sidebar h2 {
+    font-size: 1rem !important;
+  }
+  .sl-markdown-content .sl-heading-wrapper {
+    --sl-anchor-icon-size: 0.7em !important;
+    --sl-anchor-icon-gap: 1em !important;
+  }
+  .sl-markdown-content .sl-anchor-icon > svg {
+    transform: translateY(0.4em) !important;
+  }
+  .sl-markdown-content h2:not(:where(.not-content *)) {
+    font-size: 1.5rem !important; /* 24px */
+  }
+  .sl-markdown-content h3:not(:where(.not-content *)) {
+    font-size: 1.125rem !important; /* 18px */
+  }
+  .sl-markdown-content h4:not(:where(.not-content *)) {
+    font-size: 1rem !important; /* 16px */
+  }
+  .sl-markdown-content h5:not(:where(.not-content *)) {
+    font-size: 0.875rem !important; /* 14px */
+  }
+  .sl-markdown-content h6:not(:where(.not-content *)) {
+    font-size: 0.75rem !important; /* 12px */
+  }
+  .sl-markdown-content strong {
+    font-weight: 600 !important;
+  }
+  :root {
+    --sl-font-weight-bold: 600 !important;
+  }
+}

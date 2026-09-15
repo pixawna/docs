@@ -37,7 +37,7 @@ Every batch is built from a matrix: an array of **Items** (the N data points, e.
 ### Use Cases
 
 - **Update the same kind of resource, one at a time or many at once**: pass a one-element array to update a single pull request, or the full list to update every open one, with the same node.
-- **Multiple derived outputs per item**: generate a title suggestion, a description suggestion, and a risk assessment for every pull request in one batch (Multiple Prompts mode).
+- **Multiple derived outputs per item**: generate a title suggestion, a description suggestion and a risk assessment for every pull request in one batch (Multiple Prompts mode).
 - **Bulk classification or extraction**: run the same prompt over many inputs at once, at a lower cost than individual requests.
 
 ### How It Works
@@ -136,7 +136,7 @@ combining raw API/SDK token usage with Claude Code productivity metrics.
 1. Fetches token usage for the date range from the Messages usage report
 2. Fetches productivity metrics (sessions, lines of code, commits, PRs, tool actions) for the
    date range from the Claude Code usage report
-3. Aggregates both into rollup totals, per-model/per-actor breakdowns, and a daily time series
+3. Aggregates both into rollup totals, per-model/per-actor breakdowns and a daily time series
 
 ### Configuration
 
@@ -148,7 +148,7 @@ combining raw API/SDK token usage with Claude Code productivity metrics.
 - **messages**: Token usage totals and per-model breakdown (no cost data; Messages usage has
   no dollar figure attached)
 - **claudeCode**: Sessions, lines of code, commits, pull requests, tool action accept/reject
-  counts, estimated cost, and per-model/per-actor breakdowns
+  counts, estimated cost and per-model/per-actor breakdowns
 - **daily**: Org-wide per-day rollup combining both reports, for trend charts
 
 ### Notes
@@ -237,7 +237,7 @@ combining raw API/SDK token usage with Claude Code productivity metrics.
 
 **Component key:** `claude.runAgent`
 
-The **Run Managed Agent** component uses [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) to start a **session** with a configured agent and environment, sends your task as a **user message**, and waits until the **session** reaches a terminal state (idle or terminated) by polling. Log streaming is not used.
+The **Run Managed Agent** component uses [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview) to start a **session** with a configured agent and environment, sends your task as a **user message** and waits until the **session** reaches a terminal state (idle or terminated) by polling. Log streaming is not used.
 
 ### Prerequisites
 
@@ -255,7 +255,7 @@ The **Run Managed Agent** component uses [Claude Managed Agents](https://platfor
 
 ### Output
 
-Emits a finished payload with **session** status, **session id**, and the final **agent message** when available so downstream steps can branch or consume the result. For failure cases the status is still emitted when the **session** is *terminated* or the step times out.
+Emits a finished payload with **session** status, **session id** and the final **agent message** when available so downstream steps can branch or consume the result. For failure cases the status is still emitted when the **session** is *terminated* or the step times out.
 
 When Structured Output is configured, **parsed** carries the JSON object extracted from the final message — only when the session finished normally (idle), never on a timeout, error, or terminated session.
 
@@ -296,7 +296,7 @@ Files the agent saves under `/mnt/session/outputs/` are emitted as **artifacts**
 
 **Component key:** `claude.runCodeAgent`
 
-The **Run Code Agent** component runs an autonomous Claude coding agent using [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview). You pick a repository (or an existing pull request) and describe a task; the component provisions a network-enabled sandbox with a scoped GitHub token, and the agent clones the repo, does the work, commits, pushes, and opens or updates a pull request — entirely on its own.
+The **Run Code Agent** component runs an autonomous Claude coding agent using [Claude Managed Agents](https://platform.claude.com/docs/en/managed-agents/overview). You pick a repository (or an existing pull request) and describe a task; the component provisions a network-enabled sandbox with a scoped GitHub token and the agent clones the repo, does the work, commits, pushes and opens or updates a pull request — entirely on its own.
 
 ### Prerequisites
 
@@ -305,14 +305,14 @@ The **Run Code Agent** component runs an autonomous Claude coding agent using [C
 
 ### Modes
 
-- **Repository** — start new work: the agent branches from the base branch, implements the task, and opens a PR.
-- **Pull request** — update an existing PR: the agent checks out the PR's branch, applies the task, and pushes to it. Only same-repository pull requests are supported; PRs opened from forks are rejected.
+- **Repository** — start new work: the agent branches from the base branch, implements the task and opens a PR.
+- **Pull request** — update an existing PR: the agent checks out the PR's branch, applies the task and pushes to it. Only same-repository pull requests are supported; PRs opened from forks are rejected.
 
 ### Debugging
 
 By default the session and its sandbox are torn down as soon as the run finishes. Enable **Keep Session After Run** to keep them, so you can read the agent's full transcript in the Anthropic Console. The vault holding your GitHub token is always reclaimed, whether or not you keep the session.
 
-The setting applies only to runs that **finish** — including ones that fail or time out, which are usually the ones worth reading. A run that is cancelled, or that errors before the agent starts, is always torn down: there is no transcript to read, and nothing would ever reclaim the sandbox afterwards.
+The setting applies only to runs that **finish** — including ones that fail or time out, which are usually the ones worth reading. A run that is cancelled, or that errors before the agent starts, is always torn down: there is no transcript to read and nothing would ever reclaim the sandbox afterwards.
 
 Kept sessions and environments are not reclaimed automatically, so delete them yourself once you're done debugging.
 
@@ -322,7 +322,7 @@ Optional: a JSON Schema the agent is asked to match in its final message, in add
 
 ### Output
 
-Emits the final **status**, the **pull request URL**, the working **branch**, and a **summary** so downstream steps can branch or post the result.
+Emits the final **status**, the **pull request URL**, the working **branch** and a **summary** so downstream steps can branch or post the result.
 
 When Structured Output is configured, **parsed** carries the JSON object extracted from the final message — only when the session finished normally (idle), never on a timeout, error, or terminated session.
 
@@ -386,7 +386,7 @@ Returns a payload containing:
 - **stopReason**: Why the generation ended (e.g., "end_turn", "max_tokens").
 - **model**: The specific model version used.
 - **parsed**: When Structured Output is configured, the response parsed into an object (only on a normal end_turn completion).
-- **artifacts**: When Code Execution is enabled, the files Claude generated, with the file content included: text files as plain text (`encoding: "text"`), everything else base64-encoded (`encoding: "base64"`). Each artifact carries fileId, filename, mimeType, sizeBytes, and a downloadUrl; files over 10MB include metadata and the download link only.
+- **artifacts**: When Code Execution is enabled, the files Claude generated, with the file content included: text files as plain text (`encoding: "text"`), everything else base64-encoded (`encoding: "base64"`). Each artifact carries fileId, filename, mimeType, sizeBytes and a downloadUrl; files over 10MB include metadata and the download link only.
 
 ### Notes
 

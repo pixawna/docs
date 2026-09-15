@@ -1,9 +1,9 @@
 ---
 title: Authentication and accounts
-description: Manage your user account, authenticate via the UI and CLI, and configure API tokens.
+description: Manage your user account, authenticate via the UI and CLI and configure API tokens.
 ---
 
-This page explains how to authenticate with SuperPlane as a human user or an automated system. It covers UI login methods, account management, API tokens, and CLI authentication.
+This page explains how to authenticate with SuperPlane as a human user or an automated system. It covers UI login methods, account management, API tokens and CLI authentication.
 
 ## Log in to the UI
 
@@ -14,6 +14,19 @@ When logging into the SuperPlane UI, choose between the following methods (depen
 - **Passwordless sign-in**: Log in without a password by requesting a magic link or access code sent to your email. Use this if you forget your password or prefer not to use one.
 
 The login screen remembers your last-used login method to speed up future sign-ins.
+
+## Configure self-hosted login methods
+
+Set a method to `yes` to expose it on a self-hosted login page:
+
+| Method | Configuration |
+| --- | --- |
+| Email and password | `ENABLE_PASSWORD_LOGIN=yes` |
+| Email access code | `ENABLE_MAGIC_CODE_LOGIN=yes` and outbound email configured in the installation settings |
+| Google OAuth | `GOOGLE_CLIENT_ID` and `GOOGLE_CLIENT_SECRET` |
+| GitHub OAuth | `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` |
+
+Restart the API service after changing environment variables. Configure each OAuth application's callback for the public HTTPS address of the SuperPlane deployment.
 
 ## Manage your account
 

@@ -1,0 +1,9 @@
+# SuperPlane documentation is publicly crawlable.
+User-agent: *
+Allow: /
+
+Sitemap: https://docs.superplane.com/sitemap-index.xml
+
+# Agent-readable documentation indexes:
+# https://docs.superplane.com/llms.txt
+# https://docs.superplane.com/llms-full.txt

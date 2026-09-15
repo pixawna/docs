@@ -1,0 +1,132 @@
+---
+title: Billing overview
+description: Compare SuperPlane plans and understand subscription, machine and managed model charges.
+---
+
+SuperPlane charges a fixed monthly fee for each organization. Machine use and managed model use draw from a shared allowance. You can invite your full team without a fee for each member.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/billing_overview.png" alt="SuperPlane organization billing settings showing the Business plan and remaining hosted credit" />
+  <figcaption>View your plan and remaining hosted credit from the organization billing settings.</figcaption>
+</figure>
+
+Business includes a 14 day trial with no credit card required. You can connect private repositories during the trial.
+
+## Choose a plan
+
+<div class="pricing-grid not-content">
+  <article class="pricing-card">
+    <p class="pricing-card__label">Open source</p>
+    <h3>Free for qualifying projects</h3>
+    <p>Actively maintained projects with a public repository and an open source license can apply for up to $5,000 in sponsored credits.</p>
+    <ul>
+      <li>Business features included</li>
+      <li>Credits for machines and AI models</li>
+      <li>Public pages for your workflows</li>
+    </ul>
+    <span class="pricing-card__action pricing-card__action--disabled">Applications coming soon</span>
+  </article>
+
+  <article class="pricing-card pricing-card--featured">
+    <p class="pricing-card__label">Business</p>
+    <div class="pricing-card__price"><strong>$199</strong><span>per organization each month</span></div>
+    <p>For teams putting software factory workflows into everyday use.</p>
+    <ul>
+      <li>Unlimited team members</li>
+      <li>$50 in shared monthly usage</li>
+      <li>Core software factory workflows</li>
+      <li>Managed x64 and ARM machines</li>
+      <li>Model API rates plus 10%</li>
+      <li>Email support</li>
+    </ul>
+    <a class="pricing-card__action" href="https://app.superplane.com/" target="_blank" rel="noreferrer">Start free trial</a>
+  </article>
+
+  <article class="pricing-card">
+    <p class="pricing-card__label">Enterprise</p>
+    <div class="pricing-card__price"><strong>Custom</strong></div>
+    <p>For scaled organizations. Enterprise includes everything in Business plus:</p>
+    <ul>
+      <li>Air gapped installation</li>
+      <li>Access controls and audit logs</li>
+      <li>Your own model keys</li>
+      <li>Priority support and service level agreements</li>
+      <li>A dedicated engineer for workflow implementation</li>
+      <li>Invoice and purchase order billing</li>
+    </ul>
+    <a class="pricing-card__action pricing-card__action--secondary" href="https://calendar.app.google/bZ4ZejCzttSPBg4J7" target="_blank" rel="noreferrer">Contact sales</a>
+  </article>
+</div>
+
+## Understand usage charges
+
+Your included usage covers machines and managed models. Usage above the included allowance is deducted from your prepaid balance. Purchased credits remain valid for 12 months.
+
+<div class="usage-metrics not-content">
+  <div><strong>$50</strong><span>shared each Business billing month</span></div>
+  <div><strong>Provider rate + 10%</strong><span>for managed models</span></div>
+  <div><strong>$0</strong><span>per member</span></div>
+</div>
+
+Managed model usage is available for models from OpenAI, Anthropic, Gemini, xAI Grok, DeepSeek, Qwen and Kimi. Enterprise customers can also use their own model API keys.
+
+Unused monthly usage does not roll over. When the included $50 is exhausted SuperPlane deducts additional usage from your prepaid balance.
+
+## Machine usage
+
+Managed machines run Linux. Choose a size and architecture that matches your workflow.
+
+| Machine | Architecture | vCPUs | Memory | Price per minute |
+| --- | --- | ---: | ---: | ---: |
+| Small x64 | x64 | 2 | 0.5 GiB | $0.0002 |
+| Small ARM | ARM | 2 | 0.5 GiB | $0.0001 |
+| Large x64 | x64 | 2 | 8 GiB | $0.0042 |
+| Large ARM | ARM | 2 | 8 GiB | $0.0030 |
+
+## See example monthly bills
+
+These examples show Business pricing for a five person team in United States dollars before tax. Actual usage depends on your workflows and model choices.
+
+<div class="billing-examples not-content">
+  <article>
+    <p class="pricing-card__label">Example A</p>
+    <h3>Usage stays within the allowance</h3>
+    <dl>
+      <div><dt>Business subscription</dt><dd>$199</dd></div>
+      <div><dt>Member charges</dt><dd>$0</dd></div>
+      <div><dt>Machine and model usage</dt><dd>$48</dd></div>
+      <div><dt>Additional usage</dt><dd>$0</dd></div>
+      <div class="billing-total"><dt>Total cost</dt><dd>$199</dd></div>
+    </dl>
+    <p>The remaining $2 of included usage expires at renewal.</p>
+  </article>
+
+  <article>
+    <p class="pricing-card__label">Example B</p>
+    <h3>AI heavy usage</h3>
+    <dl>
+      <div><dt>Business subscription</dt><dd>$199</dd></div>
+      <div><dt>Machine usage</dt><dd>$300</dd></div>
+      <div><dt>Model usage at provider rates</dt><dd>$1,000</dd></div>
+      <div><dt>Model markup</dt><dd>$100</dd></div>
+      <div><dt>Included usage</dt><dd>($50)</dd></div>
+      <div class="billing-total"><dt>Total cost</dt><dd>$1,549</dd></div>
+    </dl>
+    <p>The prepaid balance covers $1,350 in additional usage.</p>
+  </article>
+</div>
+
+Credit purchases can happen at a different time from usage. The examples show subscription and consumed usage for the month instead of card payment timing.
+
+## Self hosting
+
+<div class="self-hosted-callout not-content">
+  <div>
+    <p class="pricing-card__label">Community support</p>
+    <h3>Run SuperPlane on your infrastructure</h3>
+    <p>Use your own model providers and cover your infrastructure and model costs directly.</p>
+  </div>
+  <a href="https://github.com/superplanehq/superplane" target="_blank" rel="noreferrer">View deployment resources</a>
+</div>
+
+Read [Costs and budgets](/billing/costs-budgets) to plan usage and control spending. See the [current pricing page](https://superplane.com/pricing/) for commercial terms.

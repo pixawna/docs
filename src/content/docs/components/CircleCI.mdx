@@ -49,8 +49,8 @@ Triggers when a CircleCI workflow completes.
 ### Event Data
 
 Each workflow completion event includes:
-- **workflow**: Workflow information including ID, name, status, and URL
-- **pipeline**: Parent pipeline information including ID, number, and trigger details
+- **workflow**: Workflow information including ID, name, status and URL
+- **pipeline**: Parent pipeline information including ID, number and trigger details
 - **project**: Project information
 - **organization**: Organization information
 
@@ -211,7 +211,7 @@ The Get Recent Workflow Runs component fetches recent individual runs for a name
 
 1. Calls the CircleCI Insights endpoint for the given project and workflow name
 2. Returns a list of individual workflow runs (up to 90 days back)
-3. Each run includes its status, duration, branch, timestamps, and credits used
+3. Each run includes its status, duration, branch, timestamps and credits used
 
 ### Configuration
 
@@ -221,7 +221,7 @@ The Get Recent Workflow Runs component fetches recent individual runs for a name
 
 ### Output
 
-Emits a `circleci.workflowRuns` payload containing an array of recent workflow runs with fields like `id`, `status`, `duration`, `branch`, `createdAt`, `stoppedAt`, and `creditsUsed`.
+Emits a `circleci.workflowRuns` payload containing an array of recent workflow runs with fields like `id`, `status`, `duration`, `branch`, `createdAt`, `stoppedAt` and `creditsUsed`.
 
 ### Example Output
 
@@ -277,7 +277,7 @@ The Get Test Metrics component fetches test performance data from the CircleCI I
 
 ### Output
 
-Emits a `circleci.testMetrics` payload with most failed tests, slowest tests, and test run summaries.
+Emits a `circleci.testMetrics` payload with most failed tests, slowest tests and test run summaries.
 
 ### Example Output
 
@@ -334,7 +334,7 @@ The Get Workflow component fetches details for a CircleCI workflow.
 
 ### Use Cases
 
-- **Workflow inspection**: Fetch current workflow status, jobs, and metadata
+- **Workflow inspection**: Fetch current workflow status, jobs and metadata
 - **Workflow context**: Use workflow fields to drive branching decisions in later steps
 
 ### Configuration
@@ -343,7 +343,7 @@ The Get Workflow component fetches details for a CircleCI workflow.
 
 ### Output
 
-Emits a `circleci.workflow` payload containing workflow fields like `id`, `name`, `status`, `createdAt`, and `stoppedAt`.
+Emits a `circleci.workflow` payload containing workflow fields like `id`, `name`, `status`, `createdAt` and `stoppedAt`.
 
 ### Example Output
 

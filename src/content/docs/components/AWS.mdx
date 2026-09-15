@@ -53,7 +53,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="EC2 • Enable Image Deprecation" href="#ec2-•-enable-image-deprecation" description="Enable deprecation for an EC2 AMI image" />
   <LinkCard title="EC2 • Get Image" href="#ec2-•-get-image" description="Get an EC2 AMI image by ID" />
   <LinkCard title="EC2 • Get Instance" href="#ec2-•-get-instance" description="Fetch the current state and details of an EC2 instance" />
-  <LinkCard title="EC2 • Get Instance Metrics" href="#ec2-•-get-instance-metrics" description="Fetch CPU, network, and optional memory metrics for an EC2 instance via CloudWatch" />
+  <LinkCard title="EC2 • Get Instance Metrics" href="#ec2-•-get-instance-metrics" description="Fetch CPU, network and optional memory metrics for an EC2 instance via CloudWatch" />
   <LinkCard title="EC2 • Manage Elastic IP" href="#ec2-•-manage-elastic-ip" description="Associate or disassociate an Elastic IP address with an EC2 instance" />
   <LinkCard title="EC2 • Manage Instance Power" href="#ec2-•-manage-instance-power" description="Perform power operations on an EC2 instance" />
   <LinkCard title="EC2 • Release Elastic IP" href="#ec2-•-release-elastic-ip" description="Release an Elastic IP address back to the AWS address pool" />
@@ -114,7 +114,7 @@ The On Alarm trigger starts a workflow execution when a CloudWatch alarm transit
 ### Configuration
 
 - **Region**: AWS region where alarms are evaluated
-- **Alarms**: Optional alarm name filters (supports equals, not-equals, and regex matches)
+- **Alarms**: Optional alarm name filters (supports equals, not-equals and regex matches)
 - **State**: Only trigger for alarms in the specified state (OK, ALARM, or INSUFFICIENT_DATA)
 
 ### Event Data
@@ -232,7 +232,7 @@ The On Pipeline trigger starts a workflow execution when AWS CodePipeline emits 
 ### Configuration
 
 - **Region**: AWS region where pipeline execution events are observed
-- **Pipelines**: Optional pipeline name filters (supports equals, not-equals, and regex matches)
+- **Pipelines**: Optional pipeline name filters (supports equals, not-equals and regex matches)
 - **Pipeline States**: Optional list of states to match (for example STARTED, SUCCEEDED, FAILED)
 
 ### Event Data
@@ -302,7 +302,7 @@ Each matched event includes the full EventBridge payload:
 - **detail.alarmName**: CloudWatch alarm name
 - **detail.state.value**: Current alarm state (ALARM / OK / INSUFFICIENT_DATA)
 - **detail.previousState.value**: Previous alarm state
-- **detail.configuration**: Full alarm configuration including metric, threshold, and dimensions
+- **detail.configuration**: Full alarm configuration including metric, threshold and dimensions
 - **region**, **account**, **time**: Event envelope fields
 
 ### Example Data
@@ -658,7 +658,7 @@ The Create Alarm component creates a CloudWatch metric alarm on any metric publi
 - **Unit** *(toggleable)*: Metric unit. Leave unset unless the metric is published with several units
 - **Actions Enabled**: Whether alarm actions run on state changes (default: enabled)
 - **Alarm Actions** *(toggleable)*: SNS topics notified when the alarm enters ALARM
-- **EC2 Action** *(toggleable)*: EC2 automation CloudWatch runs when the alarm enters ALARM — Recover, Reboot, Stop or Terminate. Shown for `AWS/EC2` alarms, and requires an InstanceId dimension
+- **EC2 Action** *(toggleable)*: EC2 automation CloudWatch runs when the alarm enters ALARM — Recover, Reboot, Stop or Terminate. Shown for `AWS/EC2` alarms and requires an InstanceId dimension
 - **OK Actions** *(toggleable)*: SNS topics notified when the alarm returns to OK
 - **Insufficient Data Actions** *(toggleable)*: SNS topics notified when the alarm enters INSUFFICIENT_DATA
 
@@ -666,7 +666,7 @@ The Create Alarm component creates a CloudWatch metric alarm on any metric publi
 
 Emits the created alarm on the default output channel, including `alarmName`, `alarmArn`,
 `namespace`, `metricName`, `dimensions`, `statistic`, `threshold`,
-`comparisonOperator`, `stateValue`, the configured actions, and `consoleUrl`.
+`comparisonOperator`, `stateValue`, the configured actions and `consoleUrl`.
 
 ### Example Output
 
@@ -1317,7 +1317,7 @@ The Get Pipeline component retrieves the full definition of an AWS CodePipeline 
 
 ### Use Cases
 
-- **Pipeline inspection**: Fetch pipeline stages, actions, and configuration
+- **Pipeline inspection**: Fetch pipeline stages, actions and configuration
 - **Workflow branching**: Route workflow based on pipeline structure or version
 - **Audit and compliance**: Retrieve pipeline definitions for auditing purposes
 
@@ -1329,7 +1329,7 @@ The Get Pipeline component retrieves the full definition of an AWS CodePipeline 
 ### Output
 
 Emits the full pipeline definition including:
-- Pipeline name, version, and role ARN
+- Pipeline name, version and role ARN
 - All stages and their actions
 - Pipeline metadata (ARN, creation date, last updated date)
 
@@ -1394,7 +1394,7 @@ The Get Pipeline Execution component retrieves the details of a specific AWS Cod
 
 ### Use Cases
 
-- **Execution inspection**: Fetch the status, trigger, and artifact revisions of a pipeline run
+- **Execution inspection**: Fetch the status, trigger and artifact revisions of a pipeline run
 - **Post-deploy checks**: After a RunPipeline component, fetch details of that execution for logging
 - **Workflow branching**: Route workflow based on execution status or trigger type
 - **Audit and compliance**: Retrieve execution details for auditing purposes
@@ -1408,7 +1408,7 @@ The Get Pipeline Execution component retrieves the details of a specific AWS Cod
 ### Output
 
 Emits the full pipeline execution details including:
-- Execution ID, status, and status summary
+- Execution ID, status and status summary
 - Pipeline name and version
 - Trigger type and detail
 - Artifact revisions (source code revisions involved)
@@ -1591,7 +1591,7 @@ Emits the allocated Elastic IP details on the default output channel:
 
 - Elastic IPs are allocated to your account and incur charges when not associated with a running instance
 - The address is allocated for use in a VPC (`domain: vpc`)
-- BYOIP, customer-owned, and IPAM pools must already exist in the target region
+- BYOIP, customer-owned and IPAM pools must already exist in the target region
 
 ### Example Output
 
@@ -1741,7 +1741,7 @@ The Create Instance component launches a new Amazon EC2 instance and waits until
 - **Firewall**: Create a launch security group (like the AWS launch wizard) or use one or more existing security groups
 - **IAM Instance Profile** (optional): IAM instance profile name or ARN attached to the launched instance
 - **Allow SSH/HTTP/HTTPS from the internet**: Ingress rules when creating a new security group
-- **Configure Root Volume** (optional): Override the AMI root volume device name, size, type, IOPS, delete-on-termination, and encryption settings
+- **Configure Root Volume** (optional): Override the AMI root volume device name, size, type, IOPS, delete-on-termination and encryption settings
 - **Additional Block Devices** (optional): Extra EBS volumes attached at launch
 - **Key Pair** (optional): EC2 key pair for SSH access. These are filtered to show only key pairs available in the selected region
 - **User Data** (optional): Shell script or cloud-init payload executed at launch
@@ -2182,7 +2182,7 @@ The Get Instance component describes an EC2 instance and emits its current detai
 
 - **State inspection**: Check whether an instance is running or stopped before taking action
 - **IP resolution**: Retrieve the public or private IP address of an instance at runtime
-- **Metadata lookup**: Fetch instance type, AMI, VPC, and tags mid-workflow
+- **Metadata lookup**: Fetch instance type, AMI, VPC and tags mid-workflow
 
 ### Configuration
 
@@ -2452,7 +2452,7 @@ The Update Instance component resizes an EC2 instance to a new instance type and
 
 - **Region**: AWS region where the instance runs
 - **Instance**: EC2 instance to update
-- **New Instance Type**: Target instance type (e.g. `t3.medium`). The instance is stopped automatically, resized, and restarted. At least one of this field or Security Groups must be set.
+- **New Instance Type**: Target instance type (e.g. `t3.medium`). The instance is stopped automatically, resized and restarted. At least one of this field or Security Groups must be set.
 - **Security Group**: Replace the instance's security group. Takes effect immediately for VPC instances; does not require a stop/start cycle.
 - **Restart After Resize**: Whether to start the instance after changing its type (default true). If unchecked the instance remains stopped after the type change.
 
@@ -3010,7 +3010,7 @@ The Run Lambda component invokes a Lambda function.
 ### How It Works
 
 1. Invokes the specified Lambda function with the provided payload
-2. Returns the function's response including status code, payload, and log output
+2. Returns the function's response including status code, payload and log output
 3. Optionally creates a new Lambda function from inline JavaScript code
 
 ### Example Output
@@ -3511,7 +3511,7 @@ The Delete DNS Record component deletes a DNS record from an AWS Route 53 hosted
 
 1. Connects to AWS Route 53 using the integration credentials
 2. Deletes the specified DNS record from the hosted zone
-3. The record name, type, TTL, and values must match the existing record exactly
+3. The record name, type, TTL and values must match the existing record exactly
 4. Returns the change status and submission timestamp
 
 ### Example Output

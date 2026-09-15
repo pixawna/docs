@@ -14,7 +14,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="On Broadcast" href="#on-broadcast" description="Receive broadcast messages from another SuperPlane app" />
   <LinkCard title="On Error" href="#on-error" description="Run a workflow whenever any node in this canvas errors out" />
   <LinkCard title="On Run" href="#on-run" description="Handle runs started from another app" />
-  <LinkCard title="On Task" href="#on-task" description="Start when a task is created in this factory" />
+  <LinkCard title="On Work Order" href="#on-work-order" description="Start when a work order is created in this factory" />
   <LinkCard title="Schedule" href="#schedule" description="Start a new execution chain on a schedule" />
   <LinkCard title="Manual Run" href="#manual-run" description="Start a new execution chain manually" />
   <LinkCard title="Webhook" href="#webhook" description="Start a new execution chain when a webhook is called" />
@@ -24,19 +24,19 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
 
 <CardGrid>
   <LinkCard title="Add Memory" href="#add-memory" description="Add a namespaced JSON value to canvas memory" />
-  <LinkCard title="Add Pull Request" href="#add-pull-request" description="Attach a pull request to a task" />
+  <LinkCard title="Add Pull Request" href="#add-pull-request" description="Attach a pull request to a work order" />
   <LinkCard title="Add Pull Request Activity" href="#add-pull-request-activity" description="Create a factory pull request activity for the current run" />
   <LinkCard title="Add Run Error" href="#add-run-error" description="Record a business failure on the current run" />
-  <LinkCard title="Add Task Artifact" href="#add-task-artifact" description="Attach a typed artifact (markdown note, branch, or link) to a task" />
-  <LinkCard title="Add Task Comment" href="#add-task-comment" description="Append a comment to a task timeline" />
+  <LinkCard title="Add Work Order Artifact" href="#add-work-order-artifact" description="Attach a typed artifact (markdown note, branch, or link) to a work order" />
+  <LinkCard title="Add Work Order Comment" href="#add-work-order-comment" description="Append a comment to a work order timeline" />
   <LinkCard title="Approval" href="#approval" description="Collect approvals on events" />
   <LinkCard title="Broadcast Message" href="#broadcast-message" description="Broadcast a message to other SuperPlane apps" />
-  <LinkCard title="Create Task" href="#create-task" description="Create a new task" />
+  <LinkCard title="Create Work Order" href="#create-work-order" description="Create a new work order" />
   <LinkCard title="Delete Memory" href="#delete-memory" description="Delete values from canvas memory by namespace and field matches" />
   <LinkCard title="Display" href="#display" description="Display a debug message from the latest execution" />
   <LinkCard title="Filter" href="#filter" description="Filter events based on their content" />
   <LinkCard title="Find Pull Request" href="#find-pull-request" description="Look up a factory pull request by provider identity or URL" />
-  <LinkCard title="Find Task" href="#find-task" description="Look up a task by id or by an artifact's key" />
+  <LinkCard title="Find Work Order" href="#find-work-order" description="Look up a work order by id or by an artifact's key" />
   <LinkCard title="For Each" href="#for-each" description="Emit one downstream event per item in an array" />
   <LinkCard title="GraphQL Request" href="#graph-ql-request" description="Send a GraphQL query to an HTTP endpoint (GraphQL over JSON POST)" />
   <LinkCard title="HTTP Request" href="#http-request" description="Make HTTP requests" />
@@ -45,7 +45,7 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Merge" href="#merge" description="Merge multiple upstream inputs and forward" />
   <LinkCard title="No Operation" href="#no-operation" description="Just pass events through without any additional processing" />
   <LinkCard title="Read Memory" href="#read-memory" description="Find values from canvas memory by namespace and field matches" />
-  <LinkCard title="Report Task Check" href="#report-task-check" description="Report a scored or pass/fail check (risk, coverage, CI) on a task" />
+  <LinkCard title="Report Work Order Check" href="#report-work-order-check" description="Report a scored or pass/fail check (risk, coverage, CI) on a work order" />
   <LinkCard title="Run App" href="#run-app" description="Run another SuperPlane app and wait for its run to finish" />
   <LinkCard title="Run Shell Commands" href="#run-shell-commands" description="Runs shell commands on a fleet runner (host or Docker container)" />
   <LinkCard title="Run Bash" href="#run-bash" description="Runs a Bash script on a fleet runner with upstream node data in SUPERPLANE_PAYLOAD_FILE" />
@@ -54,14 +54,13 @@ import { CardGrid, LinkCard } from "@astrojs/starlight/components";
   <LinkCard title="Run JavaScript" href="#run-java-script" description="Runs JavaScript on a fleet runner with access to upstream node data via $" />
   <LinkCard title="Run OpenRouter Agent" href="#run-open-router-agent" description="Runs a SuperPlane OpenRouter agent on a fleet runner" />
   <LinkCard title="Run Python" href="#run-python" description="Runs Python on a fleet runner with access to upstream node data via the payload argument" />
-  <LinkCard title="Run SuperPlane Agent" href="#run-super-plane-agent" description="Runs a SuperPlane-hosted coding agent on a fleet runner." />
-  <LinkCard title="Set Task Status Note" href="#set-task-status-note" description="Announce what a waiting task is blocked on and what resolves it" />
+  <LinkCard title="Set Work Order Status Note" href="#set-work-order-status-note" description="Announce what a waiting work order is blocked on and what resolves it" />
   <LinkCard title="SSH Command" href="#ssh-command" description="Run one or more commands on a remote host via SSH. Authenticate using an organization Secret (SSH key or password)." />
   <LinkCard title="Time Gate" href="#time-gate" description="Route events based on active days and time windows, with optional excluded dates" />
   <LinkCard title="Update Memory" href="#update-memory" description="Update values in canvas memory by namespace and field matches" />
-  <LinkCard title="Update Pull Request" href="#update-pull-request" description="Update a factory pull request that is already attached to a task" />
+  <LinkCard title="Update Pull Request" href="#update-pull-request" description="Update a factory pull request that is already attached to a work order" />
   <LinkCard title="Update Pull Request Activity" href="#update-pull-request-activity" description="Update the current factory pull request activity" />
-  <LinkCard title="Update Task Status" href="#update-task-status" description="Transition a task between lifecycle states" />
+  <LinkCard title="Update Work Order Status" href="#update-work-order-status" description="Transition a work order between lifecycle states" />
   <LinkCard title="Upsert Memory" href="#upsert-memory" description="Update matching memory rows, or create one when no match exists" />
   <LinkCard title="Wait" href="#wait" description="Wait for a certain amount of time" />
 </CardGrid>
@@ -122,7 +121,7 @@ If you place multiple On Error nodes on a canvas, all of them receive every erro
 
 Each emitted event carries:
 
-- `node`: the node that errored - its `id`, `name`, and `component` type
+- `node`: the node that errored - its `id`, `name` and `component` type
 - `error`: the failure `reason` and human-readable `message`
 - `run`: the `id` of the run that failed
 - `root`: the event that started the failed run - the originating `node` and
@@ -207,15 +206,15 @@ Handle runs started from another app
 }
 ```
 
-<a id="on-task"></a>
+<a id="on-work-order"></a>
 
-## On Task
+## On Work Order
 
 **Trigger key:** `onWorkOrder`
 
-The On Task trigger starts a workflow when a task is created in the factory that owns this app.
+The On Work Order trigger starts a workflow when a work order is created in the factory that owns this app.
 
-Use it on a factory-owned app, such as the generated Backlog automation that scores new tasks.
+Use it on a factory-owned app, such as the generated Backlog automation that scores new work orders.
 
 ### Event Data
 
@@ -234,7 +233,7 @@ Each event has type `workOrder.created`. The payload is:
 }
 ```
 
-`origin` is present only when the task was created from an intake item.
+`origin` is present only when the work order was created from an intake item.
 
 ### Example Data
 
@@ -284,7 +283,7 @@ The Schedule trigger starts workflow executions automatically based on a configu
 
 ### Timezone Support
 
-For days, weeks, months, and cron schedules, you can specify a timezone to ensure triggers occur at the correct local time.
+For days, weeks, months and cron schedules, you can specify a timezone to ensure triggers occur at the correct local time.
 
 ### Cron Expressions
 
@@ -344,7 +343,7 @@ The Manual Run trigger allows you to start workflow executions manually from the
 ### How It Works
 
 1. Add the Manual Run trigger as the starting node of your workflow
-2. Configure one or more templates, each with a name, default payload, and optional parameters
+2. Configure one or more templates, each with a name, default payload and optional parameters
 3. Click the "Run" button in the workflow UI, or invoke the `run` hook via the API/CLI to start an execution
 4. The workflow begins immediately with the configured payload for the selected template
 
@@ -356,7 +355,7 @@ Each Manual Run trigger exposes a list of templates. A template has:
 - `parameters` (optional): a list of typed parameters exposed to payload expressions as `parameters["name"]` and used by the run form
 - `payload` (required): a default JSON object emitted when the template is used. Supports expressions such as `{{ now() }}` and `{{ parameters["my parameter"] }}` in JSON values.
 
-Each parameter has a `name` (plain text), required `type` (`string`, `text`, `number`, `boolean`, or `select`), an optional `title` for the run form label (defaults to `name` when unset), and an optional default (`defaultString`, `defaultNumber`, or `defaultBoolean`) whose editor matches the selected type. `string` is a single-line input and `text` renders a multi-line textarea; both use `defaultString`. Select parameters also require an `options` list of `label` / `value` pairs; run-time values use the option `value` strings.
+Each parameter has a `name` (plain text), required `type` (`string`, `text`, `number`, `boolean`, or `select`), an optional `title` for the run form label (defaults to `name` when unset) and an optional default (`defaultString`, `defaultNumber`, or `defaultBoolean`) whose editor matches the selected type. `string` is a single-line input and `text` renders a multi-line textarea; both use `defaultString`. Select parameters also require an `options` list of `label` / `value` pairs; run-time values use the option `value` strings.
 
 ### Event Data
 
@@ -492,15 +491,15 @@ A single `memory.added` event is emitted with all written rows and the total `co
 
 **Component key:** `addPullRequest`
 
-The Add Pull Request component records a pull request on a task.
+The Add Pull Request component records a pull request on a work order.
 
-Required fields are `repository`, `number`, and `url`. `provider` defaults to `github`. `state` defaults to `open`.
+Required fields are `repository`, `number` and `url`. `provider` defaults to `github`. `state` defaults to `open`.
 
-`state`, `merged`, and `draft` accept expressions, so you can pass a GitHub webhook payload through as-is. A GitHub-shaped `state: "closed"` + `merged: true` becomes SuperPlane state `merged`.
+`state`, `merged` and `draft` accept expressions, so you can pass a GitHub webhook payload through as-is. A GitHub-shaped `state: "closed"` + `merged: true` becomes SuperPlane state `merged`.
 
 Set `mergedAt` or `closedAt` (RFC3339) when the pull request is already merged or closed so Velocity uses the real day.
 
-`orderId` defaults to `{{ order().id }}`. In a flow that is not dispatched from a factory line, replace it with the task id from a previous step. This component can only be used in factory-owned apps.
+`orderId` defaults to `{{ order().id }}`. In a flow that is not dispatched from a factory line, replace it with the work order id from a previous step. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -597,13 +596,13 @@ The Add Run Error component appends an error entry to the current run.
 }
 ```
 
-<a id="add-task-artifact"></a>
+<a id="add-work-order-artifact"></a>
 
-## Add Task Artifact
+## Add Work Order Artifact
 
 **Component key:** `addWorkOrderArtifact`
 
-The Add Task Artifact component stores a typed artifact against a task.
+The Add Work Order Artifact component stores a typed artifact against a work order.
 
 Supported types:
 
@@ -611,13 +610,13 @@ Supported types:
 - **Branch** (`branch`): requires `name` and `repository` (`owner/repo` or a repository http(s) URL), or an explicit `url`. SuperPlane writes a GitHub tree URL from the repository and branch name at attach time.
 - **Link** (`link`): requires `url` (must be http or https); optional `title` for the artifact chip's label — e.g. attach a preview-environment URL as "Preview".
 
-Use the Add Pull Request component to attach a pull request to a task.
+Use the Add Pull Request component to attach a pull request to a work order.
 
 Markdown and link types accept a free-form `data` list of `{name, value}` entries that gets merged into the artifact's `data` map. Typed inputs take precedence over free-form entries with the same key.
 
-Set `artifactKey` to tag the artifact with a queryable key so a later `findWorkOrder` (`by: artifactKey`) step can resolve this task. Keys are unique per factory.
+Set `artifactKey` to tag the artifact with a queryable key so a later `findWorkOrder` (`by: artifactKey`) step can resolve this work order. Keys are unique per factory.
 
-`orderId` explicitly targets the task — it defaults to `{{ order().id }}`, the task driving the current run, which only resolves when the flow was dispatched from a factory line. In a flow triggered by an external event, replace it with e.g. `{{ previous().data.workOrder.id }}`. This component can only be used in factory-owned apps.
+`orderId` explicitly targets the work order — it defaults to `{{ order().id }}`, the work order driving the current run, which only resolves when the flow was dispatched from a factory line. In a flow triggered by an external event, replace it with e.g. `{{ previous().data.workOrder.id }}`. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -638,15 +637,15 @@ Set `artifactKey` to tag the artifact with a queryable key so a later `findWorkO
 }
 ```
 
-<a id="add-task-comment"></a>
+<a id="add-work-order-comment"></a>
 
-## Add Task Comment
+## Add Work Order Comment
 
 **Component key:** `addWorkOrderComment`
 
-The Add Task Comment component appends a comment from this automation to the task's activity timeline. Authorship is captured automatically — the timeline shows which canvas node and app wrote the comment, without any configurable label.
+The Add Work Order Comment component appends a comment from this automation to the work order's activity timeline. Authorship is captured automatically — the timeline shows which canvas node and app wrote the comment, without any configurable label.
 
-`orderId` explicitly targets the task — it defaults to `{{ order().id }}`, the task driving the current run, which only resolves when the flow was dispatched from a factory line. In a flow triggered by an external event, replace it with e.g. `{{ previous().data.workOrder.id }}` after a `findWorkOrder` step. This component can only be used in factory-owned apps.
+`orderId` explicitly targets the work order — it defaults to `{{ order().id }}`, the work order driving the current run, which only resolves when the flow was dispatched from a factory line. In a flow triggered by an external event, replace it with e.g. `{{ previous().data.workOrder.id }}` after a `findWorkOrder` step. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -750,13 +749,13 @@ Broadcast a message to other SuperPlane apps subscribed to this app
 }
 ```
 
-<a id="create-task"></a>
+<a id="create-work-order"></a>
 
-## Create Task
+## Create Work Order
 
 **Component key:** `createWorkOrder`
 
-The Create Task component creates a new task in the factory. This component can only be used in factory-owned apps.
+The Create Work Order component creates a new work order in the factory. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -764,9 +763,9 @@ The Create Task component creates a new task in the factory. This component can 
 {
   "data": {
     "workOrder": {
-      "description": "Task 1 description",
+      "description": "Work Order 1 description",
       "id": "123",
-      "title": "Task 1"
+      "title": "Work Order 1"
     }
   },
   "timestamp": "2026-01-01T00:00:00Z",
@@ -877,8 +876,8 @@ The expression has access to:
 - **$**: The run context data
 - **root()**: Access to the root event data
 - **previous()**: Access to previous node outputs (optionally with depth parameter)
-- **app()**: Access to the current app's metadata — `app().id`, `app().name`, `app().description`, and `app().url`
-- **run()**: Access to the current run's metadata — `run().id`, `run().url` (a direct link to the run in the SuperPlane UI), and `run().started_at` (a timestamp)
+- **app()**: Access to the current app's metadata — `app().id`, `app().name`, `app().description` and `app().url`
+- **run()**: Access to the current run's metadata — `run().id`, `run().url` (a direct link to the run in the SuperPlane UI) and `run().started_at` (a timestamp)
 
 ### Examples
 
@@ -907,10 +906,10 @@ The Find Pull Request component looks up a pull request in the current factory. 
 Supply at least one complete identity:
 
 - Provider and external id
-- Provider, repository, and number
+- Provider, repository and number
 - URL
 
-On a match, emits `pullRequest.found` with the pull request and its task on the `found` channel. When nothing matches, emits `pullRequest.notFound` on the `notFound` channel instead of failing the run. This component can only be used in factory-owned apps.
+On a match, emits `pullRequest.found` with the pull request and its work order on the `found` channel. When nothing matches, emits `pullRequest.notFound` on the `notFound` channel instead of failing the run. This component can only be used in factory-owned apps.
 
 ### Output Channels
 
@@ -938,25 +937,25 @@ On a match, emits `pullRequest.found` with the pull request and its task on the 
 }
 ```
 
-<a id="find-task"></a>
+<a id="find-work-order"></a>
 
-## Find Task
+## Find Work Order
 
 **Component key:** `findWorkOrder`
 
-The Find Task component resolves a task without requiring the current run to be attached to one — the missing piece for flows that don't start on a factory line, e.g. a `github.onPullRequest` merged event that needs to close the task a pull request belongs to.
+The Find Work Order component resolves a work order without requiring the current run to be attached to one — the missing piece for flows that don't start on a factory line, e.g. a `github.onPullRequest` merged event that needs to close the order a pull request belongs to.
 
 Lookup modes:
 
-- **Task ID** (`by: id`): resolves `orderId` directly.
-- **Artifact Key** (`by: artifactKey`): resolves the task that owns the artifact tagged with `artifactKey` (set via `addWorkOrderArtifact`'s `artifactKey` field — e.g. the pull request's URL).
+- **Work Order ID** (`by: id`): resolves `orderId` directly.
+- **Artifact Key** (`by: artifactKey`): resolves the work order that owns the artifact tagged with `artifactKey` (set via `addWorkOrderArtifact`'s `artifactKey` field — e.g. the pull request's URL).
 
-On a match, emits `workOrder.found` with `{ workOrder }` on the `found` channel, so downstream components can target it with `orderId: {{ previous().data.workOrder.id }}`. When nothing matches, emits on the `notFound` channel instead of failing the run — a PR merge unrelated to any tracked task shouldn't red a flow, and downstream components can wire the `notFound` channel to a no-op if they don't need to react to it. Misconfiguration (invalid id, wrong factory, etc.) still fails the run. This component can only be used in factory-owned apps.
+On a match, emits `workOrder.found` with `{ workOrder }` on the `found` channel, so downstream components can target it with `orderId: {{ previous().data.workOrder.id }}`. When nothing matches, emits on the `notFound` channel instead of failing the run — a PR merge unrelated to any tracked order shouldn't red a flow and downstream components can wire the `notFound` channel to a no-op if they don't need to react to it. Misconfiguration (invalid id, wrong factory, etc.) still fails the run. This component can only be used in factory-owned apps.
 
 ### Output Channels
 
-- **Found**: A task matched the lookup
-- **Not Found**: No task matched the lookup
+- **Found**: A work order matched the lookup
+- **Not Found**: No work order matched the lookup
 
 ### Example Output
 
@@ -966,7 +965,7 @@ On a match, emits `workOrder.found` with `{ workOrder }` on the `found` channel,
     "workOrder": {
       "id": "wo-123",
       "state": "open",
-      "title": "Task 1"
+      "title": "Work Order 1"
     }
   },
   "timestamp": "2026-01-01T00:00:00Z",
@@ -1171,8 +1170,8 @@ The expression has access to:
 - **$**: The run context data
 - **root()**: Access to the root event data
 - **previous()**: Access to previous node outputs (optionally with depth parameter)
-- **app()**: Access to the current app's metadata — `app().id`, `app().name`, `app().description`, and `app().url`
-- **run()**: Access to the current run's metadata — `run().id`, `run().url` (a direct link to the run in the SuperPlane UI), and `run().started_at` (a timestamp)
+- **app()**: Access to the current app's metadata — `app().id`, `app().name`, `app().description` and `app().url`
+- **run()**: Access to the current run's metadata — `run().id`, `run().url` (a direct link to the run in the SuperPlane UI) and `run().started_at` (a timestamp)
 
 ### Examples
 
@@ -1225,7 +1224,7 @@ Edges back into Loop are allowed so downstream steps can return control for the 
 
 ### Output Channels
 
-- **Done**: Emitted once when the loop stops. Payload is under `data.done` with `iterations`, `stopReason` (`conditionTrue` or `max_iterations`), and `elapsedMs`
+- **Done**: Emitted once when the loop stops. Payload is under `data.done` with `iterations`, `stopReason` (`conditionTrue` or `max_iterations`) and `elapsedMs`
 - **Next**: Emitted at the start of each iteration. Payload is under `data.next` with `iteration` and `maxIterations`
 
 ### Limits
@@ -1365,7 +1364,7 @@ The Read Memory component looks up values from canvas-level memory storage.
 
 ### How It Works
 
-1. Reads `namespace`, `resultMode`, `emitMode`, and `matchList` from configuration
+1. Reads `namespace`, `resultMode`, `emitMode` and `matchList` from configuration
 2. Finds memory rows matching all configured key/value pairs
 3. Emits `memory.read` to the `found` or `notFound` channel
 
@@ -1405,15 +1404,15 @@ The Read Memory component looks up values from canvas-level memory storage.
 }
 ```
 
-<a id="report-task-check"></a>
+<a id="report-work-order-check"></a>
 
-## Report Task Check
+## Report Work Order Check
 
 **Component key:** `reportWorkOrderCheck`
 
-The Report Task Check component stores a scored check against a task. Checks appear as scorecards on the task page, next to the description.
+The Report Work Order Check component stores a scored check against a work order. Checks appear as scorecards on the work order page, next to the description.
 
-Each check is identified by its `checkKey` (for example `risk-review`). The first report creates the check. A later report with the same key updates the check in place and keeps the prior score, so the UI can show the movement between runs. Every report also adds an entry to the task timeline.
+Each check is identified by its `checkKey` (for example `risk-review`). The first report creates the check. A later report with the same key updates the check in place and keeps the prior score, so the UI can show the movement between runs. Every report also adds an entry to the work order timeline.
 
 A check is either scored or a pass/fail verdict, controlled by `format`:
 
@@ -1428,9 +1427,9 @@ For scored checks, the level (healthy / neutral / needs attention / critical) is
 
 For example, a risk score from 0 to 10 where lower is better, with `cautionAt: 5` and `criticalAt: 8`: a score of 3 is healthy, 6 needs attention, 9 is critical.
 
-`score`, `maxScore`, and `passed` accept expressions, so a preceding automation run can feed them (e.g. `{{ previous().data.risk.score }}`). Use `analysis` for the full markdown report — it renders when a user opens the check.
+`score`, `maxScore` and `passed` accept expressions, so a preceding automation run can feed them (e.g. `{{ previous().data.risk.score }}`). Use `analysis` for the full markdown report — it renders when a user opens the check.
 
-`orderId` explicitly targets the task — it defaults to `{{ order().id }}`, the task driving the current run. This component can only be used in factory-owned apps.
+`orderId` explicitly targets the work order — it defaults to `{{ order().id }}`, the work order driving the current run. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -1492,7 +1491,7 @@ Runs shell commands on a fleet runner.
 
 ### Execution
 - **Host**: Commands run directly on the runner machine (Bash with a PTY).
-- **Docker**: Commands run inside a container started from **Docker image**. The runner pulls the image, starts a long-lived container, and executes your script via `docker exec`. The image must include a usable `sleep` (common base images do).
+- **Docker**: Commands run inside a container started from **Docker image**. The runner pulls the image, starts a long-lived container and executes your script via `docker exec`. The image must include a usable `sleep` (common base images do).
 
 ### Configuration
 - **Machine type**: Runner fleet registered on the task-broker (required).
@@ -1600,7 +1599,7 @@ Runs [Claude Code](https://code.claude.com/docs/en/headless) in non-interactive 
 
 ### Prerequisites
 - The `claude` CLI is installed on the runner machine and available on `PATH`.
-- An Anthropic API key stored as a SuperPlane secret or a Claude integration.
+- An Anthropic API key stored as a SuperPlane secret, a Claude integration, or SuperPlane-hosted credentials.
 
 ### Steps
 Configure an ordered list of **bash** and **prompt** steps:
@@ -1618,12 +1617,10 @@ Example:
 ### Configuration
 - **Machine type**: Runner fleet registered on the task-broker (required).
 - **Steps**: Ordered bash/prompt actions (at least one prompt required).
-- **Anthropic API Key**: SuperPlane secret or Claude integration used as `ANTHROPIC_API_KEY`.
-- **Model**: Select a model from Organization LLM Models.
+- **Anthropic API Key**: SuperPlane secret, Claude integration, or SuperPlane-hosted credentials used as `ANTHROPIC_API_KEY`.
+- **Model**: Optional model id or alias (for example `sonnet`). SuperPlane-hosted credentials require a model from the installation allowlist.
 - **Working directory**: Optional starting directory.
 - **Execution timeout**: Optional wall-clock limit in seconds (1–86400). Defaults to **3600** (1 hour).
-
-Use **Run SuperPlane Agent** for SuperPlane-hosted credentials.
 
 ### Output
 Prompt steps stream agent activity to **View logs**. The finished event includes the latest Claude `result`.
@@ -1662,7 +1659,7 @@ Runs the OpenAI Codex CLI in non-interactive mode on a fleet runner.
 
 ### Prerequisites
 - The `codex` CLI is installed on the runner machine and available on `PATH`.
-- An OpenAI API key stored as a SuperPlane secret or an OpenAI integration.
+- An OpenAI API key stored as a SuperPlane secret, an OpenAI integration, or SuperPlane-hosted credentials.
 
 ### Steps
 Configure an ordered list of **bash** and **prompt** steps:
@@ -1673,12 +1670,10 @@ Configure an ordered list of **bash** and **prompt** steps:
 ### Configuration
 - **Machine type**: Runner fleet registered on the task-broker (required).
 - **Steps**: Ordered bash/prompt actions (at least one prompt required).
-- **Credentials**: SuperPlane secret or OpenAI integration used as `OPENAI_API_KEY`.
-- **Model**: Select a model from Organization LLM Models.
+- **Credentials**: SuperPlane secret, OpenAI integration, or SuperPlane-hosted credentials used as `OPENAI_API_KEY`.
+- **Model**: Optional Codex model id. SuperPlane-hosted credentials require a model from the installation allowlist.
 - **Working directory**: Optional starting directory.
 - **Execution timeout**: Optional wall-clock limit in seconds (1–86400). Defaults to **3600** (1 hour).
-
-Use **Run SuperPlane Agent** for SuperPlane-hosted credentials.
 
 ### Output channels
 - **Passed**: All steps finished with exit code **0**.
@@ -1763,30 +1758,26 @@ function main() {
 
 **Component key:** `runnerOpenRouter`
 
-Runs a SuperPlane OpenRouter agent on a fleet runner. The runner starts OpenCode with the selected OpenRouter model.
+Runs a SuperPlane-shipped OpenRouter agent on a fleet runner. Prompt turns can use bash, read, edit and write tools.
 
 ### Prerequisites
-- The `opencode` CLI is installed on the runner machine and available on `PATH`.
 - Node.js on the runner `PATH`.
-- An OpenRouter API key stored as a SuperPlane secret or an OpenRouter integration.
+- An OpenRouter API key stored as a SuperPlane secret, or SuperPlane-hosted credentials.
 
 ### Steps
 Configure an ordered list of **bash** and **prompt** steps:
 
 - **bash** — shell commands (clone a repo, install deps, run tests, push).
-- **prompt** — one OpenCode turn in the same working directory. Later prompts continue one OpenCode session.
+- **prompt** — one OpenRouter agent loop in the same working directory (up to max turns).
 
 ### Configuration
 - **Machine type**: Runner fleet registered on the task-broker (required).
 - **Steps**: Ordered bash/prompt actions (at least one prompt required).
-- **Credentials**: SuperPlane secret or OpenRouter integration used as `OPENROUTER_API_KEY`.
-- **Model**: Required. Select a model from Organization LLM Models.
+- **Credentials**: SuperPlane secret, OpenRouter integration, or SuperPlane-hosted credentials used as `OPENROUTER_API_KEY`.
+- **Model**: Required OpenRouter model id (`provider/model`). SuperPlane-hosted credentials require a model from the installation allowlist.
 - **Working directory**: Optional starting directory.
 - **Execution timeout**: Optional wall-clock limit in seconds (1–86400). Defaults to **3600** (1 hour).
-
-If OpenRouter rate-limits the selected model, SuperPlane continues the session on the next allowed OpenRouter model.
-
-Use **Run SuperPlane Agent** for SuperPlane-hosted credentials.
+- **Max turns per prompt**: Optional limit on model turns for each prompt step (1–256). Defaults to **128**. After this limit, SuperPlane asks for a final reply without tools.
 
 ### Output channels
 - **Passed**: All steps finished with exit code **0**.
@@ -1864,77 +1855,24 @@ def main(payload):
 }
 ```
 
-<a id="run-super-plane-agent"></a>
+<a id="set-work-order-status-note"></a>
 
-## Run SuperPlane Agent
-
-**Component key:** `runnerSuperPlane`
-
-Runs a SuperPlane-hosted coding agent on a fleet runner.
-
-This agent uses SuperPlane-hosted models. Select a model on the node, or use the instance SuperPlane agent model. The node does not store an API key.
-
-### Prerequisites
-- The organization has hosted credit.
-- An installation admin has set a SuperPlane agent model.
-
-### Steps
-Configure an ordered list of **bash** and **prompt** steps:
-
-- **bash** — shell commands (clone a repo, install deps, run tests, push).
-- **prompt** — an agent turn. Later prompts continue the same session.
-
-### Configuration
-- **Machine type**: Runner fleet registered on the task-broker (required).
-- **Model**: Optional SuperPlane-hosted model. The instance SuperPlane agent model is used when this field is empty.
-- **Steps**: Ordered bash/prompt actions (at least one prompt required).
-- **Working directory**: Optional starting directory.
-- **Execution timeout**: Optional wall-clock limit in seconds (1–86400). Defaults to **3600** (1 hour).
-
-### Output
-Prompt steps stream agent activity to **View logs**. The finished event includes the latest agent result.
-
-### Output channels
-- **Passed**: All steps finished with exit code **0**.
-- **Failed**: A bash or prompt step failed (non-zero exit).
-
-### Example Output
-
-```json
-{
-  "data": [
-    {
-      "exit_code": 0,
-      "result": {
-        "result": "Done.",
-        "type": "result"
-      },
-      "status": "succeeded"
-    }
-  ],
-  "timestamp": "2026-01-16T17:56:16.680755501Z",
-  "type": "runnerSuperPlane.finished"
-}
-```
-
-<a id="set-task-status-note"></a>
-
-## Set Task Status Note
+## Set Work Order Status Note
 
 **Component key:** `setWorkOrderStatusNote`
 
-The Set Task Status Note component announces what a waiting task is blocked on and what resolves it. The note shows as a "next step" panel on the task page — for example, a PR watcher can announce "Review the pull request: when it merges, this task completes automatically."
+The Set Work Order Status Note component announces what a waiting work order is blocked on and what resolves it. The note shows as a "next step" panel on the work order page — for example, a PR watcher can announce "Review the pull request: when it merges, this work order completes automatically."
 
-Each note is identified by its `noteKey` (for example `pr-closure`). The first set creates the note. A later set with the same key updates that note in place. A different key sits beside it, so one task can carry several waits at once (a PR review and a later decision prompt). Any state change (close, reopen, back to draft) clears every note. The task must be open.
+Each note is identified by its `noteKey` (for example `pr-closure`). The first set creates the note. A later set with the same key updates that note in place. A different key sits beside it, so one work order can carry several waits at once (a PR review and a later decision prompt). Any state change (close, reopen, back to draft) clears every note. The work order must be open.
 
 - `headline` is the short instruction shown as the panel title (e.g. "Review the pull request").
 - `body` is an optional markdown paragraph with the details — what happens on each outcome.
 - `ctaLabel` and `ctaUrl` render an optional action button that links to where the wait resolves (e.g. the pull request). Set both or neither.
 - `showOnlyWhenWaiting` hides the note while a line is running. The default is off, so the note stays visible during a run.
 
-`orderId` explicitly targets the task — it defaults to `{{ order().id }}`, the task driving the current run. This component can only be used in factory-owned apps.
+`orderId` explicitly targets the work order — it defaults to `{{ order().id }}`, the work order driving the current run. This component can only be used in factory-owned apps.
 
-Setting a note also emails the task's owners and creator (excluding whoever triggered the run), so they know it's waiting on their review — every set sends a fresh email, including one that just updates an existing note's body. Recipients can turn this off in their notification settings without affecting other task emails.
+Setting a note also emails the work order's owners and creator (excluding whoever triggered the run), so they know it's waiting on their review — every set sends a fresh email, including one that just updates an existing note's body. Recipients can turn this off in their notification settings without affecting other work order emails.
 
 ### Example Output
 
@@ -1942,7 +1880,7 @@ Setting a note also emails the task's owners and creator (excluding whoever trig
 {
   "data": {
     "statusNote": {
-      "body": "When PR #42 merges, this task completes automatically.",
+      "body": "When PR #42 merges, this work order completes automatically.",
       "ctaLabel": "Review PR #42",
       "ctaUrl": "https://github.com/acme/app/pull/42",
       "headline": "Review the pull request",
@@ -2056,7 +1994,7 @@ The Update Memory component updates matching rows in canvas-level memory storage
 
 ### How It Works
 
-1. Reads `namespace`, `matchList`, and `valueList` from configuration
+1. Reads `namespace`, `matchList` and `valueList` from configuration
 2. Updates all matching memory rows in a single SQL operation
 3. Emits `memory.updated` to the `found` or `notFound` channel
 
@@ -2116,9 +2054,9 @@ iteration starts) instead of a bare expression.
 
 The Update Pull Request component updates a factory pull request by `pullRequestId`. External-event canvases should run Find Pull Request first and pass its output id.
 
-Mutable fields: repository, external id, URL, title, state, merged timestamp, and closed timestamp. The component does not move the pull request to a different task.
+Mutable fields: repository, external id, URL, title, state, merged timestamp and closed timestamp. The component does not move the pull request to a different work order.
 
-`state`, `merged`, and `draft` accept expressions. A GitHub-shaped `state: "closed"` + `merged: true` becomes SuperPlane state `merged`. This component can only be used in factory-owned apps.
+`state`, `merged` and `draft` accept expressions. A GitHub-shaped `state: "closed"` + `merged: true` becomes SuperPlane state `merged`. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -2172,15 +2110,15 @@ This component can only be used in factory-owned apps.
 }
 ```
 
-<a id="update-task-status"></a>
+<a id="update-work-order-status"></a>
 
-## Update Task Status
+## Update Work Order Status
 
 **Component key:** `updateWorkOrderStatus`
 
-The Update Task Status component transitions a task through the lifecycle: draft → open → closed, plus open ↔ draft (back to draft), closed → open (reopen), and draft → closed (abandon before dispatch). When closing, a result must be provided; from open any of completed / rejected / failed is valid, from draft only rejected is valid (an unopened task never ran).
+The Update Work Order Status component transitions a work order through the lifecycle: draft → open → closed, plus open ↔ draft (back to draft), closed → open (reopen) and draft → closed (abandon before dispatch). When closing, a result must be provided; from open any of completed / rejected / failed is valid, from draft only rejected is valid (an unopened order never ran).
 
-`orderId` explicitly targets the task — it defaults to `{{ order().id }}`, the task driving the current run, which only resolves when the flow was dispatched from a factory line. In a flow triggered by an external event such as `github.onPullRequest`, replace it with `{{ previous().data.workOrder.id }}` after a `findWorkOrder` step. This component can only be used in factory-owned apps.
+`orderId` explicitly targets the work order — it defaults to `{{ order().id }}`, the work order driving the current run, which only resolves when the flow was dispatched from a factory line. In a flow triggered by an external event such as `github.onPullRequest`, replace it with `{{ previous().data.workOrder.id }}` after a `findWorkOrder` step. This component can only be used in factory-owned apps.
 
 ### Example Output
 
@@ -2191,7 +2129,7 @@ The Update Task Status component transitions a task through the lifecycle: draft
       "id": "wo-123",
       "result": "completed",
       "state": "closed",
-      "title": "Task 1"
+      "title": "Work Order 1"
     }
   },
   "timestamp": "2026-01-01T00:00:00Z",
@@ -2205,7 +2143,7 @@ The Update Task Status component transitions a task through the lifecycle: draft
 
 **Component key:** `upsertMemory`
 
-The Upsert Memory component updates matching rows in canvas-level memory storage, and creates a new row when no matches are found.
+The Upsert Memory component updates matching rows in canvas-level memory storage and creates a new row when no matches are found.
 
 ### Use Cases
 
@@ -2215,7 +2153,7 @@ The Upsert Memory component updates matching rows in canvas-level memory storage
 
 ### How It Works
 
-1. Reads `namespace`, `matchList`, and `valueList` from configuration
+1. Reads `namespace`, `matchList` and `valueList` from configuration
 2. Attempts to update all matching memory rows
 3. If no rows were updated, inserts a new memory row with the values
 4. Emits `memory.upserted` to the default channel with `operation` set to `updated` or `created`
@@ -2303,7 +2241,7 @@ The Wait component pauses workflow execution for a specified duration or until a
 - Execution pauses until the wait period completes
 - Can be manually pushed through using the "Push Through" action
 - Automatically resumes when the wait time expires
-- Emits metadata including start time, finish time, and result
+- Emits metadata including start time, finish time and result
 
 ### Output
 

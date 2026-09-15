@@ -1,0 +1,67 @@
+---
+title: Work intake and backlog
+description: Turn incoming requests into clear tasks that are safe to start.
+---
+
+Work intake is where a request becomes Factory work. The goal is not to send every open issue to an agent. It is to identify work with a clear outcome, enough repository context and a verification path that can catch a wrong result.
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/factory_board.png" alt="SuperPlane importing and scoring two GitHub issues before opening the Factory board." />
+  <figcaption>Connected work is discovered and assessed before it enters execution.</figcaption>
+</figure>
+
+## Where tasks come from
+
+A Factory can receive work from a connected issue tracker such as GitHub or from a task created directly on the board. The source remains attached so the team can return to the original discussion and expected result.
+
+Automatic intake is useful when the rules are narrow. For example, a Factory can listen for issues from one repository or with a particular label. Manual intake remains useful for one-off work and requests that need context before they are ready for the team backlog.
+
+## What makes a task ready
+
+Strong tasks describe a result that another person can check. They do not need to prescribe every code edit but they should remove avoidable guesswork.
+
+A ready task usually contains:
+
+- **The problem:** What is wrong or missing today?
+- **The expected behavior:** What should be true after the change?
+- **The boundary:** Which part of the product or repository is in scope?
+- **The evidence:** Which test, check or observation can prove the result?
+- **The constraints:** Are there compatibility, security or design requirements the agent must preserve?
+
+Repository conventions still matter. Test commands, contribution guidance and local instructions help the agent act like a contributor to this codebase rather than a visitor making an isolated patch.
+
+## Confidence is a routing signal
+
+SuperPlane can run configured checks against imported tasks and record a confidence score. Treat that score as triage, not as a promise. It helps your team identify requests with bounded scope, sufficient context and an observable success condition while leaving ambiguous requests where a person can improve them.
+
+<div class="use-case-signals not-content">
+  <div>
+    <strong>Ready to start</strong>
+    <span>The outcome is specific, the affected area is bounded and a reliable check exists.</span>
+  </div>
+  <div>
+    <strong>Needs clarification</strong>
+    <span>The request depends on a product choice, crosses unclear boundaries or has no observable success condition.</span>
+  </div>
+</div>
+
+An unclear task should not become a more detailed agent prompt by accident. Improve the source issue first when the missing information changes what should be built.
+
+## Starting work is an authorization boundary
+
+The **Start** action tells the Factory that the task is ready for its line. This is a small but important control point. Discovery can run continuously while implementation begins only after the task meets your team's rules.
+
+Before you start a task, confirm that:
+
+- the repository and target area are correct
+- the request has one primary outcome
+- risky assumptions are written down
+- the completion check is available to the workflow
+- a person is identified for decisions the workflow cannot make
+
+<figure class="sp-media-figure not-content">
+  <img src="https://docs-assets.superplane.com/images/main_screenshot.png" alt="A Factory board showing discovered tasks in Backlog with readiness indicators and a Start action." />
+  <figcaption>Backlog keeps discovered work visible until it is ready to enter the line.</figcaption>
+</figure>
+
+Once the task is approved, [Implement](/fundamentals/implement) receives the request and its accumulated context.
