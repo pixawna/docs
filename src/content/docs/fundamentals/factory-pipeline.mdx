@@ -25,9 +25,9 @@ This separation matters. A change can be technically complete but still fail ver
 
 ## What moves through the pipeline
 
-A [task](/reference/glossary#task) is the unit of work. It begins with a request from an issue tracker or another connected source and gathers context as it moves. The task can hold links, agent output, pull requests, checks, approvals and notes from the people involved.
+A task is the unit of work. It begins with a request from an issue tracker or another connected source and gathers context as it moves. The task can hold links, agent output, pull requests, checks, approvals and notes from the people involved.
 
-An [automation](/reference/glossary#automation) defines what a stage does. A [run](/reference/glossary#run) is one execution of that automation for a particular task. This distinction is useful when debugging: the stage describes the policy while the run shows exactly what happened this time.
+An automation defines what a stage does. A run is one execution of that automation for a particular task. This distinction is useful when debugging: the stage describes the policy while the run shows exactly what happened this time.
 
 <div class="factory-execution-flow not-content" role="list" aria-label="Factory pipeline stages">
   <span role="listitem">Qualify the task</span>
