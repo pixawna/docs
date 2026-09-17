@@ -6,7 +6,7 @@ description: Follow a task from intake through implementation, verification and 
 The Factory pipeline is the operating path that turns an incoming request into a checked result. It gives people and agents the same view of what is happening, what evidence exists and who must decide what happens next.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/superplane_work_asset.png" alt="A SuperPlane task moving from connected work sources through discovery, implementation, verification and completion, with paths for retries and human decisions." />
+  <img src="https://docs-assets.superplane.com/images/verify_phase_issue_1.webp" alt="A SuperPlane task moving from connected work sources through discovery, implementation, verification and completion, with paths for retries and human decisions." />
   <figcaption>Work follows a visible path from discovery to a verified result.</figcaption>
 </figure>
 
@@ -23,11 +23,11 @@ The board is more than a set of status columns. Each stage has a different respo
 
 This separation matters. A change can be technically complete but still fail verification. A pull request can pass its checks but still require a product decision. Keeping these states distinct makes failure visible instead of hiding it behind a single progress label.
 
-## What moves through the pipeline
+## What moves through the pipeline?
 
-A [task](/reference/glossary#task) is the unit of work. It begins with a request from an issue tracker or another connected source and gathers context as it moves. The task can hold links, agent output, pull requests, checks, approvals and notes from the people involved.
+A task is the unit of work. It begins with a request from an issue tracker or another connected source and gathers context as it moves. The task can hold links, agent output, pull requests, checks, approvals and notes from the people involved.
 
-An [automation](/reference/glossary#automation) defines what a stage does. A [run](/reference/glossary#run) is one execution of that automation for a particular task. This distinction is useful when debugging: the stage describes the policy while the run shows exactly what happened this time.
+An automation defines what a stage does. A run is one execution of that automation for a particular task. This distinction is useful when debugging: the stage describes the policy while the run shows exactly what happened this time.
 
 <div class="factory-execution-flow not-content" role="list" aria-label="Factory pipeline stages">
   <span role="listitem">Qualify the task</span>

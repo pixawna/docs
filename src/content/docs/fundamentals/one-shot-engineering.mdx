@@ -3,16 +3,16 @@ title: How one-shot engineering works
 description: Learn how SuperPlane moves bounded tasks through configured implementation and verification steps.
 ---
 
-One-shot engineering moves a bounded software task from a clear request through implementation and configured checks with one deliberate human handoff. Your team decides what should be done and where judgment is required. The [software factory](/reference/glossary#software-factory) coordinates the repeatable work in between.
+One-shot engineering moves a bounded software task from a clear request through implementation and configured checks with one deliberate human handoff. Your team decides what should be done and where judgment is required. The software factory coordinates the repeatable work in between.
 
 It does not mean giving a model one prompt and trusting whatever comes back. The “one shot” belongs to the engineering process, not to a single agent response.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/superplane_work_asset.png" alt="SuperPlane moving work from issue discovery through implementation, verification and human approval" />
+  <img src="https://docs-assets.superplane.com/images/how_superplane_works.webp" alt="SuperPlane moving work from issue discovery through implementation, verification and human approval" />
   <figcaption>The factory owns the process. Agents perform the work inside it.</figcaption>
 </figure>
 
-## What changes with one-shot engineering
+## What changes with one-shot engineering?
 
 Coding agents are already good at inspecting repositories, editing files and running commands. The harder problem is everything around the code: deciding which work is safe to delegate, enforcing the same rules on every run, responding to failed checks and knowing when a person should step in.
 
@@ -28,7 +28,7 @@ One-shot engineering moves that coordination into a defined workflow.
 The important shift is the unit of automation. A coding assistant automates an action. A software factory automates the path from intent to a result your team can review.
 
 <figure class="sp-media-figure sp-media-figure--compact not-content">
-  <img src="https://docs-assets.superplane.com/images/software_factory_exp.png" alt="Software factory loop with human review at planning, implementation and final review" />
+  <img src="https://docs-assets.superplane.com/images/principle_software_factory.webp" alt="Software factory loop with human review at planning, implementation and final review" />
   <figcaption>People review decisions and results. The factory carries work between those points.</figcaption>
 </figure>
 
@@ -73,7 +73,7 @@ The workflow defines the allowed path before an agent starts. It can specify the
 This keeps the process consistent when the model changes, when another person starts the task or when the same pattern is used in a different repository.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/screenshot-background.png" alt="SuperPlane implementation automation with agent execution, failure handling and task artifacts" />
+  <img src="https://docs-assets.superplane.com/images/automation_check.webp" alt="SuperPlane implementation automation with agent execution, failure handling and task artifacts" />
   <figcaption>An automation makes the execution path explicit instead of hiding it inside one long prompt.</figcaption>
 </figure>
 
@@ -88,7 +88,7 @@ The agent is responsible for the engineering work. SuperPlane is responsible for
 A pull request is an output, not proof that the task is complete. The Verify stage checks the result against the rules defined by the factory. Verification can include tests, continuous integration status, deterministic validation, pull request feedback and human approval.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/verify_phase.png" alt="A pull request task waiting in the Verify stage of a SuperPlane factory" />
+  <img src="https://docs-assets.superplane.com/images/verify_phase_issue_1.webp" alt="A pull request task waiting in the Verify stage of a SuperPlane factory" />
   <figcaption>Verification keeps the result and the remaining decision visible before the task reaches Done.</figcaption>
 </figure>
 
@@ -125,7 +125,7 @@ People still choose priorities, clarify ambiguous work, approve sensitive change
   <figcaption>Human involvement is most valuable at decisions, not at every mechanical handoff.</figcaption>
 </figure>
 
-## What to measure
+## What to measure?
 
 The goal is not to maximize the number of tasks sent to agents. It is to increase the number of bounded tasks that pass the team's configured checks without creating more cleanup for engineers.
 

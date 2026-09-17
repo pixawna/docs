@@ -1,0 +1,106 @@
+---
+interface Props {
+  src: string;
+  label: string;
+  caption: string;
+}
+
+const { src, label, caption } = Astro.props;
+---
+
+<playback-speed class="video-player">
+  <figure class="sp-media-figure not-content">
+    <video
+      aria-label={label}
+      controls
+      playsinline
+      preload="metadata"
+      src={src}
+      data-playback-video
+    >
+      Your browser does not support embedded video.
+    </video>
+    <figcaption class="video-player__footer">
+      <span>{caption}</span>
+      <label>
+        Playback speed
+        <select data-playback-rate aria-label="Video playback speed">
+          <option value="0.5">0.5×</option>
+          <option value="0.75">0.75×</option>
+          <option value="1">1×</option>
+          <option value="1.25">1.25×</option>
+          <option value="1.5" selected>1.5×</option>
+          <option value="1.75">1.75×</option>
+          <option value="2">2×</option>
+        </select>
+      </label>
+    </figcaption>
+  </figure>
+</playback-speed>
+
+<script>
+  class PlaybackSpeed extends HTMLElement {
+    connectedCallback() {
+      const video = this.querySelector<HTMLVideoElement>("[data-playback-video]");
+      const rate = this.querySelector<HTMLSelectElement>("[data-playback-rate]");
+
+      if (!video || !rate || rate.dataset.initialized) return;
+
+      rate.dataset.initialized = "true";
+      video.playbackRate = Number(rate.value);
+      rate.addEventListener("change", () => {
+        video.playbackRate = Number(rate.value);
+      });
+    }
+  }
+
+  if (!customElements.get("playback-speed")) {
+    customElements.define("playback-speed", PlaybackSpeed);
+  }
+</script>
+
+<style>
+  .video-player {
+    display: block;
+  }
+
+  .video-player__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    text-align: start;
+  }
+
+  .video-player__footer label {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: var(--sl-color-gray-2);
+    font-size: 0.875rem;
+    font-weight: 600;
+  }
+
+  .video-player__footer select {
+    min-width: 5rem;
+    padding: 0.35rem 1.75rem 0.35rem 0.6rem;
+    border: 1px solid var(--sl-color-gray-4);
+    border-radius: 0.4rem;
+    color: var(--sl-color-white);
+    background: var(--sl-color-gray-6);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .video-player__footer select:focus-visible {
+    outline: 2px solid var(--sl-color-accent-high);
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 30rem) {
+    .video-player__footer {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+</style>

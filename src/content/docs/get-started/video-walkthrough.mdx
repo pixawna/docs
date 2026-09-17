@@ -1,0 +1,37 @@
+---
+title: Video walkthrough
+description: Watch a SuperPlane task move from Backlog to Done in under four minutes.
+---
+
+import { CardGrid, LinkCard } from "@astrojs/starlight/components";
+import VideoPlayer from "../../../components/VideoPlayer.astro";
+
+## See how a software factory run in the background
+
+<VideoPlayer
+  src="https://docs-assets.superplane.com/videos/demo_video_superplane.mp4"
+  label="SuperPlane factory running from Backlog to Done"
+  caption="Backlog to Implement to Verify to Done."
+/>
+
+**In this video, you will see:**
+
+- How a task moves from **Backlog** to "**Done** stage.
+- The task moving to **Implement** while an agent works on the change.
+- SuperPlane checking the result in **Verify** & wait for the human approval.
+- Completed work reaching **Done**.
+
+Starting a task authorizes code work for that task. Review the title, description, repository and factory line before you confirm.
+
+<CardGrid>
+  <LinkCard
+    title="Example codebase"
+    href="https://github.com/pixawna/sup_community"
+    description="Explore the example repository source code on GitHub."
+  />
+  <LinkCard
+    title="Deployed application"
+    href="https://community-coral-nu.vercel.app/"
+    description="Open the deployed URL and try it yourself."
+  />
+</CardGrid>
