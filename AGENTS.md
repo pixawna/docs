@@ -106,7 +106,7 @@ Classic devtool docs: clear, direct, pragmatic. Minimal marketing; anchor value 
 #### Terminology
 
 Use consistently: **factory**, **workspace**, **task**, **work order**, **line**, **automation**, **canvas**,
-**node**, **component**, **run**, **payload**, **channel**, **subscription**, **expression**. Link to the glossary on first use per page.
+**node**, **component**, **run**, **payload**, **channel**, **subscription**, **expression**.
 
 - MUST: Write **open source** without a hyphen when it is a noun or an adjective: "open source project" and "SuperPlane is open source." Keep literal paths, slugs and identifiers unchanged.
 
