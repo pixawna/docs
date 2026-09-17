@@ -37,7 +37,7 @@ Coding agents can help with individual steps. Engineers often still coordinate t
 Once your repository is connected SuperPlane can listen for GitHub issues and bring them into the factory Backlog. The GitHub issue remains the source of the work. SuperPlane adds the execution process around it.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/main_screenshot.png" alt="GitHub issues listed in the Backlog stage of a SuperPlane factory" />
+  <img src="https://docs-assets.superplane.com/images/main_screenshot.webp" alt="GitHub issues listed in the Backlog stage of a SuperPlane factory" />
   <figcaption>Connected GitHub issues appear in Backlog with a confidence indicator and a clear action to start the work.</figcaption>
 </figure>
 
@@ -53,7 +53,7 @@ Before an agent starts coding SuperPlane evaluates whether the issue is a good c
 Focused work can move forward with higher confidence. Ambiguous work or work that needs judgment stays with the team.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/workflow_page.png" alt="SuperPlane backlog showing confidence indicators for imported GitHub issues" />
+  <img src="https://docs-assets.superplane.com/images/main_screenshot.webp" alt="SuperPlane backlog showing confidence indicators for imported GitHub issues" />
   <figcaption>The YouTube logo issue has a high confidence indicator, so it can move into implementation without a manual approval step.</figcaption>
 </figure>
 
@@ -74,7 +74,7 @@ When the task starts it moves into Implement. The configured agent receives the 
 The exact implementation process depends on how you configure the agent.
 
 <figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/screenshot-background.png" alt="SuperPlane implementation automation running an agent and recording task artifacts" />
+  <img src="https://docs-assets.superplane.com/images/automation_check.webp" alt="SuperPlane implementation automation running an agent and recording task artifacts" />
   <figcaption>The implementation automation runs the agent, records failures and attaches the resulting artifacts to the task.</figcaption>
 </figure>
 
@@ -95,11 +95,6 @@ Once implementation produces a pull request SuperPlane moves the task into Verif
 - Agent review
 - Deterministic validation
 - Human approval
-
-<figure class="sp-media-figure not-content">
-  <img src="https://docs-assets.superplane.com/images/verify_phase.png" alt="A pull request task waiting in the Verify stage of a SuperPlane factory" />
-  <figcaption>Verify keeps the pull request and its outstanding checks visible before the work reaches Done.</figcaption>
-</figure>
 
 If a check fails or a reviewer requests a change the workflow can return that context to the agent for another attempt. Human judgment remains available for decisions the factory should not make on its own.
 
