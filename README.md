@@ -2,7 +2,7 @@
 
 # SuperPlane Factory Docs
 
-This repository contains the documentation for [SuperPlane Factory](https://github.com/superplanehq/superplane), the open source AI software factory for tracked agent work. The site explains how to turn development tickets into verified, review-ready pull requests with repeatable intake, implementation, verification, and review workflows.
+This repository powers the [SuperPlane Factory](https://github.com/superplanehq/superplane) documentation. SuperPlane is an open source AI software factory that turns development tickets into verified pull requests through repeatable intake, implementation, verification and review workflows.
 
 [Read the documentation](https://docs.superplane.com) · [View SuperPlane on GitHub](https://github.com/superplanehq/superplane) · [Join Discord](https://discord.superplane.com) · [Contribute](./CONTRIBUTING.md)
 
@@ -13,10 +13,10 @@ The documentation is built with [Astro](https://astro.build) and [Starlight](htt
 It covers:
 
 - Getting started with SuperPlane and building your first factory
-- Software factory fundamentals, automations, and pipeline stages
+- Software factory fundamentals, automations and pipeline stages
 - Common use cases for tracked agent work
 - Integrations and component reference pages
-- Billing, open source participation, support, and release notes
+- Billing, open source participation, support and release notes
 
 ## Local development
 
@@ -59,25 +59,24 @@ Run these commands from the repository root:
 
 ## Project structure
 
-.
-├── public/                 # Text-based static files and generated agent indexes
-├── scripts/                # Repository checks and index generation
-├── src/
-│   ├── assets/             # Text-based assets such as SVG files
-│   ├── components/         # Custom Astro and Starlight components
-│   ├── config/             # Sidebar configuration
-│   ├── content/docs/       # Markdown and MDX documentation pages
-│   └── styles/             # Site-wide styles
-├── AGENTS.md               # Writing and repository guidance for contributors and agents
-├── CONTRIBUTING.md         # Contribution workflow and local setup
-└── astro.config.mjs        # Astro and Starlight configuration
-```
+| Path | What it contains |
+| --- | --- |
+| `src/content/docs/` | Markdown and MDX documentation pages |
+| `src/components/` | Custom Astro and Starlight components |
+| `src/config/` | Sidebar configuration |
+| `src/styles/` | Site-wide styles |
+| `src/assets/` | Text-based assets such as SVG files |
+| `public/` | Static text files and generated agent indexes |
+| `scripts/` | Repository checks and index generation scripts |
+| `astro.config.mjs` | Astro and Starlight configuration |
+| `AGENTS.md` | Writing and repository guidance |
+| `CONTRIBUTING.md` | Local setup and the contribution workflow |
 
-Each `.md` or `.mdx` file under `src/content/docs/` becomes a documentation route. The main content areas are organized into `get-started`, `fundamentals`, `use-cases`, `integrations`, `components`, `billing`, `open-source`, `troubleshooting`, and `release-notes`.
+Each `.md` or `.mdx` file under `src/content/docs/` becomes a documentation route. Content is grouped into `get-started`, `fundamentals`, `use-cases`, `integrations`, `components`, `billing`, `open-source`, `troubleshooting` and `release-notes`.
 
 ## Write and edit documentation
 
-Before editing content, read [AGENTS.md](./AGENTS.md) for the complete writing, structure, terminology, linking, diagram, and accessibility guidelines.
+Before editing content, read [AGENTS.md](./AGENTS.md) for the writing, structure, terminology, linking, diagram and accessibility guidelines used across the site.
 
 When adding or updating a page:
 
@@ -85,7 +84,7 @@ When adding or updating a page:
 2. Add frontmatter with a `title` and a concise `description`.
 3. Use site-root paths for internal links, such as `/get-started/overview`.
 4. Update `src/config/sidebar.mjs` when the page needs a manual navigation entry.
-5. Run `npm run build` to catch invalid slugs, frontmatter errors, and broken asset references.
+5. Run `npm run build` to catch invalid slugs, frontmatter errors and broken asset references.
 
 Keep generated files out of manual edits. The build owns `public/llms.txt` and `public/llms-full.txt`.
 
@@ -109,6 +108,6 @@ The LLM context files are generated automatically during `npm run build` and sho
 
 ## Contributing
 
-Contributions that improve accuracy, clarity, examples, and navigation are welcome. Follow the setup and pull request workflow in [CONTRIBUTING.md](./CONTRIBUTING.md).
+Contributions that improve accuracy, clarity, examples and navigation are welcome. Follow the setup and pull request workflow in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-If something is missing, confusing, or incorrect, [open an issue](https://github.com/superplanehq/docs/issues). For questions and community support, join the [SuperPlane Discord](https://discord.superplane.com).
+If something is missing, confusing or incorrect, [open an issue](https://github.com/superplanehq/docs/issues). For questions and community support, join the [SuperPlane Discord](https://discord.superplane.com).
