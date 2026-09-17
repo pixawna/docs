@@ -1,25 +1,114 @@
-# SuperPlane Documentation
+![SuperPlane Factory documentation](https://docs-assets.superplane.com/images/superplane_readme_header.png)
 
-This repository contains the documentation for [SuperPlane Factory](https://github.com/superplanehq/superplane), the AI software factory for tracked agent work.
+# SuperPlane Factory Docs
 
-## About
+This repository contains the documentation for [SuperPlane Factory](https://github.com/superplanehq/superplane), the open source AI software factory for tracked agent work. The site explains how to turn development tickets into verified, review-ready pull requests with repeatable intake, implementation, verification, and review workflows.
 
-This documentation site is built with [Starlight](https://starlight.astro.build), a documentation framework built on [Astro](https://astro.build) and deployed to [docs.superplane.com](https://docs.superplane.com) via Cloudflare Pages.
+[Read the documentation](https://docs.superplane.com) · [View SuperPlane on GitHub](https://github.com/superplanehq/superplane) · [Join Discord](https://discord.superplane.com) · [Contribute](./CONTRIBUTING.md)
+
+## About the documentation
+
+The documentation is built with [Astro](https://astro.build) and [Starlight](https://starlight.astro.build), then deployed to [docs.superplane.com](https://docs.superplane.com) through Cloudflare Pages.
+
+It covers:
+
+- Getting started with SuperPlane and building your first factory
+- Software factory fundamentals, automations, and pipeline stages
+- Common use cases for tracked agent work
+- Integrations and component reference pages
+- Billing, open source participation, support, and release notes
+
+## Local development
+
+### Prerequisites
+
+- A current Node.js Long-Term Support (LTS) release
+- npm
+
+Clone the repository and install its dependencies:
+
+```bash
+git clone https://github.com/superplanehq/docs.git
+cd docs
+npm install
+```
+
+Start the local development server:
+
+```bash
+npm run dev
+```
+
+Open [http://localhost:4321](http://localhost:4321) to view the site. Astro reloads the page as you edit documentation and components.
+
+## Available commands
+
+Run these commands from the repository root:
+
+| Command | Action |
+| --- | --- |
+| `npm install` | Install project dependencies |
+| `npm run dev` | Start the local development server at `localhost:4321` |
+| `npm run check:text-only` | Confirm that the repository does not contain unsupported binary assets |
+| `npm run generate:llms` | Regenerate `public/llms.txt` and `public/llms-full.txt` |
+| `npm run build` | Validate the content and build the production site in `dist/` |
+| `npm run preview` | Preview the production build locally |
+| `npm run astro -- --help` | Show the available Astro CLI commands |
+
+`npm run build` runs the text-only check and regenerates the agent-readable documentation files before Astro builds the site.
+
+## Project structure
+
+.
+├── public/                 # Text-based static files and generated agent indexes
+├── scripts/                # Repository checks and index generation
+├── src/
+│   ├── assets/             # Text-based assets such as SVG files
+│   ├── components/         # Custom Astro and Starlight components
+│   ├── config/             # Sidebar configuration
+│   ├── content/docs/       # Markdown and MDX documentation pages
+│   └── styles/             # Site-wide styles
+├── AGENTS.md               # Writing and repository guidance for contributors and agents
+├── CONTRIBUTING.md         # Contribution workflow and local setup
+└── astro.config.mjs        # Astro and Starlight configuration
+```
+
+Each `.md` or `.mdx` file under `src/content/docs/` becomes a documentation route. The main content areas are organized into `get-started`, `fundamentals`, `use-cases`, `integrations`, `components`, `billing`, `open-source`, `troubleshooting`, and `release-notes`.
+
+## Write and edit documentation
+
+Before editing content, read [AGENTS.md](./AGENTS.md) for the complete writing, structure, terminology, linking, diagram, and accessibility guidelines.
+
+When adding or updating a page:
+
+1. Place the file in the appropriate directory under `src/content/docs/`.
+2. Add frontmatter with a `title` and a concise `description`.
+3. Use site-root paths for internal links, such as `/get-started/overview`.
+4. Update `src/config/sidebar.mjs` when the page needs a manual navigation entry.
+5. Run `npm run build` to catch invalid slugs, frontmatter errors, and broken asset references.
+
+Keep generated files out of manual edits. The build owns `public/llms.txt` and `public/llms-full.txt`.
 
 ## Crawler and agent discovery
 
 The deployed site publishes:
 
-- `/robots.txt` — crawler access policy and sitemap location
-- `/llms.txt` — concise, structured documentation index for agents
-- `/llms-full.txt` — complete documentation context for tools that need it
+- `/robots.txt` for crawler policy and sitemap discovery
+- `/llms.txt` for a concise, structured documentation index
+- `/llms-full.txt` for tools that need the complete documentation context
 
-The LLM context files are generated automatically during `npm run build` (via `prebuild`) and should not be edited manually. `robots.txt` controls crawler access; `llms.txt` does not grant access and instead helps an agent find the most relevant documentation.
+The LLM context files are generated automatically during `npm run build` and should not be edited manually. `robots.txt` controls crawler access; `llms.txt` helps an agent locate relevant documentation but does not grant access.
+
+## Stack
+
+- [Astro](https://astro.build) for the static site build
+- [Starlight](https://starlight.astro.build) for the documentation framework
+- [Mermaid](https://mermaid.js.org) for source-controlled diagrams
+- [Cloudflare Pages](https://pages.cloudflare.com) for deployment
+- Cloudflare R2 for documentation images and videos
 
 ## Contributing
 
-We welcome your contributions to improve the documentation. See [CONTRIBUTING.md](./CONTRIBUTING.md) for development setup and contribution guidelines.
+Contributions that improve accuracy, clarity, examples, and navigation are welcome. Follow the setup and pull request workflow in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
-If you have any questions, please reach out to us on [Discord](https://discord.superplane.com).
-
-If you find something missing, confusing, or wrong, please [open an issue](https://github.com/superplanehq/docs/issues) to put it on our radar.
+If something is missing, confusing, or incorrect, [open an issue](https://github.com/superplanehq/docs/issues). For questions and community support, join the [SuperPlane Discord](https://discord.superplane.com).
