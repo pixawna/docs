@@ -59,21 +59,10 @@ export const sidebar = [
       { label: "Make small code improvements", slug: "use-cases/small-code-improvements" },
     ],
   },
+  // Integrations and Components is temporarily hidden from navigation.
+  // Keep the content pages in place so the section can be restored later.
   {
-    label: "4. Integrations and Components",
-    collapsed: true,
-    items: [
-      { label: "Source control and work intake", slug: "integrations/source-control" },
-      { label: "Coding agents and AI", slug: "integrations/coding-agents-ai" },
-      { label: "CI/CD", slug: "integrations/ci-cd" },
-      { label: "Observability", slug: "integrations/observability" },
-      { label: "Cloud and infrastructure", slug: "integrations/cloud-infrastructure" },
-      { label: "Custom integrations", slug: "integrations/custom-integrations" },
-      { label: "All components", slug: "components" },
-    ],
-  },
-  {
-    label: "5. Billing",
+    label: "4. Billing",
     collapsed: true,
     items: [
       { label: "Overview", slug: "billing/overview" },
@@ -81,7 +70,7 @@ export const sidebar = [
     ],
   },
   {
-    label: "6. Open Source",
+    label: "5. Open Source",
     collapsed: true,
     items: [
       { label: "Why SuperPlane is open source", slug: "open-source/why-open-source" },
@@ -95,7 +84,7 @@ export const sidebar = [
     ],
   },
   {
-    label: "7. Support and Help",
+    label: "6. Support and Help",
     collapsed: true,
     items: [
       {
@@ -107,7 +96,7 @@ export const sidebar = [
     ],
   },
   {
-    label: "8. Release Notes",
+    label: "7. Release Notes",
     collapsed: true,
     items: [
       { label: "Latest release", slug: "release-notes/latest" },
