@@ -59,8 +59,6 @@ export const sidebar = [
       { label: "Make small code improvements", slug: "use-cases/small-code-improvements" },
     ],
   },
-  // Integrations and Components is temporarily hidden from navigation.
-  // Keep the content pages in place so the section can be restored later.
   {
     label: "4. Billing",
     collapsed: true,
@@ -101,6 +99,22 @@ export const sidebar = [
     items: [
       { label: "Latest release", slug: "release-notes/latest" },
       { label: "Product & Integration updates", slug: "release-notes/product-updates" },
+    ],
+  },
+];
+
+// Sections omitted from the UI navigation but retained in the generated LLM indexes.
+export const llmsOnlySections = [
+  {
+    label: "Integrations and Components",
+    items: [
+      { label: "Source control and work intake", slug: "integrations/source-control" },
+      { label: "Coding agents and AI", slug: "integrations/coding-agents-ai" },
+      { label: "CI/CD", slug: "integrations/ci-cd" },
+      { label: "Observability", slug: "integrations/observability" },
+      { label: "Cloud and infrastructure", slug: "integrations/cloud-infrastructure" },
+      { label: "Custom integrations", slug: "integrations/custom-integrations" },
+      { label: "All components", slug: "components" },
     ],
   },
 ];

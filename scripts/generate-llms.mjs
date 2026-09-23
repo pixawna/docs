@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { sidebar } from "../src/config/sidebar.mjs";
+import { llmsOnlySections, sidebar } from "../src/config/sidebar.mjs";
 
 const BASE_URL = "https://docs.superplane.com";
 const DOCS_ROOT = "src/content/docs";
@@ -200,6 +200,7 @@ function main() {
   ensureDir(PUBLIC_DIR);
 
   const sections = resolveManualSections(sidebar);
+  sections.push(...resolveManualSections(llmsOnlySections));
   sections.push(resolveDirectory("components", "Component details"));
 
   const llms = buildLlmsTxt(sections);
