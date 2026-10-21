@@ -1,14 +1,34 @@
 ---
 import Search from 'virtual:starlight/components/Search';
 import SiteTitle from 'virtual:starlight/components/SiteTitle';
-import SocialIcons from 'virtual:starlight/components/SocialIcons';
+import { Icon } from '@astrojs/starlight/components';
 ---
 <div class="brand-header">
   <div class="brand-brand"><SiteTitle /></div>
-  <div class="brand-search"><Search /></div>
+  <a class="brand-repository" href="https://github.com/superplanehq/superplane" target="_blank" rel="noopener noreferrer">
+    <Icon name="github" size="18" />
+    <span>superplanehq/superplane</span>
+    <span class="brand-repository-stars" hidden><span aria-hidden="true">☆</span> <span data-star-count></span><span class="sr-only"> stars</span></span>
+    <span class="sr-only"> (opens in a new tab)</span>
+  </a>
   <nav class="brand-header-controls" aria-label="SuperPlane links">
     <a class="brand-button brand-button--secondary brand-website" href="https://superplane.com/">Website</a>
-    <div class="brand-social"><SocialIcons /></div>
     <a class="brand-button brand-header-app" href="https://app.superplane.com/">Open app</a>
   </nav>
+  <div class="brand-search"><Search /></div>
 </div>
+<script>
+  const stars = document.querySelector<HTMLElement>('.brand-repository-stars');
+  const count = stars?.querySelector('[data-star-count]');
+  if (stars && count) {
+    fetch('https://api.github.com/repos/superplanehq/superplane', { credentials: 'omit' })
+      .then(response => response.ok ? response.json() : null)
+      .then(repository => {
+        if (Number.isSafeInteger(repository?.stargazers_count)) {
+          count.textContent = new Intl.NumberFormat('en-US').format(repository.stargazers_count);
+          stars.hidden = false;
+        }
+      })
+      .catch(() => { /* The repository link remains available when counts cannot load. */ });
+  }
+</script>
