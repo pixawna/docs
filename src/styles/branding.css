@@ -438,7 +438,7 @@
     .brand-header-controls { margin-inline-start: auto; flex-shrink: 0; }
     .brand-header .brand-search { width: clamp(160px, 20vw, 280px); min-width: 0; margin: 0; }
     .brand-header .brand-search site-search button { height: 40px; }
-    .brand-header-controls .brand-website { background: transparent; border-color: transparent; }
+    .brand-header-controls .brand-website { background: #08090a; border-color: #353939; }
     .brand-header-controls .brand-button { padding-inline: 14px; }
   }
   @media(min-width:50rem) and (max-width:74.999rem) {
