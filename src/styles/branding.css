@@ -420,7 +420,7 @@
   }
 }
 
-/* Repository sits outside the action card; search aligns beneath the card. */
+/* Search and actions share one card, followed by repository statistics. */
 @layer starlight.user {
   .brand-repository {
     display: inline-flex; align-items: center; gap: 8px;
@@ -432,29 +432,24 @@
   .brand-repository-stars { display: inline-flex; align-items: center; gap: 5px; color: #969d9c; }
   .brand-repository-stars[hidden] { display: none; }
   @media(min-width:50rem) {
-    :root, :root[data-theme] { --sl-nav-height: 8rem; }
-    .brand-header {
-      display: grid; grid-template-columns: auto minmax(0,1fr) auto auto;
-      grid-template-rows: 56px 36px; column-gap: 24px; row-gap: 8px;
-      align-content: center;
-    }
-    .brand-header .brand-brand { grid-column: 1; grid-row: 1 / 3; }
+    :root, :root[data-theme] { --sl-nav-height: 5.5rem; }
+    .brand-header { display: flex; gap: 24px; }
     .brand-header .brand-brand .site-logo { width: 220px; max-width: 220px; height: 66px; }
-    .brand-repository { grid-column: 3; grid-row: 1; }
-    .brand-header-controls { grid-column: 4; grid-row: 1; }
-    .brand-header .brand-search {
-      grid-column: 4; grid-row: 2; width: 100%; min-width: 0; margin: 0;
-    }
-    .brand-header .brand-search site-search button { height: 36px; }
+    .brand-header-controls { margin-inline-start: auto; flex-shrink: 0; }
+    .brand-header .brand-search { width: clamp(160px, 20vw, 280px); min-width: 0; margin: 0; }
+    .brand-header .brand-search site-search button { height: 40px; }
+    .brand-header-controls .brand-website { background: transparent; border-color: transparent; }
+    .brand-header-controls .brand-button { padding-inline: 14px; }
   }
-  @media(min-width:50rem) and (max-width:63.999rem) {
-    .brand-repository { grid-column: 2 / 4; justify-self: end; font-size: 12px; }
-    .brand-repository-stars { display: none; }
-    .brand-header { column-gap: 14px; }
+  @media(min-width:50rem) and (max-width:74.999rem) {
+    .brand-repository-name { display: none; }
+    .brand-header { gap: 16px; }
     .brand-header .brand-brand .site-logo { width: 190px; max-width: 190px; }
   }
   @media(max-width:49.999rem) {
     .brand-repository { display: none; }
     .brand-header .brand-brand .site-logo { width: 170px; max-width: min(170px, 45vw); height: 50px; }
+    .brand-header-controls { display: flex; padding: 0; background: transparent; border: 0; }
+    .brand-header-controls .brand-button { display: none; }
   }
 }

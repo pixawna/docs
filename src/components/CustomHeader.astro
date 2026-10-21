@@ -5,17 +5,17 @@ import { Icon } from '@astrojs/starlight/components';
 ---
 <div class="brand-header">
   <div class="brand-brand"><SiteTitle /></div>
-  <a class="brand-repository" href="https://github.com/superplanehq/superplane" target="_blank" rel="noopener noreferrer">
-    <Icon name="github" size="18" />
-    <span>superplanehq/superplane</span>
-    <span class="brand-repository-stars" hidden><span aria-hidden="true">☆</span> <span data-star-count></span><span class="sr-only"> stars</span></span>
-    <span class="sr-only"> (opens in a new tab)</span>
-  </a>
-  <nav class="brand-header-controls" aria-label="SuperPlane links">
+  <nav class="brand-header-controls" aria-label="Documentation search and SuperPlane links">
+    <div class="brand-search"><Search /></div>
     <a class="brand-button brand-button--secondary brand-website" href="https://superplane.com/">Website</a>
     <a class="brand-button brand-header-app" href="https://app.superplane.com/">Open app</a>
   </nav>
-  <div class="brand-search"><Search /></div>
+  <a class="brand-repository" href="https://github.com/superplanehq/superplane" target="_blank" rel="noopener noreferrer">
+    <Icon name="github" size="18" />
+    <span class="brand-repository-name">superplanehq/superplane</span>
+    <span class="brand-repository-stars" hidden><span aria-hidden="true">☆</span> <span data-star-count></span><span class="sr-only"> stars</span></span>
+    <span class="sr-only"> (opens in a new tab)</span>
+  </a>
 </div>
 <script>
   const stars = document.querySelector<HTMLElement>('.brand-repository-stars');
