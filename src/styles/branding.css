@@ -484,3 +484,41 @@
     .brand-header-controls { margin-inline-start: auto; }
   }
 }
+
+/* Compact action card and a separate mobile documentation navigation row. */
+@layer starlight.user {
+  @media(min-width:50rem) {
+    :root, :root[data-theme] { --sl-nav-height: 5rem; }
+    .brand-header-controls { padding: 4px; min-height: 44px; border-radius: 10px; }
+    .brand-header-controls .brand-button { min-height: 34px; padding: 7px 12px; border-radius: 6px; }
+    .brand-header .brand-search site-search button { height: 34px; }
+  }
+  @media(max-width:49.999rem) {
+    .brand-header { gap: 8px; }
+    .brand-more-button { margin-inline-end: 0; }
+    .brand-header-controls { min-height: 36px; }
+    .brand-header .brand-search site-search button {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; padding: 0; border: 0 !important;
+      background: transparent; border-radius: 6px;
+    }
+    .brand-header .brand-search site-search button svg { width: 18px; height: 18px; margin: 0; }
+    .brand-header .brand-search site-search button:hover { background: #242425; }
+    starlight-menu-button button {
+      top: calc(var(--sl-nav-height) + 8px); inset-inline-start: 16px; inset-inline-end: auto;
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 106px; height: 32px; padding: 0 10px;
+      background: #101312; color: #c5c7c2; border: 1px solid #29312c;
+      border-radius: 6px; box-shadow: none;
+      font: 400 11px/1.4 var(--sl-font-mono);
+    }
+    starlight-menu-button button svg { display: none !important; }
+    starlight-menu-button button::before { content: 'Browse docs'; }
+    starlight-menu-button[aria-expanded='true'] button::before { content: 'Close docs'; }
+    starlight-menu-button[aria-expanded='true'] button { background: #242425; color: #f3f3ea; }
+    mobile-starlight-toc summary { padding-inline-start: 134px; }
+    mobile-starlight-toc .toggle { gap: 8px; }
+    .sidebar-pane { inset-block-start: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height)); }
+  }
+  @media(max-width:24rem) { mobile-starlight-toc .display-current { display: none; } }
+}

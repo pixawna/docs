@@ -37,6 +37,13 @@ import RepositoryLink from './HeaderRepositoryLink.astro';
       })
       .catch(() => { /* The repository link remains available when counts cannot load. */ });
   }
+  const docsMenu = document.querySelector('starlight-menu-button');
+  const docsMenuButton = docsMenu?.querySelector('button');
+  if (docsMenu && docsMenuButton) {
+    const updateLabel = () => docsMenuButton.setAttribute('aria-label', docsMenu.getAttribute('aria-expanded') === 'true' ? 'Close docs' : 'Browse docs');
+    updateLabel();
+    new MutationObserver(updateLabel).observe(docsMenu, { attributes: true, attributeFilter: ['aria-expanded'] });
+  }
   const desktop = matchMedia('(min-width: 50rem)');
   desktop.addEventListener('change', () => {
     if (desktop.matches) document.querySelector<HTMLElement>('#brand-mobile-actions')?.hidePopover();
