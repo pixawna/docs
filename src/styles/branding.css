@@ -309,7 +309,7 @@
   }
   .sl-markdown-content > :first-child { margin-top: 0; }
   .brand-guides { margin-block: 20px 40px; }
-  .brand-arrow-field { top: -30px; right: -25px; height: 190px; width: 240px; opacity: .18; }
+  .brand-arrow-field { top: -30px; right: -25px; height: 190px; width: 240px; opacity: .55; }
   .sidebar-content { padding: 32px 16px 32px; }
   .sidebar-content summary { margin-top: 16px; padding: 8px 0; }
   .sidebar-content > sl-sidebar-state-persist > ul > li:first-child > details > summary { margin-top: 0; }
@@ -350,7 +350,7 @@
     .brand-description, .brand-title--intro .brand-description { font-size: 17px; }
     .sl-markdown-content h2:not(:where(.not-content *)) { margin-top: 32px; }
     .sidebar-content { padding: 16px 20px 32px; }
-    .brand-arrow-field { opacity: .1; }
+    .brand-arrow-field { opacity: .3; }
   }
 }
 
@@ -365,11 +365,6 @@
     border-radius: 6px; box-shadow: none;
     transition: border-color .2s ease, color .2s ease;
   }
-  .sidebar-content .top-level > li > details > summary::before {
-    content: ''; position: absolute; inset: 0; z-index: -1;
-    background: #ed8e09; transform: scaleX(0); transform-origin: left;
-    transition: transform .35s cubic-bezier(.65,0,.35,1);
-  }
   .sidebar-content .top-level > li > details > summary :is(.group-label,.large) {
     color: #f3f3ea; font: 400 11px/1.5 var(--sl-font-mono);
     letter-spacing: .04em; text-transform: uppercase;
@@ -379,14 +374,11 @@
   }
   .sidebar-content .top-level > li > details[open] > summary { border-color: #69776e; }
   .sidebar-content .top-level > li > details > summary:is(:hover,:focus-visible) {
-    border-color: #ed8e09;
+    background: #08090a !important;
+    color: #f3f3ea !important;
   }
-  .sidebar-content .top-level > li > details > summary:is(:hover,:focus-visible)::before {
-    transform: scaleX(1);
-  }
-  .sidebar-content .top-level > li > details > summary:is(:hover,:focus-visible),
   .sidebar-content .top-level > li > details > summary:is(:hover,:focus-visible) :is(.group-label,.large,.caret) {
-    color: #08090a !important;
+    color: #f3f3ea !important;
   }
   .sidebar-content .top-level > li > details > ul { padding-block: 8px 4px; }
 }
@@ -490,7 +482,7 @@
   @media(min-width:50rem) {
     :root, :root[data-theme] { --sl-nav-height: 5rem; }
     .brand-header-controls { padding: 4px; min-height: 44px; border-radius: 10px; }
-    .brand-header-controls .brand-button { min-height: 34px; padding: 7px 12px; border-radius: 6px; }
+    .brand-header-controls .brand-button { box-sizing: border-box; width: 96px; height: 34px; min-height: 34px; padding: 7px 12px; border-radius: 6px; }
     .brand-header .brand-search site-search button { height: 34px; }
   }
   @media(max-width:49.999rem) {
@@ -521,4 +513,158 @@
     .sidebar-pane { inset-block-start: calc(var(--sl-nav-height) + var(--sl-mobile-toc-height)); }
   }
   @media(max-width:24rem) { mobile-starlight-toc .display-current { display: none; } }
+}
+
+/* Match the website's reading headings without changing component palettes. */
+@layer starlight.user {
+  .brand-title h1,
+  .sl-markdown-content :is(h1,h2,h3,h4,h5,h6):not(:where(.not-content *)) {
+    font-family: "Instrument Sans", sans-serif;
+    font-weight: 400 !important;
+    color: #f3f3ea;
+    letter-spacing: -.025em;
+  }
+}
+
+/* Larger page titles, scaled for desktop and mobile reading. */
+@layer starlight.user {
+  .brand-title h1, .brand-title--intro h1 { font-size: 48px; }
+  @media(max-width:49.999rem) {
+    .brand-title h1, .brand-title--intro h1 { font-size: 38px; }
+  }
+}
+
+/* Page breadcrumbs use the website's yellow eyebrow typography. */
+@layer starlight.user {
+  .brand-eyebrow {
+    color: #d6b83c;
+    font-size: 11px;
+    line-height: 1.4;
+    letter-spacing: .07em;
+    margin-bottom: 6px;
+  }
+  .brand-eyebrow span { color: inherit; }
+  @media(max-width:49.999rem) {
+    .brand-eyebrow { font-size: 10px; }
+  }
+}
+
+@layer starlight.user {
+  .brand-title .brand-description { color: #8fadb1; }
+}
+
+/* A sage reading timeline follows section progress in the page outline. */
+@layer starlight.user {
+  page-outline-timeline { display: block; }
+  .right-sidebar starlight-toc nav > ul {
+    position: relative; padding-inline-start: 22px !important;
+  }
+  .right-sidebar starlight-toc nav > ul::before,
+  .right-sidebar starlight-toc nav > ul::after {
+    content: ''; position: absolute; inset-inline-start: 5px;
+    top: var(--timeline-top, 18px); width: 2px; border-radius: 2px; pointer-events: none;
+  }
+  .right-sidebar starlight-toc nav > ul::before { height: var(--timeline-height, 0px); background: #29332f; }
+  .right-sidebar starlight-toc nav > ul::after { height: var(--timeline-progress, 0px); background: #87ae9d; }
+  .right-sidebar starlight-toc li + li { margin-top: 6px; }
+  .right-sidebar starlight-toc ul ul { padding-block-start: 6px; }
+  .right-sidebar starlight-toc a {
+    position: relative; border: 0; border-radius: 8px; padding: 7px 10px;
+    background: transparent !important; color: #929d97 !important;
+    text-decoration: none; transition: background-color .2s ease, color .2s ease;
+  }
+  .right-sidebar starlight-toc a::before {
+    content: ''; position: absolute; inset-inline-start: -20px; top: calc(50% - 4px);
+    width: 8px; height: 8px; border-radius: 50%; z-index: 1;
+    background: #08090a; border: 1px solid #45534b;
+  }
+  .right-sidebar starlight-toc a.is-read::before { background: #87ae9d; border-color: #87ae9d; }
+  .right-sidebar starlight-toc a:is(:hover,:focus-visible) {
+    background: #87ae9d14 !important; color: #f3f3ea !important;
+  }
+  .right-sidebar starlight-toc a[aria-current='true'] {
+    background: #87ae9d26 !important; color: #f3f3ea !important;
+  }
+  .right-sidebar starlight-toc a[aria-current='true']::before {
+    background: #87ae9d; border-color: #87ae9d; box-shadow: 0 0 0 3px #87ae9d20;
+  }
+  .right-sidebar starlight-toc a span { color: inherit; }
+  .right-sidebar starlight-toc a:focus-visible { outline-color: #87ae9d !important; }
+}
+
+/* Smaller descriptions beneath page titles across the documentation. */
+@layer starlight.user {
+  .brand-title .brand-description { font-size: 16px; line-height: 1.55; }
+  @media(max-width:49.999rem) {
+    .brand-title .brand-description { font-size: 15px; }
+  }
+}
+
+/* Article prose sizing without changing headings or component labels. */
+@layer starlight.user {
+  .sl-markdown-content { font-size: 16px; line-height: 1.75; }
+  .sl-markdown-content :is(p,li,dt,dd):not(:where(.not-content *)) {
+    font-size: 16px;
+    line-height: 1.75;
+  }
+  @media(max-width:49.999rem) {
+    .sl-markdown-content,
+    .sl-markdown-content :is(p,li,dt,dd):not(:where(.not-content *)) { font-size: 16px; }
+  }
+}
+
+/* Quiet teal navigation with a sage selection outline for nested pages. */
+@layer starlight.user {
+  .sidebar-content ul ul li a {
+    border: 1px solid transparent !important; border-radius: 6px;
+    margin-block: 2px; margin-inline: 8px; width: calc(100% - 16px);
+    padding: 6px 10px;
+    background: transparent !important; box-shadow: none;
+    transform: none !important;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease;
+  }
+  .sidebar-content ul ul li a:not([aria-current='page']):is(:hover,:focus-visible) {
+    background: #87ae9d14 !important; border-color: transparent !important;
+    color: #f3f3ea !important; box-shadow: none;
+  }
+  .sidebar-content ul ul li a[aria-current='page'],
+  .sidebar-content ul ul li a[aria-current='page']:hover {
+    background: #87ae9d26 !important; border-color: transparent !important;
+    color: #f3f3ea !important; box-shadow: none;
+  }
+  .sidebar-content ul ul li a:focus-visible { outline-color: #87ae9d !important; outline-offset: 2px; }
+}
+
+@layer starlight.user {
+  .sidebar-content ul ul li a,
+  .sidebar-content ul ul li a[aria-current='page'] {
+    border-radius: 8px !important;
+  }
+}
+
+/* Separate the page introduction from the article at the reading width. */
+@layer starlight.user {
+  .brand-title::after {
+    content: '';
+    display: block;
+    height: 1px;
+    margin-top: 24px;
+    background: #87ae9d33;
+  }
+}
+
+/* Keep the opening paragraph close to the introduction divider. */
+@layer starlight.user {
+  .main-pane .content-panel:first-of-type { padding-bottom: 16px; }
+}
+
+/* Keep the decorative arrow field within the right half of the page introduction. */
+@layer starlight.user {
+  .brand-title .brand-arrow-field {
+    pointer-events: none;
+    top: 0;
+    right: 0;
+    width: 50%;
+    height: 100%;
+  }
 }
