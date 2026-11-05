@@ -1,6 +1,6 @@
 import fs from "node:fs";
 import path from "node:path";
-import { llmsOnlySections, sidebar } from "../src/config/sidebar.mjs";
+import { sidebar } from "../src/config/sidebar.mjs";
 
 const BASE_URL = "https://docs.superplane.com";
 const DOCS_ROOT = "src/content/docs";
@@ -62,6 +62,19 @@ function slugToUrl(slug) {
   return slug === "" ? `${BASE_URL}/` : `${BASE_URL}/${slug}/`;
 }
 
+// Starlight uses lowercase slugs even when source filenames contain capitals.
+// Resolve against actual filenames so Linux and macOS produce the same index.
+const docFilesByPath = new Map();
+for (const entry of fs.readdirSync(DOCS_ROOT, { recursive: true, withFileTypes: true })) {
+  if (!entry.isFile() || !/\.mdx?$/.test(entry.name)) continue;
+  const filePath = path.join(entry.parentPath, entry.name);
+  const key = filePath.toLowerCase();
+  if (docFilesByPath.has(key)) {
+    throw new Error(`Docs paths differ only by case: "${docFilesByPath.get(key)}" and "${filePath}"`);
+  }
+  docFilesByPath.set(key, filePath);
+}
+
 function slugToFilePath(slug) {
   const base = slug === "" ? "index" : slug;
   const candidates = [
@@ -70,7 +83,7 @@ function slugToFilePath(slug) {
     path.join(DOCS_ROOT, base, "index.md"),
     path.join(DOCS_ROOT, base, "index.mdx"),
   ];
-  const filePath = candidates.find((candidate) => fs.existsSync(candidate));
+  const filePath = candidates.map((candidate) => docFilesByPath.get(candidate.toLowerCase())).find(Boolean);
   if (filePath) return filePath;
   throw new Error(`Could not find docs file for slug: "${slug}"`);
 }
@@ -200,7 +213,6 @@ function main() {
   ensureDir(PUBLIC_DIR);
 
   const sections = resolveManualSections(sidebar);
-  sections.push(...resolveManualSections(llmsOnlySections));
   sections.push(resolveDirectory("components", "Component details"));
 
   const llms = buildLlmsTxt(sections);

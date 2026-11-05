@@ -22,6 +22,24 @@ export const sidebar = [
         items: [
           { label: "Pipeline overview", slug: "fundamentals/factory-pipeline" },
           { label: "Work intake and backlog", slug: "fundamentals/work-intake" },
+          {
+            label: "Intakes",
+            collapsed: true,
+            items: [
+              { label: "Intakes overview", slug: "intakes/overview" },
+              { label: "Source control and work intake", slug: "integrations/source-control" },
+              {
+                label: "Intake component references",
+                collapsed: true,
+                items: [
+                  { label: "GitHub", slug: "components/github" },
+                  { label: "Jira", slug: "components/jira" },
+                  { label: "Linear", slug: "components/linear" },
+                  { label: "Sentry", slug: "components/sentry" },
+                ],
+              },
+            ],
+          },
           { label: "Implement", slug: "fundamentals/implement" },
           { label: "Verify", slug: "fundamentals/verify" },
           { label: "Done", slug: "fundamentals/done" },
@@ -51,7 +69,15 @@ export const sidebar = [
     ],
   },
   {
-    label: "3. Use Cases",
+    label: "3. Developer tools",
+    collapsed: true,
+    items: [
+      { label: "Connect an MCP client", slug: "agents/mcp" },
+      { label: "Install and connect the CLI", slug: "cli" },
+    ],
+  },
+  {
+    label: "4. Use Cases",
     collapsed: true,
     items: [
       { label: "Use cases overview", slug: "use-cases/overview" },
@@ -60,15 +86,42 @@ export const sidebar = [
     ],
   },
   {
-    label: "4. Billing",
+    label: "5. Integrations and Components",
+    collapsed: true,
+    items: [
+      { label: "Source control and work intake", slug: "integrations/source-control" },
+      { label: "Agent tools", slug: "integrations/agent-tools" },
+      { label: "CI/CD", slug: "integrations/ci-cd" },
+      { label: "Observability", slug: "integrations/observability" },
+      { label: "Cloud and infrastructure", slug: "integrations/cloud-infrastructure" },
+      { label: "Custom integrations", slug: "integrations/custom-integrations" },
+      { label: "All components", slug: "components" },
+    ],
+  },
+  {
+    label: "6. Billing",
     collapsed: true,
     items: [
       { label: "Overview", slug: "billing/overview" },
       { label: "Costs and budgets", slug: "billing/costs-budgets" },
+      { label: "Model sources", slug: "billing/model-sources" },
+      { label: "Bring your own key", slug: "billing/bring-your-own-key" },
+      { label: "Bring your own subscription", slug: "billing/bring-your-own-subscription" },
     ],
   },
   {
-    label: "5. Open Source",
+    label: "7. Self-hosting",
+    collapsed: true,
+    items: [
+      { label: "Overview", slug: "self-hosting/overview" },
+      { label: "Install on a single VM", slug: "self-hosting/single-vm" },
+      { label: "Install on your cloud", slug: "self-hosting/install" },
+      { label: "Troubleshooting", slug: "self-hosting/troubleshooting" },
+      { label: "Upgrade and uninstall", slug: "self-hosting/upgrade-and-uninstall" },
+    ],
+  },
+  {
+    label: "8. Open Source",
     collapsed: true,
     items: [
       { label: "Why SuperPlane is open source", slug: "open-source/why-open-source" },
@@ -82,7 +135,7 @@ export const sidebar = [
     ],
   },
   {
-    label: "6. Support and Help",
+    label: "9. Support and Help",
     collapsed: true,
     items: [
       {
@@ -94,27 +147,11 @@ export const sidebar = [
     ],
   },
   {
-    label: "7. Release Notes",
+    label: "10. Release Notes",
     collapsed: true,
     items: [
       { label: "Latest release", slug: "release-notes/latest" },
       { label: "Product & Integration updates", slug: "release-notes/product-updates" },
-    ],
-  },
-];
-
-// Sections omitted from the UI navigation but retained in the generated LLM indexes.
-export const llmsOnlySections = [
-  {
-    label: "Integrations and Components",
-    items: [
-      { label: "Source control and work intake", slug: "integrations/source-control" },
-      { label: "Coding agents and AI", slug: "integrations/coding-agents-ai" },
-      { label: "CI/CD", slug: "integrations/ci-cd" },
-      { label: "Observability", slug: "integrations/observability" },
-      { label: "Cloud and infrastructure", slug: "integrations/cloud-infrastructure" },
-      { label: "Custom integrations", slug: "integrations/custom-integrations" },
-      { label: "All components", slug: "components" },
     ],
   },
 ];

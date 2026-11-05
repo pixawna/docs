@@ -4,19 +4,24 @@ import { defineConfig } from "astro/config";
 import mermaid from "astro-mermaid";
 import starlightImageZoom from "starlight-image-zoom";
 import { sidebar } from "./src/config/sidebar.mjs";
+import { superplaneChartVersion } from "./scripts/remark-superplane-chart.mjs";
 
 // https://astro.build/config
 export default defineConfig({
   site: "https://docs.superplane.com",
+  markdown: {
+    remarkPlugins: [superplaneChartVersion],
+  },
   redirects: {
     "/": "/get-started/overview",
+    "/integrations/coding-agents-ai": "/billing/model-sources",
   },
   integrations: [
     mermaid({ autoTheme: true }),
     starlight({
       plugins: [starlightImageZoom()],
       title: "SuperPlane Factory Docs",
-      customCss: ["./src/styles/custom.css"],
+      customCss: ["./src/styles/custom.css", "./src/styles/branding.css"],
       editLink: {
         base: "https://github.com/superplanehq/docs/edit/main/",
       },
